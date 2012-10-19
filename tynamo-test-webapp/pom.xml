@@ -5,12 +5,26 @@
     <version>1.0</version>
     <packaging>war</packaging>
     <name>webapp Tapestry 5 Application</name>
-        <dependencies>
+    <dependencies>
+        
         <dependency>
             <groupId>org.apache.tapestry</groupId>
             <artifactId>tapestry-core</artifactId>
             <version>${tapestry-release-version}</version>
         </dependency>
+
+		<dependency>
+			<groupId>org.tynamo</groupId>
+			<artifactId>tapestry-security</artifactId>
+			<version>0.4.6</version>
+		</dependency>	
+
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<version>1.2.1</version>
+		</dependency> 		        
+        
         <!-- A dependency on either JUnit or TestNG is required, or the surefire plugin (which runs the tests)
 will fail, preventing Maven from packaging the WAR. Tapestry includes a large number
 of testing facilities designed for use with TestNG (http://testng.org/), so it's recommended. -->
