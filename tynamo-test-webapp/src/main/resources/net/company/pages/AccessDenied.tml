@@ -24,7 +24,7 @@
     <br/>
 
       <p>
-        You are not logged on! Go <a t:type="pagelink" t:page="${portada}">back to the application</a>   
+        You are not logged on! Go <a t:type="pagelink" t:page="${success}">back to the application</a>
       </p>
 
   </div>

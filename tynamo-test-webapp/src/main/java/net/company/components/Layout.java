@@ -1,34 +1,29 @@
 package net.company.components;
 
-import org.apache.tapestry5.*;
-import org.apache.tapestry5.annotations.*;
-import org.apache.tapestry5.ioc.annotations.*;
-import org.apache.tapestry5.BindingConstants;
-
 /**
  * Layout component for pages of application webapp.
  */
-@IncludeStylesheet("context:layout/layout.css")
+@org.apache.tapestry5.annotations.Import(library={"context:layout/layout.css"})
 public class Layout
 {
     /** The page title, for the <title> element and the <h1> element. */
-    @Property
-    @Parameter(required = true, defaultPrefix = BindingConstants.LITERAL)
+    @org.apache.tapestry5.annotations.Property
+    @org.apache.tapestry5.annotations.Parameter(required = true, defaultPrefix = org.apache.tapestry5.BindingConstants.LITERAL)
     private String title;
 
-    @Property
+    @org.apache.tapestry5.annotations.Property
     private String pageName;
 
-    @Property
-    @Parameter(defaultPrefix = BindingConstants.LITERAL)
+    @org.apache.tapestry5.annotations.Property
+    @org.apache.tapestry5.annotations.Parameter(defaultPrefix = org.apache.tapestry5.BindingConstants.LITERAL)
     private String sidebarTitle;
 
-    @Property
-    @Parameter(defaultPrefix = BindingConstants.LITERAL)
-    private Block sidebar;
+    @org.apache.tapestry5.annotations.Property
+    @org.apache.tapestry5.annotations.Parameter(defaultPrefix = org.apache.tapestry5.BindingConstants.LITERAL)
+    private org.apache.tapestry5.Block sidebar;
 
-    @Inject
-    private ComponentResources resources;
+    @org.apache.tapestry5.ioc.annotations.Inject
+    private org.apache.tapestry5.ComponentResources resources;
 
     public String getClassForPageName()
     {
@@ -39,6 +34,6 @@ public class Layout
 
     public String[] getPageNames()
     {
-      return new String[] { "Index", "About", "Contact" };
+      return new String[] { "Index", "About", "Contact", "Logout", "junior/Index", "senior/Index", "admin/Index" };
     }
 }

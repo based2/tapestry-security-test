@@ -4,27 +4,35 @@
     <artifactId>tynamo-test-webapp</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
-    <name>webapp Tapestry 5 Application</name>
+    <name>Secured web application access with Apache Tapestry 5 and Apache Shiro (Tynamo: tapestry-security)</name>
     <dependencies>
-        
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.0.13</version>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.tapestry</groupId>
             <artifactId>tapestry-core</artifactId>
             <version>${tapestry-release-version}</version>
         </dependency>
 
-		<dependency>
-			<groupId>org.tynamo</groupId>
-			<artifactId>tapestry-security</artifactId>
-			<version>0.4.6</version>
-		</dependency>	
+        <!-- http://tynamo.org/tapestry-security+guide -->
+        <dependency>
+            <groupId>org.tynamo</groupId>
+            <artifactId>tapestry-security</artifactId>
+            <version>0.5.1</version>
+        </dependency>
 
+        <!--
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-core</artifactId>
-			<version>1.2.1</version>
-		</dependency> 		        
-        
+			<version>1.2.2</version>
+		</dependency> -->
+
         <!-- A dependency on either JUnit or TestNG is required, or the surefire plugin (which runs the tests)
 will fail, preventing Maven from packaging the WAR. Tapestry includes a large number
 of testing facilities designed for use with TestNG (http://testng.org/), so it's recommended. -->
@@ -51,80 +59,206 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
 
         <!-- Provided by the servlet container, but sometimes referenced in the application
        code. -->
+        <!-- jetty6
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>2.5</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>newapp</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
+                   -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
+
     <build>
         <finalName>webapp</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
                 <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
-                    <optimize>true</optimize>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <optimize>false</optimize>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+            </plugin>
 
-            <!-- Run the application using "mvn jetty:run" -->
+            <!-- Run the application using "mvn jetty:run"
+               https://localhost:8443/tynamo-test-webapp/
+
+            ### https://bugs.eclipse.org/bugs/show_bug.cgi?id=409946  ###
+
+               https://jira.codehaus.org/browse/JETTY-1549
+
+               http://mail-archives.apache.org/mod_mbox/tapestry-users/201103.mbox/%3CAANLkTimVy8dbnzdtvr3eBWt3q2Wer4k_S4TbktK=KiYY@mail.gmail.com%3E
+            -->
+            <!--   <plugin>
+                   <groupId>org.eclipse.jetty</groupId>
+                   <artifactId>jetty-maven-plugin</artifactId>
+                   <version>9.0.3.v20130506</version>
+                   <configuration>
+                       <reload>automatic</reload>
+                       <scanIntervalSeconds>4</scanIntervalSeconds>
+                       <stopPort>9999</stopPort>
+                       <stopKey>key</stopKey>   -->
+            <!-- http://jetty.4.x6.nabble.com/jetty-users-jetty-maven-plugin-ssl-problem-for-version-9-0-1-v20130408-td4960389.html
+             http://git.eclipse.org/c/jetty/org.eclipse.jetty.project.git/tree/jetty-server/src/main/config/etc/
+             http://git.eclipse.org/c/jetty/org.eclipse.jetty.project.git/tree/examples/embedded/src/main/java/org/eclipse/jetty/embedded/LikeJettyXml.java
+
+
+             -->
+            <!--   <jettyXml>src/main/jetty/jetty.xml,src/main/jetty/jetty-http.xml,src/main/jetty/jetty-ssl.xml,src/main/jetty/jetty-https.xml</jettyXml>
+           </configuration>  -->
+
+            <!-- <exclusions>
+               <exclusion>
+                   <groupId>org.eclipse.jetty</groupId>
+                   <artifactId>websocket-server</artifactId>
+               </exclusion>
+                <exclusion>
+                   <groupId>org.eclipse.jetty</groupId>
+                   <artifactId>jetty-annotations</artifactId>
+               </exclusion>
+               <exclusion>
+                   <groupId>org.eclipse.jetty</groupId>
+                   <artifactId>jetty-jaas</artifactId>
+               </exclusion>
+               <exclusion>
+                   <groupId>org.eclipse.jetty</groupId>
+                   <artifactId>jetty-jmx</artifactId>
+               </exclusion>
+               <exclusion>
+                   <groupId>org.eclipse.jetty</groupId>
+                   <artifactId>jetty-jsp</artifactId>
+               </exclusion>
+           </exclusions> -->
+            <!--  </plugin> -->
+
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>maven-jetty-plugin</artifactId>
-                <version>6.1.16</version>
+                <version>6.1.26</version>
                 <configuration>
-                    <!-- Log to the console. -->
-                    <requestLog implementation="org.mortbay.jetty.NCSARequestLog">
-                        <!-- This doesn't do anything for Jetty, but is a workaround for a Maven bug
-                             that prevents the requestLog from being set. -->
-                        <append>true</append>
-                    </requestLog>
+                    <contextPath>/tynamo-test-webapp</contextPath>
+                    <scanIntervalSeconds>5</scanIntervalSeconds>
+                    <connectors>
+                        <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                            <port>8080</port>
+                            <maxIdleTime>60000</maxIdleTime>
+                        </connector>
+                        <connector implementation="org.mortbay.jetty.security.SslSocketConnector">
+                            <port>8443</port>
+                            <maxIdleTime>60000</maxIdleTime>
+                            <!-- <keystore>${project.build.directory}/jetty-ssl.keystore</keystore> -->
+                            <keystore>${basedir}/src/main/webapp/WEB-INF/jetty-ssl.keystore</keystore>
+                            <password>jetty66</password>
+                            <keyPassword>jetty66</keyPassword>
+                        </connector>
+                    </connectors>
+                    <!-- <userRealms>
+                         <userRealm implementation="org.mortbay.jetty.security.HashUserRealm">
+                             <name>APP</name>
+                             <config>${project.build.directory}/webapp/WEB-INF/realm.properties</config>
+                         </userRealm>
+                     </userRealms>   -->
+                    <!--
+                    <loginServices>
+                        <loginService implementation="org.eclipse.jetty.security.HashLoginService">
+                            <name>APP</name>
+                            <config>${project.build.directory}/test-classes/jetty-users.properties</config>
+                        </loginService>
+                    </loginServices>
+                    -->
                 </configuration>
             </plugin>
         </plugins>
     </build>
 
-    <reporting>
+    <reporting/>
 
-        <!-- Adds a report detailing the components, mixins and base classes defined by this module. -->
-        <plugins>
-            <plugin>
-                <groupId>org.apache.tapestry</groupId>
-                <artifactId>tapestry-component-report</artifactId>
-                <version>${tapestry-release-version}</version>
-                <configuration>
-                    <rootPackage>net.company</rootPackage>
-                </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
+    <!--
+    http://active-active.blogspot.be/2011/04/maven-note-securing-temporary-jetty.html
+    http://stackoverflow.com/questions/3794892/howto-use-https-ssl-with-maven-mortbay-jetty-plugin
+     http://www.eclipse.org/jetty/documentation/current/configuring-ssl.html#generating-key-pairs-and-certificates
+     -->
+    <profiles>
+        <profile>
+            <id>keytool</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>keytool-maven-plugin</artifactId>
+                        <version>1.2</version>
+                        <executions>
+                            <execution>
+                                <phase>generate-resources</phase>
+                                <id>clean</id>
+                                <goals>
+                                    <goal>clean</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <phase>generate-resources</phase>
+                                <id>genkey</id>
+                                <goals>
+                                    <goal>generateKeyPair</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <!-- <keystore>${project.build.directory}/webapp/WEB-INF/jetty-ssl.keystore</keystore>  -->
+                            <keystore>${basedir}/src/main/webapp/WEB-INF/jetty-ssl.keystore</keystore>
+                            <!-- <keystore>${basedir}/src/main/webapp/WEB-INF/jetty-ssl.keystore</keystore> --><!-- jetty9 -->
+                            <dname>cn=localhost</dname><!-- put your CN here-->
+                            <!-- <dname>cn=myserverhostname.mydomain.tld</dname> --><!-- put your CN here-->
+                            <keypass>jetty66</keypass>
+                            <storepass>jetty66</storepass>
+                            <alias>jetty66</alias>
+                            <keyalg>RSA</keyalg>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <repositories>
-
-        <!-- This repository is only needed when the tapestry-release-version is a snapshot release. -->
+        <!-- This repository is only needed when the Tapestry version is a preview release, rather
+             than a final release. -->
         <repository>
-            <id>apache-snapshots</id>
-            <url>http://repository.apache.org/snapshots/</url>
+            <id>apache-staging</id>
+            <url>https://repository.apache.org/content/groups/staging/</url>
+        </repository>
+        <repository>
+            <id>apache-staging5.4</id>
+            <url>https://repository.apache.org/content/repositories/orgapachetapestry-036/</url>
         </repository>
     </repositories>
 
-    <pluginRepositories>
-
-        <!-- As above, this can be commented out when access to the snapshot version
-of a Tapestry Maven plugin is not required.   -->
-        <pluginRepository>
-            <id>apache-snapshots</id>
-            <url>http://repository.apache.org/snapshots/</url>
-        </pluginRepository>
-
-    </pluginRepositories>
-
     <properties>
-        <tapestry-release-version>5.2.6</tapestry-release-version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- http://maven.apache.org/plugins/maven-resources-plugin/examples/binaries-filtering.html -->
+        <!-- <tapestry-release-version>5.3.7</tapestry-release-version>    -->
+        <tapestry-release-version>5.4-alpha-8</tapestry-release-version> <!-- 5.4-alpha-9 -->
+        <!-- 'tynamo incompat. 0.5.1 will not work with the upcoming T5.4' (?) -->
     </properties>
 </project>

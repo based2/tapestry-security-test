@@ -17,10 +17,10 @@ import org.tynamo.security.internal.services.LoginContextService;
 
 public class AccessDenied {
 	
-	@Inject
-	private LoginContextService loginContextService;		
+	@org.apache.tapestry5.ioc.annotations.Inject
+	private org.tynamo.security.internal.services.LoginContextService loginContextService;
 
-	public String getPortada() {
+	public String getSuccess() {
 		return loginContextService.getSuccessPage();
 	}
 	
