@@ -1,41 +1,41 @@
-<html t:type="layout" title="webapp Index"
-      t:sidebarTitle="Current Time"
-      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
-      xmlns:p="tapestry:parameter">
-        <!-- Most of the page content, including <head>, <body>, etc. tags, comes from Layout.tml -->
+<html t:type="loginLayout" title="login"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
 
     <p>${message:greeting}</p>
 
-        <h1>Please Login</h1>
+    <div class="container">
+      <form class="form-horizontal" t:type="form" t:id="loginForm" t:clientValidation="NONE">
+        <fieldset>
+          <div id="legend">
+            <legend class="">Please Login</legend>
+          </div>
+          <div class="control-group">
+            <!-- Username -->
+            <label class="control-label" t:type="label" t:for="username">Username</label>
+            <div class="controls">
+              <input t:type="textfield" t:id="username" placeholder="" class="input-xlarge" />
+            </div>
+          </div>
 
-        <form t:type="form" t:id="loginForm">
+          <div class="control-group">
+            <!-- Password-->
+            <label class="control-label" t:type="label" t:for="password">Password</label>
+            <div class="controls">
+              <input t:type="passwordfield" t:id="password" name="password" placeholder="" class="input-xlarge" />
+            </div>
+          </div>
 
-            <t:errors/>
+          <div class="control-group">
+            <!-- Button -->
+            <div class="controls">
+              <button type="submit" class="btn btn-success">Login</button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
 
-            <t:label for="userName"/>:
-            <input t:type="TextField" t:id="username" t:validate="required,minlength=3" size="30"/>
-            <br/>
-            <t:label for="password"/>:
-            <input t:type="PasswordField" t:id="password" t:validate="required,minlength=3" size="30"/>
-            <br/>
-			<t:label for="rememberMe"/>:
-			<input t:type="checkbox" t:id="rememberMe" />            
-            <br/>
-            <input type="submit" value="Login"/>
-        </form>
+    <p>The current time is: ${currentTime}.</p>
 
-    <p:sidebar>
-
-        <p>
-            Just to prove this is live:
-        </p>
-
-        <p>The current time is: ${currentTime}.</p>
-
-
-        <p>
-            [<t:pagelink page="Index">refresh</t:pagelink>]
-        </p>
-    </p:sidebar>
-
+    <p>[<t:pagelink page="Index">refresh</t:pagelink>]</p>
 </html>

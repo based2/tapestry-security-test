@@ -4,9 +4,10 @@ mvn clean jetty:run
 
 Accesses in src/resources/shiro-users.properties:
 
-junior1  password1
-senior1  password1
-admin1  password1
+admin1  111
+editor1 222
+seller1 333
+customer1 444
 
 Version of tapestry can be changed to 5.3.7 (used is 5.4-alpha-9)
 
@@ -16,9 +17,7 @@ TOdos_________________________________________________________________________
 
 * check https://kawwa.atosworldline.com/?
 
-* fix/enable jetty9 ssl with maven depends on ### https://bugs.eclipse.org/bugs/show_bug.cgi?id=409946  ###  > fixed in future jetty9 version
-
-* load realms of Jetty
+* load realms of Jetty ?
 
 * use org.tynamo.security:tapestry-security-jpa
 

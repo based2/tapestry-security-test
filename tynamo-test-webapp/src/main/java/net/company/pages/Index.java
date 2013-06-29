@@ -51,10 +51,6 @@ public class Index
 		} 
 		return null;
 	}
-
-	/*void setupRender() {
-		LOG.debug("Index setup render...");
-	}*/
 	
 	@Log
 	@OnEvent(value= EventConstants.VALIDATE, component="loginForm")
@@ -82,7 +78,7 @@ public class Index
 	@Log
 	@OnEvent(value= EventConstants.SUCCESS, component="loginForm")
 	public Object loggingSuccess(){				
-			return loginContextService.getSuccessPage();
+		return loginContextService.getSuccessPage();
 	}
 
 	public Date getCurrentTime()

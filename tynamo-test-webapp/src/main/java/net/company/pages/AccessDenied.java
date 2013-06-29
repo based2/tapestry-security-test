@@ -14,6 +14,7 @@ package net.company.pages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.tynamo.security.internal.services.LoginContextService;
 
+
 public class AccessDenied {
 	
 	@Inject

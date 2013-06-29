@@ -1,0 +1,11 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd">
+
+    <body data-spy="scroll" data-target=".subnav" data-offset="50">
+
+        <t:body/>
+
+        <div class="nav-bottom">
+            net.company - 2013
+        </div>
+    </body>
+</html>

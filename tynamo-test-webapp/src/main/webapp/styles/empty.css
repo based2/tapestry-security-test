@@ -1,0 +1,17 @@
+body {
+ background-image: linear-gradient(top bottom, rgb(242, 242, 242), rgb(255, 255, 255));
+ padding-bottom: 40px;
+ border-left-width:20px;
+}
+
+.sidebar-nav {
+  padding: 9px 0;
+}
+
+.inline {
+    display:inline;
+}
+
+#container {
+  margin:10px;
+}

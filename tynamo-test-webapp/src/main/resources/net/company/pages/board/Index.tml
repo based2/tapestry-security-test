@@ -1,0 +1,10 @@
+<html t:type="layout" title="Board"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+
+    <p>Welcome<span class="badge badge-success inline"> ${userLogin}</span> [<strong><a t:type="actionLink" t:id="logout" id="logout">Logout</a></strong>]</p>
+
+    <h2>Board for customers</h2>
+
+
+</html>

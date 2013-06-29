@@ -1,8 +1,7 @@
 <html t:type="Layout" title="Welcome Page"
       encoding="ISO-8859-1"
-      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
-      xmlns:p="tapestry:parameter"
-      xmlns:j="tapestry-library:jquery">
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
 
 
 	WELCOME ${userLogin} [<strong><a t:type="actionLink" t:id="logout" id="logout">Logout</a></strong>]
