@@ -1,17 +1,14 @@
 package net.company.pages;
 
 //import org.apache.shiro.SecurityUtils;
-import org.apache.tapestry5.ioc.annotations.Inject;
+
 //import org.apache.tapestry5.services.Request;
 
+import org.apache.tapestry5.ioc.annotations.Inject;
 import org.tynamo.security.services.SecurityService;
 
 /**
- * Created with IntelliJ IDEA.
- * User: chandba
- * Date: 03/06/13
- * Time: 17:43
- * To change this template use File | Settings | File Templates.
+ * Date: 03/06/13 17:43
  */
 // http://mail-archives.apache.org/mod_mbox/tapestry-users/201103.mbox/%3CAANLkTimVy8dbnzdtvr3eBWt3q2Wer4k_S4TbktK=KiYY@mail.gmail.com%3E
 // http://comments.gmane.org/gmane.comp.java.tynamo.user/710
@@ -20,8 +17,8 @@ public class Logout {
     //@Inject
     //private Request request;
 
-    @org.apache.tapestry5.ioc.annotations.Inject
-    private org.tynamo.security.services.SecurityService securityService;
+    @Inject
+    private SecurityService securityService;
 
     Object onActivate() {
         /***

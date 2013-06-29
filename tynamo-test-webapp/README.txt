@@ -1,4 +1,4 @@
-mvn keytool:genkey jetty:run
+mvn clean jetty:run
 
 > https://localhots:8443/tynamo-test-webapp
 
@@ -8,7 +8,7 @@ junior1  password1
 senior1  password1
 admin1  password1
 
-Version of tapestry can be changed to 5.3.7 (used is 5.4-alpha-8)
+Version of tapestry can be changed to 5.3.7 (used is 5.4-alpha-9)
 
 TOdos_________________________________________________________________________
 

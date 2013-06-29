@@ -1,27 +1,36 @@
 package net.company.pages;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.tapestry5.EventConstants;
+import org.apache.tapestry5.annotations.Log;
+import org.apache.tapestry5.annotations.OnEvent;
+import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.services.Request;
+import org.slf4j.Logger;
+import org.tynamo.security.internal.services.LoginContextService;
+
 public class Success {
 
-    @org.apache.tapestry5.ioc.annotations.Inject
-    private org.slf4j.Logger logger;
+    @Inject
+    private Logger logger;
 
-	@org.apache.tapestry5.ioc.annotations.Inject
-	private org.tynamo.security.internal.services.LoginContextService loginContextService;
+	@Inject
+	private LoginContextService loginContextService;
 	
-    @org.apache.tapestry5.ioc.annotations.Inject
-    private org.apache.tapestry5.services.Request request;
+    @Inject
+    private Request request;
 
     public String getUserLogin() {
-        logger.debug("Authenticated: "+ org.apache.shiro.SecurityUtils.getSubject().isAuthenticated() +
-    			" , name: "	+ org.apache.shiro.SecurityUtils.getSubject().getPrincipal());
-		return (String) org.apache.shiro.SecurityUtils.getSubject().getPrincipal();
+        logger.debug("Authenticated: "+ SecurityUtils.getSubject().isAuthenticated() +
+    			" , name: "	+ SecurityUtils.getSubject().getPrincipal());
+		return (String) SecurityUtils.getSubject().getPrincipal();
 	}
 
-	@org.apache.tapestry5.annotations.Log
-	@org.apache.tapestry5.annotations.OnEvent(value=org.apache.tapestry5.EventConstants.ACTION, component="logout")
+	@Log
+	@OnEvent(value= EventConstants.ACTION, component="logout")
 	public String onActionFromLogout(){
         // Need to call this explicitly to invoke onlogout handlers (for remember me etc.)
-        org.apache.shiro.SecurityUtils.getSubject().logout();
+        SecurityUtils.getSubject().logout();
         try {
             // the session is already invalidated, but need to cause an exception since tapestry doesn't know about it
             // and you'll get a container exception message instead without this. Unfortunately, there's no way of

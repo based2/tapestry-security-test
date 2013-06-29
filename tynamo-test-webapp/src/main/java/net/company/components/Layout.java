@@ -1,29 +1,37 @@
 package net.company.components;
 
+import org.apache.tapestry5.BindingConstants;
+import org.apache.tapestry5.Block;
+import org.apache.tapestry5.ComponentResources;
+import org.apache.tapestry5.annotations.Import;
+import org.apache.tapestry5.annotations.Parameter;
+import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.ioc.annotations.Inject;
+
 /**
  * Layout component for pages of application webapp.
  */
-@org.apache.tapestry5.annotations.Import(library={"context:layout/layout.css"})
+@Import(library={"context:layout/layout.css"})
 public class Layout
 {
     /** The page title, for the <title> element and the <h1> element. */
-    @org.apache.tapestry5.annotations.Property
-    @org.apache.tapestry5.annotations.Parameter(required = true, defaultPrefix = org.apache.tapestry5.BindingConstants.LITERAL)
+    @Property
+    @Parameter(required = true, defaultPrefix = BindingConstants.LITERAL)
     private String title;
 
-    @org.apache.tapestry5.annotations.Property
+    @Property
     private String pageName;
 
-    @org.apache.tapestry5.annotations.Property
-    @org.apache.tapestry5.annotations.Parameter(defaultPrefix = org.apache.tapestry5.BindingConstants.LITERAL)
+    @Property
+    @Parameter(defaultPrefix = BindingConstants.LITERAL)
     private String sidebarTitle;
 
-    @org.apache.tapestry5.annotations.Property
-    @org.apache.tapestry5.annotations.Parameter(defaultPrefix = org.apache.tapestry5.BindingConstants.LITERAL)
-    private org.apache.tapestry5.Block sidebar;
+    @Property
+    @Parameter(defaultPrefix = BindingConstants.LITERAL)
+    private Block sidebar;
 
-    @org.apache.tapestry5.ioc.annotations.Inject
-    private org.apache.tapestry5.ComponentResources resources;
+    @Inject
+    private ComponentResources resources;
 
     public String getClassForPageName()
     {

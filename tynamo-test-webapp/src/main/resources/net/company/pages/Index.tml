@@ -13,7 +13,7 @@
             <t:errors/>
 
             <t:label for="userName"/>:
-            <input t:type="TextField" t:id="userName" t:validate="required,minlength=3" size="30"/>
+            <input t:type="TextField" t:id="username" t:validate="required,minlength=3" size="30"/>
             <br/>
             <t:label for="password"/>:
             <input t:type="PasswordField" t:id="password" t:validate="required,minlength=3" size="30"/>
