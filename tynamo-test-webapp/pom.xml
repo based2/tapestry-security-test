@@ -233,6 +233,54 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
                     -->
               <!--  </configuration>
             </plugin>  -->
+
+            <!-- tomcat6:run
+               http://tomcat.apache.org/maven-plugin-2.1/tomcat6-maven-plugin/
+               -->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat6-maven-plugin</artifactId>
+                <version>2.1</version>   <!-- 2.1 - 20 February 2013 - 6.0.35 -->
+                <!-- 2.2-SNAPSHOT : 6.0.37 - tomcat6-maven-plugin-2.2-20130706.134723-11 -->
+                <configuration>
+                    <!-- application path always starts with /-->
+                    <path>/</path>
+                    <pluginArtifacts></pluginArtifacts>
+                    <additionalConfigFilesDir>${basedir}/src/main/tomcat/conf</additionalConfigFilesDir>
+                    <contextReloadable>true</contextReloadable>
+                    <backgroundProcessorDelay>5</backgroundProcessorDelay>
+                    <port>8080</port>
+                    <httpsPort>8443</httpsPort>
+                    <keystoreFile>${basedir}/jetty-ssl.keystore</keystoreFile>
+                    <password>jetty88</password>
+                    <keystorePass>jetty88</keystorePass>
+                    <!-- <keystoreType></keystoreType> -->
+                </configuration>
+            </plugin>
+
+            <!-- tomcat7:run
+               http://tomcat.apache.org/maven-plugin-2.1/tomcat7-maven-plugin/
+               -->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.1</version>   <!-- 2.1 - 7.0.37 - 20 February 2013 -  -->
+                <!-- 2.2-SNAPSHOT :  - tomcat7-maven-plugin-2.2-20130706.134724-11.pom -->
+                <configuration>
+                    <!-- application path always starts with /-->
+                    <path>/</path>
+                    <pluginArtifacts></pluginArtifacts>
+                    <!-- <additionalConfigFilesDir>${basedir}/src/main/tomcat/conf</additionalConfigFilesDir>  -->
+                    <contextReloadable>true</contextReloadable>
+                    <backgroundProcessorDelay>5</backgroundProcessorDelay>
+                    <port>8080</port>
+                    <httpsPort>8443</httpsPort>
+                    <keystoreFile>${basedir}/jetty-ssl.keystore</keystoreFile>
+                    <password>jetty88</password>
+                    <keystorePass>jetty88</keystorePass>
+                    <!-- <keystoreType></keystoreType> -->
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

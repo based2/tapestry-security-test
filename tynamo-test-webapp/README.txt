@@ -1,6 +1,6 @@
 mvn clean jetty:run
 
-> https://localhots:8443/
+> https://localhost:8443/
 
 Accesses in src/resources/shiro-users.properties:
 
