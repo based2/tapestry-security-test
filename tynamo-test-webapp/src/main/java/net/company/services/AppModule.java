@@ -1,5 +1,6 @@
 package net.company.services;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.web.mgt.WebSecurityManager;
 import org.apache.tapestry5.MetaDataConstants;
@@ -78,7 +79,7 @@ public class AppModule
 
         //configuration.add(SymbolConstants.DEFAULT_STYLESHEET, "context:styles/empty.css");
 
-        configuration.add(SymbolConstants.HMAC_PASSPHRASE, "fg@Cv09h-°)&vRF 78h_9:");
+        configuration.add(SymbolConstants.HMAC_PASSPHRASE, RandomStringUtils.randomAscii(10));
 
         // The application version number is incorprated into URLs for some
         // assets. Web browsers will cache assets because of the far future expires
