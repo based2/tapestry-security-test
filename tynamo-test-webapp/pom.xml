@@ -352,13 +352,9 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
 
         <!-- This repository is only needed when the Tapestry version is a preview release, rather
              than a final release. -->
-       <!-- <repository>
+       <repository>
             <id>apache-staging</id>
-            <url>https://repository.apache.org/content/groups/staging/</url>
-        </repository> -->
-        <repository>
-            <id>apache-staging5.4</id>
-            <url>https://repository.apache.org/content/repositories/orgapachetapestry-150/</url>
+            <url>https://repository.apache.org/content/groups/staging</url>
         </repository>
     </repositories>
 
@@ -368,7 +364,7 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
         <java.version>1.6</java.version>
         <!-- http://maven.apache.org/plugins/maven-resources-plugin/examples/binaries-filtering.html -->
        <!--  <tapestry-release-version>5.3.7</tapestry-release-version>   -->
-         <tapestry-release-version>5.4-alpha-10</tapestry-release-version>
+         <tapestry-release-version>5.4-alpha-14</tapestry-release-version>
         <!-- 'tynamo incompat. 0.5.1 will not work with the upcoming T5.4': http://jira.codehaus.org/browse/TYNAMO-147 -->
     </properties>
 </project>
