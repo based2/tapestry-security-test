@@ -14,6 +14,8 @@ import org.apache.tapestry5.ioc.annotations.Marker;
 import org.apache.tapestry5.ioc.annotations.SubModule;
 import org.apache.tapestry5.ioc.services.ServiceOverride;
 import org.apache.tapestry5.services.HttpServletRequestFilter;
+import org.apache.tapestry5.services.compatibility.Compatibility;
+import org.apache.tapestry5.services.compatibility.Trait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tynamo.security.Security;
@@ -57,6 +59,10 @@ public class AppModule
             {"Contact"}
     };
 
+    public static boolean isProduction = false;
+
+    public static final String PATH_BOOSTRAP = "/AccessDenied";
+
     public static void contributeApplicationDefaults(MappedConfiguration<String, String> configuration)
     {
         // Contributions to ApplicationDefaults will override any contributions to
@@ -65,23 +71,33 @@ public class AppModule
         // you can extend this list of locales (it's a comma separated series of locale names;
         // the first locale name is the default when there's no reasonable match).
 
-        configuration.add(SymbolConstants.SUPPORTED_LOCALES, "en");
-
         // The factory default is true but during the early stages of an application
         // overriding to false is a good idea. In addition, this is often overridden
         // on the command line as -Dtapestry.production-mode=false
-        configuration.add(SymbolConstants.PRODUCTION_MODE, "false");
 
-        configuration.add(SymbolConstants.COMPONENT_RENDER_TRACING_ENABLED, "false");
-        configuration.add(SymbolConstants.COMPACT_JSON, "false");
-        configuration.add(SymbolConstants.COMPRESS_WHITESPACE, "false");
-        configuration.add(SymbolConstants.MINIFICATION_ENABLED, "false");
+        if (!isProduction) {
+            configuration.add(SymbolConstants.PRODUCTION_MODE, "false");
+            configuration.add(SymbolConstants.COMPONENT_RENDER_TRACING_ENABLED, "false");
+            configuration.add(SymbolConstants.COMPACT_JSON, "false");
+            configuration.add(SymbolConstants.COMPRESS_WHITESPACE, "false");
+            configuration.add(SymbolConstants.MINIFICATION_ENABLED, "false");
+        } else {
+            configuration.add(SymbolConstants.PRODUCTION_MODE, "true");
+            configuration.add(SymbolConstants.COMPONENT_RENDER_TRACING_ENABLED, "false");
+            configuration.add(SymbolConstants.COMPACT_JSON, "true");
+            configuration.add(SymbolConstants.COMPRESS_WHITESPACE, "true");
+            configuration.add(SymbolConstants.MINIFICATION_ENABLED, "true");
+        }
+
+        configuration.add(SymbolConstants.JAVASCRIPT_INFRASTRUCTURE_PROVIDER, "jquery");
+
+        configuration.add(SymbolConstants.SUPPORTED_LOCALES, "en");
 
         //configuration.add(SymbolConstants.DEFAULT_STYLESHEET, "context:styles/empty.css");
 
         configuration.add(SymbolConstants.HMAC_PASSPHRASE, RandomStringUtils.randomAscii(10));
 
-        // The application version number is incorprated into URLs for some
+        // The application version number is incorporated into URLs for some
         // assets. Web browsers will cache assets because of the far future expires
         // header. If existing assets are changed, the version number should also
         // change, to force the browser to download new versions.
@@ -107,6 +123,15 @@ public class AppModule
         binder.bind(SecurityFilterChainFactory.class, RedirectHTTP401Error.class).withId("RedirectHTTP401Error");
 
         //binder.bind(CustomerManager.class, CustomerManagerImpl.class);
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // https://github.com/bobharner/blog/wiki/Jumping-Into-Tapestry-5.4-Alpha-3
+
+    @Contribute(Compatibility.class)
+    public static void disableScriptaculous(MappedConfiguration configuration)
+    {
+        configuration.add(Trait.SCRIPTACULOUS, "false");
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

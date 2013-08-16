@@ -8,7 +8,7 @@ import org.apache.tapestry5.annotations.Property;
 /**
  * Layout component for pages of application webapp.
  */
-@Import(stylesheet={"context:bootstrap/css/bootstrap.css", "context:bootstrap/css/bootstrap-responsive.css"})
+@Import(stack="core")
 public class loginLayout
 {
     /** The page title, for the <title> element and the <h1> element. */

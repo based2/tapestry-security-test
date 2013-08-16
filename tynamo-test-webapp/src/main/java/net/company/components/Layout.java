@@ -21,9 +21,7 @@ import java.util.List;
  */
 
 //@Exclude(stylesheet={"core"})  //If you do not want Tapestry CSS
-@Import(stylesheet={"context:styles/empty.css","context:bootstrap/css/bootstrap.css"
-        ,"context:bootstrap/css/bootstrap-responsive.css"},
-        library={"context:bootstrap/js/bootstrap.js"})
+@Import(stack="core",stylesheet={"context:styles/empty.css"})
 public class Layout
 {
     private final static Logger LOG = LoggerFactory.getLogger(Layout.class);
