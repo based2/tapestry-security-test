@@ -14,7 +14,7 @@ import org.tynamo.security.services.SecurityService;
 import java.util.Date;
 
 /**
- * Start page of application webapp.
+ * Start page of application
  */
 
 @Secure
@@ -32,10 +32,9 @@ public class Index
 	
 	@Property
 	private String password;
-	
-	@Property
-	private boolean rememberMe;	
 
+	//@Property
+	//private boolean rememberMe;
 	
 	@Component(id="loginForm")
 	private Form loginForm;
@@ -46,7 +45,7 @@ public class Index
 	@Log
 	String onActivate() {
 		Subject subject = SecurityUtils.getSubject();
-		if(subject.isAuthenticated() || subject.isRemembered()) {
+		if (subject.isAuthenticated() || subject.isRemembered()) {
 			return loginContextService.getSuccessPage();
 		} 
 		return null;
@@ -54,7 +53,7 @@ public class Index
 	
 	@Log
 	@OnEvent(value= EventConstants.VALIDATE, component="loginForm")
-	public void validation(){
+	public void validation() {
 		if(!loginForm.isValid()) {
 			return;
 		}
@@ -62,22 +61,21 @@ public class Index
 			Subject subject = SecurityUtils.getSubject();
 			if (!subject.isAuthenticated()) {
 				UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-				token.setRememberMe(rememberMe);
+				//token.setRememberMe(rememberMe);
 					
 				subject.login(token);
 				LOG.debug("User [" + subject.getPrincipal() + "] logged in successfully.");
 			} else {
                 LOG.debug("User [" + subject.getPrincipal() + "] failed to log.");
             }
-	   }
-	   catch(Exception e){
-		   loginForm.recordError("Error "+e.getMessage());
+	   } catch(Exception e) {
+		   loginForm.recordError("Error " + e.getMessage());
 	   }
   	}
 
 	@Log
 	@OnEvent(value= EventConstants.SUCCESS, component="loginForm")
-	public Object loggingSuccess(){				
+	public Object loggingSuccess() {
 		return loginContextService.getSuccessPage();
 	}
 

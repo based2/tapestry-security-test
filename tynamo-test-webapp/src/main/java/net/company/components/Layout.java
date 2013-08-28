@@ -10,7 +10,6 @@ import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.tynamo.security.services.SecurityService;
 
 import java.util.ArrayList;
@@ -19,12 +18,12 @@ import java.util.List;
 /**
  * Layout component for pages of application webapp.
  */
-
-//@Exclude(stylesheet={"core"})  //If you do not want Tapestry CSS
-@Import(stack="core",stylesheet={"context:styles/empty.css"})
+// http://getbootstrap.com/examples/theme/
+@Import(stack="core",stylesheet={"context:styles/bootstrap-theme.min.css","context:styles/empty.css"})
 public class Layout
 {
-    private final static Logger LOG = LoggerFactory.getLogger(Layout.class);
+    @Inject
+    private Logger LOG;
 
     /** The page title, for the <title> element and the <h1> element. */
     @Property

@@ -14,8 +14,6 @@ import org.apache.tapestry5.ioc.annotations.Marker;
 import org.apache.tapestry5.ioc.annotations.SubModule;
 import org.apache.tapestry5.ioc.services.ServiceOverride;
 import org.apache.tapestry5.services.HttpServletRequestFilter;
-import org.apache.tapestry5.services.compatibility.Compatibility;
-import org.apache.tapestry5.services.compatibility.Trait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tynamo.security.Security;
@@ -60,8 +58,6 @@ public class AppModule
     };
 
     public static boolean isProduction = false;
-
-    public static final String PATH_BOOSTRAP = "/AccessDenied";
 
     public static void contributeApplicationDefaults(MappedConfiguration<String, String> configuration)
     {
@@ -123,15 +119,6 @@ public class AppModule
         binder.bind(SecurityFilterChainFactory.class, RedirectHTTP401Error.class).withId("RedirectHTTP401Error");
 
         //binder.bind(CustomerManager.class, CustomerManagerImpl.class);
-    }
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // https://github.com/bobharner/blog/wiki/Jumping-Into-Tapestry-5.4-Alpha-3
-
-    @Contribute(Compatibility.class)
-    public static void disableScriptaculous(MappedConfiguration configuration)
-    {
-        configuration.add(Trait.SCRIPTACULOUS, "false");
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

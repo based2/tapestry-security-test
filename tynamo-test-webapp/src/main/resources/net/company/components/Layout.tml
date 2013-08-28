@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+<html lang="en" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd" xmlns:p="tapestry:parameter">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
         <title>${title}</title>
@@ -12,21 +12,26 @@
             <br/>
         	<div id="footer">
                  <div class="navbar navbar-fixed-bottom">
-                       <div class="navbar-inner">
-                         <div class="container">
-                           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                       <div class="navbar-header">
+                           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                              <span class="icon-bar"></span>
                              <span class="icon-bar"></span>
                              <span class="icon-bar"></span>
-                           </a>
-                           <a class="bootsnippbrand btn btn-primary disabled" href="#">Net.Company</a>
-                           <ul class="nav">
+                           </button>
+                           <a class="navbar-brand btn btn-primary disabled" href="#">Net.Company</a>
+                         </div>
+                         <div class="navbar-collapse collapse">
+                             <ul class="nav navbar-nav">
                                 <li t:type="loop" source="pageNames" value="pageName" class="prop:classForPageName">
                                     <t:pagelink page="prop:pageName">${pageName}</t:pagelink>
                                 </li>
-                           </ul>
+                             </ul>
+                             <div class="navbar-header navbar-right">
+                               	<p class="navbar-text">
+                               	    <a href="#" class="navbar-link">Username</a>
+                               	</p>
+                             </div>
                          </div>
-                     </div>
                  </div>
            </div>
         </div>
