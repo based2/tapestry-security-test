@@ -15,6 +15,7 @@ import java.util.Date;
 
 /**
  * Start page of application
+ * http://jumpstart.doublenegative.com.au/jumpstart/examples/input/forms1
  */
 
 @Secure

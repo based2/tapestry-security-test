@@ -4,8 +4,17 @@
 
         <t:body/>
 
-        <div class="nav-bottom">
-            net.company - 2013
-        </div>
+        <div class="jumbotron">
+            <ul class="nav nav-pills">
+              <li class="active">
+               <a href="#">
+                Net.Company
+                <span class="badge">
+                  2013
+                </span>
+                </a>
+              </li>
+             </ul>
+         </div>
     </body>
 </html>
