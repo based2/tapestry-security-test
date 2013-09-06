@@ -30,6 +30,9 @@ public class Index
 	
 	@Property
 	private String username;
+
+    @Property
+    private String username2;
 	
 	@Property
 	private String password;

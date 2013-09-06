@@ -20,6 +20,10 @@
                         <input t:type="textfield" t:id="username" class="form-control" placeholder="Login"/>
                    </div>
                 </div>
+
+   <!--  <t:textfield id="username2" value="0" mixins="formgroup" colorborder="danger" labelsize="col-lg-3" inputsize="col-lg-2" placeholder="Login2" />  -->
+    <input t:type="textfield" t:id="username2" t:mixins="formgroup" t:colorborder="danger" t:labelsize="col-lg-3" t:inputsize="col-lg-2" placeholder="Login2" />
+
                 <div class="form-group has-info">
                    <label class="col-lg-2 control-label" for="password">Password</label>
                    <div class="col-lg-6">

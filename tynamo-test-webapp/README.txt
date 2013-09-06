@@ -9,7 +9,7 @@ editor1 222
 seller1 333
 customer1 444
 
-Version of tapestry can be changed to 5.4-alpha-15
+Version of tapestry can be changed to 5.4-alpha-18
 
 TOdos_________________________________________________________________________
 

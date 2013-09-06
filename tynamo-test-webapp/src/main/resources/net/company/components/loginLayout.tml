@@ -1,6 +1,6 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd">
 
-    <body data-spy="scroll" data-target=".subnav" data-offset="50">
+    <body style="margin-left: 30px;">
 
         <t:body/>
 
