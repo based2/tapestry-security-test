@@ -16,10 +16,7 @@ package org.apache.tapestry5.corelib.mixins;
 import org.apache.tapestry5.Field;
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.ValidationDecorator;
-import org.apache.tapestry5.annotations.Environmental;
-import org.apache.tapestry5.annotations.HeartbeatDeferred;
-import org.apache.tapestry5.annotations.InjectContainer;
-import org.apache.tapestry5.annotations.Parameter;
+import org.apache.tapestry5.annotations.*;
 import org.apache.tapestry5.dom.Element;
 import org.apache.tapestry5.ioc.internal.util.InternalUtils;
 
@@ -38,27 +35,32 @@ import org.apache.tapestry5.ioc.internal.util.InternalUtils;
 * @bootstrap 3.0
 * @tapestrydoc
 * @since 5.4
+* note: http://tawus.wordpress.com/2011/08/01/tapestry-mixins-classtransformations/
 */
 public class FormGroup
  {
 
   // Color border effect on input focus
   // Values: [info|success|info|warning|danger]
-  @Parameter(value="info")
+  @BindParameter //(value="info")
   private String colorborder;
 
   // Label column/row size
-  @Parameter(value="col-lg-2")  // for a parent form with class="form-horizontal"
+  @BindParameter //(value="col-lg-2")  // for a parent form with class="form-horizontal"
   private String labelsize;
 
   // Input column/row size
-  @Parameter(value="col-lg-6")
+  @BindParameter //(value="col-lg-6")
   private String inputsize;
+
+  // for label
+  @BindParameter
+  private String forlabel;
 
   @InjectContainer
   private Field field;
 
-  private Element label;
+  private Element _label;
 
   @Environmental
   private ValidationDecorator decorator;
@@ -79,13 +81,15 @@ public class FormGroup
 
     createWithClass(writer, "label", "control-label", labelsize);
 
-    writer.end();
+    writer.end();  // label.control-label
 
     if (!InternalUtils.isBlank(inputsize)) {
         writer.element("div", "class", inputsize);
     }
 
-    fillInLabelAttributes();
+    if (_label!=null) {
+        fillInLabelAttributes();
+    }
 
     decorator.afterLabel(field);
   }
@@ -93,8 +97,12 @@ public class FormGroup
   @HeartbeatDeferred
   void fillInLabelAttributes()
   {
-    label.attribute("for", field.getClientId());
-    label.text(field.getLabel());
+    String _for = field.getClientId();
+    if (!InternalUtils.isBlank(_for)) {
+        _for = forlabel;
+    }
+    _label.attribute("for", _for);
+    _label.text(field.getLabel());
   }
 
   void afterRender(MarkupWriter writer)
