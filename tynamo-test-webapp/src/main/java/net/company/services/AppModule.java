@@ -7,6 +7,7 @@ import org.apache.tapestry5.MetaDataConstants;
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
+import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Local;
@@ -14,6 +15,7 @@ import org.apache.tapestry5.ioc.annotations.Marker;
 import org.apache.tapestry5.ioc.annotations.SubModule;
 import org.apache.tapestry5.ioc.services.ServiceOverride;
 import org.apache.tapestry5.services.HttpServletRequestFilter;
+import org.apache.tapestry5.services.RequestFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tynamo.security.Security;
@@ -117,7 +119,7 @@ public class AppModule
     public static void bind(final ServiceBinder binder)
     {
         binder.bind(SecurityFilterChainFactory.class, RedirectHTTP401Error.class).withId("RedirectHTTP401Error");
-
+        //binder.bind(ObjectFactory.class, ObjectFactoryImpl.class);
         //binder.bind(CustomerManager.class, CustomerManagerImpl.class);
     }
 
@@ -158,17 +160,27 @@ public class AppModule
                 configuration.add(factory.createChain(linkPathPermission[1]).add(factory.perms(), linkPathPermission[2]).build());
             } catch (Exception e) {}
         }
-        // configuration.add(factory.createChain(url).add(factory.user()).build());
-        /*configuration.add(factory.createChain("/admin/**").add(factory.perms(), "architectPermission:1").build());
-        configuration.add(factory.createChain("/board/**").add(factory.perms(), "ccorPermission:1").build());
-        configuration.add(factory.createChain("/controls/**").add(factory.perms(), "operationalPermission:1").build());
-        configuration.add(factory.createChain("/inventory/**").add(factory.perms(), "operationalPermission:1").build());
-        configuration.add(factory.createChain("/stats/**").add(factory.perms(), "officialPermission:1").build());*/
     }
 
     private static PermissionsAuthorizationFilter getPermissionFilter(SecurityFilterChainFactory factory) {
         PermissionsAuthorizationFilter permFilter = factory.perms();
         permFilter.setUnauthorizedUrl(URL_UNAUTHORIZED);
         return permFilter;
+    }
+
+    /**
+     * This is a contribution to the RequestHandler service configuration. This is how we extend
+     * Tapestry using the HSTSPolicy filter.
+     */
+    // https://svn.apache.org/repos/asf/tapestry/tapestry5/trunk/quickstart/filtered/archetype-resources/src/main/java/services/AppModule.java
+    public void contributeRequestHandler(OrderedConfiguration<RequestFilter> configuration)
+    {
+        // Each contribution to an ordered configuration has a name, When necessary, you may
+        // set constraints to precisely control the invocation order of the contributed filter
+        // within the pipeline.
+
+        configuration.add("HSTSPolicy", new HSTSPolicyHeader());
+
+        //configuration.add("Timing", filter);
     }
 }

@@ -29,13 +29,10 @@ public class Index
 	private SecurityService securityService;
 	
 	@Property
-	private String username;
+	private String username, password;
 
-    @Property
-    private String username2;
-	
-	@Property
-	private String password;
+    //@Property
+    //private String username2;
 
 	//@Property
 	//private boolean rememberMe;

@@ -33,9 +33,9 @@
                    </div>
                 </div>
 
-                 <t:textfield id="username2"
-                     forlabel="username2" labelsize="col-lg-6" colorborder="danger" inputsize="col-lg-2"
-                     mixins="formgroup"  placeholder="Login2" />
+               <!--  <t:textfield id="username2"
+                     forlabel="username2" labelsize="literal:col-lg-6" colorborder="literal:danger" inputsize="literal:col-lg-2"
+                     mixins="formgroup" placeholder="Login2" value="literal:"/> -->
             </fieldset>
         </t:form>
       </div>
