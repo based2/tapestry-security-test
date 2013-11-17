@@ -94,9 +94,17 @@ public class Layout
             {
                 if (pageOrDir!=null){
                     try {
-                        if (pageOrDir.length==1){
-                            // process page with no access permission restrictions
-                            pages.add(pageOrDir[0]);
+                        if (pageOrDir.length<3){
+                            if (pageOrDir.length==2) {
+                                if ((AppModule.DEV.equals(pageOrDir[1]))
+                                    && (!AppModule.isProduction)) {
+                                    // add specific page enabled by DEV mode
+                                    pages.add(pageOrDir[0]);
+                                }
+                            } else {
+                                // process page with no access permission restrictions
+                                pages.add(pageOrDir[0]);
+                            }
                         } else {
                             if (securityService.hasPermission(pageOrDir[2])) {
                                 pages.add(pageOrDir[0]);

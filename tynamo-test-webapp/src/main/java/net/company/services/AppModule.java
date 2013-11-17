@@ -50,20 +50,21 @@ public class AppModule
     public static final String URL_UNAUTHORIZED = "/AccessDenied";
 
     public static final String T5_DASHBOARD = "T5Dashboard";
+    public static final String DEV = "DEV$!|#@";
 
     public static String[][] LINK_PATH_PERMISSIONS = new String[][]{
-            {T5_DASHBOARD}, // used only when isProduction = false
+            {T5_DASHBOARD, DEV}, // used only when isProduction = false, only in dev mode
             {"Board","/board/**",PERMISSION_CUSTOMER},
             {"Stats","/stats/**",PERMISSION_SELLER},
             {"Inventory","/inventory/**",PERMISSION_EDITOR},
             {"Controls","/controls/**",PERMISSION_EDITOR},
             {"Admin","/admin/**",PERMISSION_ADMIN},
-            {"Bootswatch"},
+            {"Bootswatch", DEV}, // used only when isProduction = false, only in dev mode
             {"About"},
             {"Contact"}
     };
 
-    public static boolean isProduction = false;
+    public static boolean isProduction = true;
 
     public static void contributeApplicationDefaults(MappedConfiguration<String, String> configuration)
     {
