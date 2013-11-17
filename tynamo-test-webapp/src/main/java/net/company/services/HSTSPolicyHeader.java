@@ -8,11 +8,10 @@ import org.apache.tapestry5.services.Response;
 import java.io.IOException;
 
 /**
+ * HTTPS only: No HTTP allowed
+ *
  * HSTS Policy specifies a period of time during which the user agent
  * shall access the server in only secure fashion (HTTP -> HTTPS).
- *
- * @author Basile Chandesris
- * @date   29/09/13 12:56
  *
  * http://justinself.com/http-security-headers-you-should-be-thinking-about-htst/
  *
@@ -30,6 +29,9 @@ import java.io.IOException;
  *  Chrome 	            4.0.211.0
  *
  * http://apache-tapestry-mailing-list-archives.1045711.n5.nabble.com/t5-adding-http-header-td3369097.html
+ *
+ * https://github.com/twitter/secureheaders
+ * http://www.browserscope.org/?category=security
  */
 public class HSTSPolicyHeader implements RequestFilter
 {

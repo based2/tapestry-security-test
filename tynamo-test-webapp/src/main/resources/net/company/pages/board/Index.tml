@@ -1,10 +1,8 @@
-<html t:type="layout" title="Board"
+<html t:type="layout" title="Customers Board"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
       xmlns:p="tapestry:parameter">
 
-    <p>Welcome<span class="badge badge-success inline"> ${userLogin}</span> [<strong><a t:type="actionLink" t:id="logout" id="logout">Logout</a></strong>]</p>
-
-    <h2>Board for customers</h2>
+    <h2>Customers Board</h2>
 
 
 </html>

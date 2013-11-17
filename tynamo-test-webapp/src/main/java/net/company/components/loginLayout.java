@@ -8,7 +8,19 @@ import org.apache.tapestry5.annotations.Property;
 /**
  * Layout component for pages of application webapp.
  */
-@Import(stack="core")
+@Import(stack="core",
+        // pkdvc - styles/pixel-kit/dark-velvet-css/
+        /*library={"context:pkdvc/js/libs/modernizr.min.js",
+                "context:pkdvc/js/libs/jquery-1.10.0.js",
+                "context:pkdvc/js/libs/jquery-ui.min.js",
+                "context:pkdvc/js/libs/bootstrap.min.js",
+                "context:pkdvc/js/general.js"
+        },*/
+        stylesheet={"context:styles/bootstrap-bootswatch-slate.css","context:styles/empty.css"}
+        //stylesheet={"context:pkdvc/css/bootstrap.css",
+                //"context:styles/pixel-kit/dark-velvet-css/css/jquery-ui-1.8.20.custom.css",
+        //        "context:pkdvc/style.css"}
+)
 public class loginLayout
 {
     /** The page title, for the <title> element and the <h1> element. */

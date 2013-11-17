@@ -49,12 +49,16 @@ public class AppModule
     public static final String URL_SUCCESS = "/board/Index";//"/success";
     public static final String URL_UNAUTHORIZED = "/AccessDenied";
 
+    public static final String T5_DASHBOARD = "T5Dashboard";
+
     public static String[][] LINK_PATH_PERMISSIONS = new String[][]{
+            {T5_DASHBOARD}, // used only when isProduction = false
             {"Board","/board/**",PERMISSION_CUSTOMER},
             {"Stats","/stats/**",PERMISSION_SELLER},
             {"Inventory","/inventory/**",PERMISSION_EDITOR},
             {"Controls","/controls/**",PERMISSION_EDITOR},
             {"Admin","/admin/**",PERMISSION_ADMIN},
+            {"Bootswatch"},
             {"About"},
             {"Contact"}
     };
@@ -80,6 +84,7 @@ public class AppModule
             configuration.add(SymbolConstants.COMPRESS_WHITESPACE, "false");
             configuration.add(SymbolConstants.MINIFICATION_ENABLED, "false");
         } else {
+            LINK_PATH_PERMISSIONS[0][0] = null;
             configuration.add(SymbolConstants.PRODUCTION_MODE, "true");
             configuration.add(SymbolConstants.COMPONENT_RENDER_TRACING_ENABLED, "false");
             configuration.add(SymbolConstants.COMPACT_JSON, "true");
@@ -89,10 +94,12 @@ public class AppModule
 
         configuration.add(SymbolConstants.JAVASCRIPT_INFRASTRUCTURE_PROVIDER, "jquery");
 
+        configuration.add(SymbolConstants.SESSION_LOCKING_ENABLED, "true");
+
         configuration.add(SymbolConstants.SUPPORTED_LOCALES, "en");
 
         //configuration.add(SymbolConstants.DEFAULT_STYLESHEET, "context:styles/empty.css");
-
+        // todo check http://apache-tapestry-mailing-list-archives.1045711.n5.nabble.com/HMAC-Passphrase-Could-Be-Much-More-Useful-Correct-Me-If-I-m-Wrong-td5724606.html
         configuration.add(SymbolConstants.HMAC_PASSPHRASE, RandomStringUtils.randomAscii(10));
 
         // The application version number is incorporated into URLs for some
@@ -167,6 +174,45 @@ public class AppModule
         permFilter.setUnauthorizedUrl(URL_UNAUTHORIZED);
         return permFilter;
     }
+   /*
+    private static final Map<String, String> LDAP_GROUP_SHIRO_ROLE_MAPPING = new LinkedHashMap(){
+        {
+            put("LDAP_GRP_CUSTOMER", AppModule.ROLE_CUSTOMER);
+            put("LDAP_GRP_SELLER", AppModule.ROLE_SELLER);
+            put("LDAP_GRP_EDITOR", AppModule.ROLE_EDITOR);
+            put("LDAP_GRP_ADMIN", AppModule.ROLE_ADMIN);
+        }
+    };
+
+    private static final Map<String, String[]> ROLES_PERMISSIONS = new  LinkedHashMap(){
+        {
+            put(AppModule.ROLE_CUSTOMER, new String[]{AppModule.PERMISSION_CUSTOMER});
+            put(AppModule.ROLE_SELLER, new String[]{AppModule.PERMISSION_SELLER});
+            put(AppModule.ROLE_EDITOR, new String[]{AppModule.PERMISSION_EDITOR});
+            put(AppModule.ROLE_ADMIN, new String[]{AppModule.PERMISSION_CUSTOMER,AppModule.PERMISSION_SELLER,AppModule.PERMISSION_EDITOR,AppModule.PERMISSION_ADMIN});
+        }
+    };
+
+    public static void contributeWebSecurityManager(Configuration<org.apache.shiro.realm.Realm> configuration,
+                                                    @Autobuild LdapRealm ldapRealm) {
+        // http://stackoverflow.com/questions/12173492/shiro-jndildaprealm-authorization-agains-ldap
+        // http://shiro.apache.org/configuration.html#Configuration-SecurityManagerfromanINIresource
+
+        ldapRealm.processRoleDefinitions(ROLES_PERMISSIONS);
+        ldapRealm.setGroupRolesMap(LDAP_GROUP_SHIRO_ROLE_MAPPING);
+
+        ldapRealm.setUserDnTemplate("userd={0}, ");
+        JndiLdapContextFactory contextFactory = ((JndiLdapContextFactory) ldapRealm.getContextFactory());
+
+        contextFactory.setUrl("ldap://server");
+        contextFactory.setAuthenticationMechanism("simple");
+        contextFactory.setSystemUsername("");
+        contextFactory.setSystemPassword("");
+
+        ldapRealm.setSearchBase("");
+        ldapRealm.setGroupNameAttribute("");
+    }
+      */
 
     /**
      * This is a contribution to the RequestHandler service configuration. This is how we extend
@@ -179,8 +225,8 @@ public class AppModule
         // set constraints to precisely control the invocation order of the contributed filter
         // within the pipeline.
 
-        configuration.add("HSTSPolicy", new HSTSPolicyHeader());
-
+        configuration.add("HSTSPolicy", new HSTSPolicyHeader()); // HTTPS only: No HTTP allowed
+        configuration.add("CSPolicy", new CSPolicyHeader());     // Restrict JS execution: no CDN
         //configuration.add("Timing", filter);
     }
 }

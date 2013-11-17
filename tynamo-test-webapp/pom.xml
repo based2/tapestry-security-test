@@ -204,7 +204,7 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
             <!-- <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.0.5.v20130815</version>
+                <version>9.0.7.v20131107</version>
                 <configuration>
                     <reload>automatic</reload>
                     <scanIntervalSeconds>4</scanIntervalSeconds>
@@ -222,7 +222,7 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>8.1.12.v20130726</version>
+                <version>8.1.14.v20131031</version>
                 <configuration>
                     <reload>automatic</reload>
                     <scanIntervalSeconds>4</scanIntervalSeconds>
@@ -400,7 +400,7 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.6</java.version>
         <!-- http://maven.apache.org/plugins/maven-resources-plugin/examples/binaries-filtering.html -->
-         <tapestry-release-version>5.4-alpha-22</tapestry-release-version>
+         <tapestry-release-version>5.4-alpha-25</tapestry-release-version>
         <!-- 'tynamo incompat. 0.5.1 will not work with the upcoming T5.4': http://jira.codehaus.org/browse/TYNAMO-147 -->
     </properties>
 </project>

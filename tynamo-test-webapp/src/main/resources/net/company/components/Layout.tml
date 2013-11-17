@@ -18,7 +18,6 @@
                              <span class="icon-bar"></span>
                              <span class="icon-bar"></span>
                            </button>
-                           <a class="navbar-brand btn btn-primary disabled" href="#">Net.Company</a>
                          </div>
                          <div class="navbar-collapse collapse">
                              <ul class="nav navbar-nav">
@@ -26,11 +25,12 @@
                                     <t:pagelink page="prop:pageName">${pageName}</t:pagelink>
                                 </li>
                              </ul>
-                             <div class="navbar-header navbar-right">
-                               	<p class="navbar-text">
-                               	    <a href="#" class="navbar-link">Username</a>
-                               	</p>
-                             </div>
+                             <a class="navbar-brand btn btn-primary disabled" href="#">App</a>
+                           <div class="navbar-header navbar-right">
+                             	<p class="navbar-text">
+                             	    <a t:type="actionLink" t:id="logout" id="logout"><t:glyphicon name="off"/> ${uname}</a>
+                             	</p>
+                           </div>
                          </div>
                  </div>
            </div>

@@ -63,7 +63,6 @@ public class Index
 			if (!subject.isAuthenticated()) {
 				UsernamePasswordToken token = new UsernamePasswordToken(username, password);
 				//token.setRememberMe(rememberMe);
-					
 				subject.login(token);
 				LOG.debug("User [" + subject.getPrincipal() + "] logged in successfully.");
 			} else {

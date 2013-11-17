@@ -1,20 +1,14 @@
+<!DOCTYPE html>
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd">
-
     <body style="margin-left: 30px;">
-
         <t:body/>
-
-        <div class="jumbotron">
-            <ul class="nav nav-pills">
-              <li class="active">
-               <a href="#">
-                Net.Company
-                <span class="badge">
-                  2013
-                </span>
-                </a>
-              </li>
-             </ul>
-         </div>
+        <div id="footer">
+            <div class="container">
+              <p class="text-muted credit">
+                 <a href="#">Net.Company<span class="badge"> 2013</span></a>
+                 <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>
+              </p>
+            </div>
+        </div>
     </body>
 </html>
