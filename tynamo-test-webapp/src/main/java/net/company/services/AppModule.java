@@ -53,12 +53,12 @@ public class AppModule
     public static final String DEV = "DEV$!|#@";
 
     public static String[][] LINK_PATH_PERMISSIONS = new String[][]{
-            {T5_DASHBOARD, DEV}, // used only when isProduction = false, only in dev mode
-            {"Board","/board/**",PERMISSION_CUSTOMER},
-            {"Stats","/stats/**",PERMISSION_SELLER},
-            {"Inventory","/inventory/**",PERMISSION_EDITOR},
-            {"Controls","/controls/**",PERMISSION_EDITOR},
-            {"Admin","/admin/**",PERMISSION_ADMIN},
+            {T5_DASHBOARD, DEV , "dashboard"}, // used only when isProduction = false, only in dev mode
+            {"Board","/board/**",PERMISSION_CUSTOMER, "tasks"},
+            {"Stats","/stats/**",PERMISSION_SELLER, ""},
+            {"Inventory","/inventory/**",PERMISSION_EDITOR, ""},
+            {"Controls","/controls/**",PERMISSION_EDITOR, ""},
+            {"Admin","/admin/**",PERMISSION_ADMIN, ""},
             {"Bootswatch", DEV}, // used only when isProduction = false, only in dev mode
             {"About"},
             {"Contact"}
@@ -91,6 +91,8 @@ public class AppModule
             configuration.add(SymbolConstants.COMPACT_JSON, "true");
             configuration.add(SymbolConstants.COMPRESS_WHITESPACE, "true");
             configuration.add(SymbolConstants.MINIFICATION_ENABLED, "true");
+            // todo check http://apache-tapestry-mailing-list-archives.1045711.n5.nabble.com/HMAC-Passphrase-Could-Be-Much-More-Useful-Correct-Me-If-I-m-Wrong-td5724606.html
+            configuration.add(SymbolConstants.HMAC_PASSPHRASE, RandomStringUtils.randomAscii(10));
         }
 
         configuration.add(SymbolConstants.JAVASCRIPT_INFRASTRUCTURE_PROVIDER, "jquery");
@@ -100,8 +102,7 @@ public class AppModule
         configuration.add(SymbolConstants.SUPPORTED_LOCALES, "en");
 
         //configuration.add(SymbolConstants.DEFAULT_STYLESHEET, "context:styles/empty.css");
-        // todo check http://apache-tapestry-mailing-list-archives.1045711.n5.nabble.com/HMAC-Passphrase-Could-Be-Much-More-Useful-Correct-Me-If-I-m-Wrong-td5724606.html
-        configuration.add(SymbolConstants.HMAC_PASSPHRASE, RandomStringUtils.randomAscii(10));
+
 
         // The application version number is incorporated into URLs for some
         // assets. Web browsers will cache assets because of the far future expires
@@ -124,10 +125,59 @@ public class AppModule
         configuration.add(SymbolConstants.TAPESTRY_VERSION, "false");
     }
 
+    // http://apache-tapestry-mailing-list-archives.1045711.n5.nabble.com/HMAC-Passphrase-Could-Be-Much-More-Useful-Correct-Me-If-I-m-Wrong-td5724606.html#a5724608
+    // http://apache-tapestry-mailing-list-archives.1045711.n5.nabble.com/Advising-and-Decoration-order-td5723770.html
+    // http://apache-tapestry-mailing-list-archives.1045711.n5.nabble.com/Decorating-IOC-Services-td2467899.html
+    // http://code.google.com/p/gsoc2011-csrf-protection/source/browse/trunk/csrfprotection/src/main/java/org/apache/tapestry5/csrfprotection/services/CsrfProtectionModule.java
+    // http://apache-tapestry-mailing-list-archives.1045711.n5.nabble.com/overriding-a-service-implementation-td5713709.html
+    // Redirect user to a new login in case of HMAC incompatibility (ucase: new deployment with HMAC value change)
+   /* public ClientDataEncoder decorateClientDataEncoder(final ClientDataEncoder delegate)
+
+    {
+        return new ClientDataEncoder() {
+
+            @Inject
+            private Logger logger;
+
+            @Inject
+            private LoginContextService loginContextService;
+
+            private final static String HMAC_DOES_NOT_MATCH = "Client data associated with the current request appears to have been tampered with " +
+                    "(the HMAC signature does not match).";
+
+            @Override
+            public ClientDataSink createSink() {
+                return delegate.createSink();
+            }
+
+            @Override
+            public ObjectInputStream decodeClientData(String s) throws IOException {
+                try {
+                    return delegate.decodeClientData(s);
+                } catch (IOException ex) {
+                    if (ex.getMessage().equals(HMAC_DOES_NOT_MATCH)) {
+                        logger.warn("HMAC does not match for user: " + SecurityUtils.getSubject().getPrincipal() +", redirecting to login page.");
+                        //TapestryRealmSecurityManager
+                        //saveRequestAndRedirectToLogin(request, response);
+                        loginContextService.redirectToSavedRequest(loginContextService.getLoginPage());
+                    } else {
+                        throw ex;
+                    }
+                }
+                return null;
+            }
+
+            @Override
+            public ObjectInputStream decodeEncodedClientData(String s) throws IOException {
+                return delegate.decodeEncodedClientData(s);
+            }
+        };
+    } */
+
     public static void bind(final ServiceBinder binder)
     {
         binder.bind(SecurityFilterChainFactory.class, RedirectHTTP401Error.class).withId("RedirectHTTP401Error");
-        //binder.bind(ObjectFactory.class, ObjectFactoryImpl.class);
+        binder.bind(Audit.class, AuditImpl.class);
         //binder.bind(CustomerManager.class, CustomerManagerImpl.class);
     }
 
@@ -181,7 +231,7 @@ public class AppModule
             put("LDAP_GRP_CUSTOMER", AppModule.ROLE_CUSTOMER);
             put("LDAP_GRP_SELLER", AppModule.ROLE_SELLER);
             put("LDAP_GRP_EDITOR", AppModule.ROLE_EDITOR);
-            put("LDAP_GRP_ADMIN", AppModule.ROLE_ADMIN);
+            //put("LDAP_GRP_ADMIN", AppModule.ROLE_ADMIN);
         }
     };
 
@@ -194,6 +244,12 @@ public class AppModule
         }
     };
 
+    private static final Map<String, String> USERS_ROLE_MAPPING = new  LinkedHashMap(){
+        {
+            put("admin1", AppModule.ROLE_ADMIN);
+        }
+    };
+
     public static void contributeWebSecurityManager(Configuration<org.apache.shiro.realm.Realm> configuration,
                                                     @Autobuild LdapRealm ldapRealm) {
         // http://stackoverflow.com/questions/12173492/shiro-jndildaprealm-authorization-agains-ldap
@@ -201,6 +257,7 @@ public class AppModule
 
         ldapRealm.processRoleDefinitions(ROLES_PERMISSIONS);
         ldapRealm.setGroupRolesMap(LDAP_GROUP_SHIRO_ROLE_MAPPING);
+        ldapRealm.setUserRolesMapFilter(USERS_ROLE_MAPPING);
 
         ldapRealm.setUserDnTemplate("userd={0}, ");
         JndiLdapContextFactory contextFactory = ((JndiLdapContextFactory) ldapRealm.getContextFactory());

@@ -1,32 +1,25 @@
-<html 
+<!DOCTYPE html>
+<html
       encoding="ISO-8859-1"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
       xmlns:p="tapestry:parameter">
-      
 <head>
 	<style type="text/css">
 		#ferror {
-			
 			font: 24px arial,sans-serif;
 			text-align:left
 		}
 	</style>
-	
 </head>
-
   <div id="ferror">
-
     <p>
       You are not allowed to access or perform an action on the requested page.
       <br/>
       Please contact your system administrator for further information!
     </p>
     <br/>
-
       <p>
         You are not logged on! Go <a t:type="pagelink" t:page="${success}">back to the application</a>
       </p>
-
   </div>
-      
 </html>

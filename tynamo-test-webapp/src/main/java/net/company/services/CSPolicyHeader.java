@@ -14,6 +14,7 @@ import java.io.IOException;
  * a broad class of content injection vulnerabilities, such as cross-site scripting (XSS).
  *
  * http://en.wikipedia.org/wiki/Content_Security_Policy
+ * https://www.owasp.org/index.php/Content_Security_Policy
  * http://developer.chrome.com/extensions/contentSecurityPolicy.html
  * https://dvcs.w3.org/hg/content-security-policy/raw-file/tip/csp-specification.dev.html
  *

@@ -18,6 +18,19 @@
             <artifactId>logback-classic</artifactId>
             <version>1.0.13</version>
         </dependency>
+       <!--
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.50</version>
+        </dependency>
+        -->
+        <!--
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.3.174</version>
+        </dependency> -->
 
         <dependency>
             <groupId>org.apache.tapestry</groupId>
@@ -101,35 +114,6 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
             <version>3.0.1</version>
             <scope>provided</scope>
         </dependency>
-        <!-- 3.1.0: major version 51 -->
-        <!--
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-maven-plugin</artifactId>
-            <version>9.0.4.v20130625</version>
-              <exclusions>
-                <exclusion>
-                    <groupId>org.eclipse.jetty</groupId>
-                    <artifactId>websocket-server</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.eclipse.jetty</groupId>
-                    <artifactId>jetty-annotations</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.eclipse.jetty</groupId>
-                    <artifactId>jetty-jaas</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.eclipse.jetty</groupId>
-                    <artifactId>jetty-jmx</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.eclipse.jetty</groupId>
-                    <artifactId>jetty-jsp</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>            -->
 
     </dependencies>
 
@@ -218,8 +202,25 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
                 </configuration>
             </plugin>  -->
 
+        <plugin>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-maven-plugin</artifactId>
+            <version>9.1.0.v20131115</version>
+            <configuration>
+                <reload>automatic</reload>
+                <scanIntervalSeconds>4</scanIntervalSeconds>
+                <stopPort>9999</stopPort>
+                <stopKey>key</stopKey>
+                <!--
+                 http://git.eclipse.org/c/jetty/org.eclipse.jetty.project.git/tree/jetty-server/src/main/config/etc/
+                 http://git.eclipse.org/c/jetty/org.eclipse.jetty.project.git/tree/examples/embedded/src/main/java/org/eclipse/jetty/embedded/LikeJettyXml.java
+                 -->
+                <jettyXml>src/main/jetty/jetty.xml,src/main/jetty/jetty-http.xml,src/main/jetty/jetty-ssl.xml,src/main/jetty/jetty-https.xml</jettyXml>
+              </configuration>
+          </plugin>
+
             <!-- http://wiki.eclipse.org/Jetty/Howto/Configure_SSL -->
-            <plugin>
+           <!-- <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>8.1.14.v20131031</version>
@@ -236,7 +237,7 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
                   </systemProperty>
               </systemProperties>
           </configuration>
-      </plugin>
+      </plugin>      -->
 
          <!--
       <plugin>
@@ -304,11 +305,13 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
             <!-- tomcat7:run
                http://tomcat.apache.org/maven-plugin-2.1/tomcat7-maven-plugin/
                -->
+            <!-- 2.1 - 7.0.37 - 20 February 2013 -  -->
+            <!-- 2.2-SNAPSHOT :  - tomcat7-maven-plugin-2.2-20130706.134724-11.pom -->
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.1</version>   <!-- 2.1 - 7.0.37 - 20 February 2013 -  -->
-                <!-- 2.2-SNAPSHOT :  - tomcat7-maven-plugin-2.2-20130706.134724-11.pom -->
+                <version>2.1</version>
+
                 <configuration>
                     <!-- application path always starts with /-->
                     <path>/</path>
@@ -400,7 +403,6 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.6</java.version>
         <!-- http://maven.apache.org/plugins/maven-resources-plugin/examples/binaries-filtering.html -->
-         <tapestry-release-version>5.4-alpha-25</tapestry-release-version>
-        <!-- 'tynamo incompat. 0.5.1 will not work with the upcoming T5.4': http://jira.codehaus.org/browse/TYNAMO-147 -->
+         <tapestry-release-version>5.4-alpha-29</tapestry-release-version>
     </properties>
 </project>

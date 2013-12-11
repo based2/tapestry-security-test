@@ -1,47 +1,37 @@
+<!DOCTYPE html>
 <html t:type="loginLayout" title="Another Example for Tapestry 5.4"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd" xmlns:p="tapestry:parameter">
 
     <div class="jumbotron">
-        <h3 class="text-success">
-            <span class="glyphicon glyphicon-tower"></span>
-            ${message:greeting}</h3>
+        <h3 class="text-success"><t:glyphicon name="tower"/>${message:greeting}</h3>
     </div>
 
     <div class="container">
       <div class="panel panel-default">
-        <div class="panel-heading"> <span class="glyphicon glyphicon-home"></span> Please Login</div>
+        <div class="panel-heading"> <t:glyphicon name="home"/> Please Login</div>
             <t:form t:id="loginForm" t:clientValidation="NONE" class="form-horizontal">
             <fieldset>
                 <legend></legend>
                 <div class="form-group has-info">
-                   <label class="col-lg-2 control-label" for="username">Login</label>
+                   <label class="col-lg-2 control-label" for="username"></label>
                    <div class="col-lg-6">
                         <input t:type="textfield" t:id="username" placeholder="Login"/>
                    </div>
                 </div>
 
                 <div class="form-group has-info">
-                   <label class="col-lg-2 control-label" for="password">Password</label>
+                   <label class="col-lg-2 control-label" for="password"></label>
                    <div class="col-lg-6">
                         <input t:type="passwordfield" t:id="password" placeholder="Password"/>
                         <!-- <div class="checkbox">
                              <label><input type="checkbox"/>Remember me</label>
                          </div> -->
                          <br/>
-                         <button class="btn btn-success" type="submit"> <span class="glyphicon glyphicon-road"></span> Sign in</button>
+                         <button class="btn btn-success" type="submit"><t:glyphicon name="road"/> Sign in</button> ${currentTime}
                    </div>
                 </div>
-
-               <!--  <t:textfield id="username2"
-                     forlabel="username2" labelsize="literal:col-lg-6" colorborder="literal:danger" inputsize="literal:col-lg-2"
-                     mixins="formgroup" placeholder="Login2" value="literal:"/> -->
             </fieldset>
         </t:form>
       </div>
-    </div>
-    <div class="jumbotron">
-        <p class="text-info">
-            <t:pagelink page="Index"><span class="glyphicon glyphicon-refresh"></span></t:pagelink> ${currentTime}
-        </p>
     </div>
 </html>

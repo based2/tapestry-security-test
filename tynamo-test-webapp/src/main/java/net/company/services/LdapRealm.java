@@ -7,8 +7,8 @@ import org.apache.shiro.realm.ldap.LdapContextFactory;
 import org.apache.shiro.realm.ldap.LdapUtils;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.PermissionUtils;
+import org.apache.tapestry5.ioc.annotations.Inject;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.naming.AuthenticationException;
 import javax.naming.NamingEnumeration;
@@ -27,7 +27,10 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 @SuppressWarnings("UnusedDeclaration")
 public class LdapRealm extends JndiLdapRealm {
-    private final static Logger logger = LoggerFactory.getLogger(LdapRealm.class);
+    @Inject
+    private Logger logger;
+
+    private final static String SERVICE = "T5_LDAP";
 
     private String searchBase;
     private String searchFilter;
@@ -38,6 +41,11 @@ public class LdapRealm extends JndiLdapRealm {
     private String groupNameAttribute;
 
     private Map<String, String> groupRolesMap;
+
+    private Map<String, String> userRolesMapFilter;
+
+    @Inject
+    private Audit auditService;
 
     public LdapRealm(){
         super();
@@ -73,17 +81,18 @@ public class LdapRealm extends JndiLdapRealm {
             String role = null;
             while (answer.hasMore()) {
                 role = getRole((SearchResult) answer.next());
+                role = filterRoleWithUser(username, role);
                 if (role!=null) {
                     roleNames.add(role);
                 } else {
                     String msg = "Bad LDAP groups (lgrp), no role found for user:" + username;
                     logger.error(msg);
-                    // todo add to audit
+                    auditService.create(username, SERVICE, msg);
                     throw new AuthorizationException(msg);
                 }
             }
 
-            logger.info("Role for {}: {}", username, roleNames);  // todo enable as audit
+            logger.info("Role for {}: {}", username, roleNames);
 
             SimpleAuthorizationInfo sa = new SimpleAuthorizationInfo(roleNames);
             if (role!=null) {
@@ -97,6 +106,7 @@ public class LdapRealm extends JndiLdapRealm {
             String msg = "Failed to authenticate on LDAP for " + username;
             logger.warn(msg);
             // do nothing as the principal was not authenticated on LDAP
+            auditService.create(username, SERVICE, msg);
             throw new AuthenticationException(msg);
         } finally {
             LdapUtils.closeContext(systemLdapContext);
@@ -135,6 +145,29 @@ public class LdapRealm extends JndiLdapRealm {
         return null;
     }
 
+    public void setUserRolesMapFilter(Map<String, String> userRolesMapFilter) {
+        this.userRolesMapFilter = userRolesMapFilter;
+    }
+
+    /**
+     * Filter role specified individually
+     *
+     * @param username
+     * @param role
+     * @return role/ new role/null non authorized
+     */
+    private String filterRoleWithUser(String username, String role){
+        String finalRole = userRolesMapFilter.get(username);
+        if (role==null) {
+            logger.debug("No role, now "+ finalRole);
+            return finalRole;
+        }
+        if (finalRole==null) {
+            return role;
+        }
+        return finalRole;
+    }
+
     public void setSearchBase(String searchBase) {
         this.searchBase = searchBase;
     }
@@ -168,7 +201,6 @@ public class LdapRealm extends JndiLdapRealm {
      *
      * @param groupRolesMap
      */
-
     public void setGroupRolesMap(Map<String, String> groupRolesMap) {
         this.groupRolesMap = groupRolesMap;
     }
