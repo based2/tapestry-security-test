@@ -39,6 +39,7 @@ public class Layout
     private String pageName;
 
     @Property
+    @Persist
     private List<String> pageNames;
 
     @Property
@@ -180,8 +181,8 @@ public class Layout
     public void loadPageNames()
     {
         if (accessiblePages==null) {
-            accessiblePages = new ArrayList();
-            icons = new ArrayList();
+            accessiblePages = new ArrayList<String>();
+            icons = new ArrayList<String>();
             for (String[] pageOrDir : AppModule.LINK_PATH_PERMISSIONS)
             {
                 if (pageOrDir!=null){

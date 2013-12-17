@@ -35,13 +35,13 @@
         <dependency>
             <groupId>org.apache.tapestry</groupId>
             <artifactId>tapestry-core</artifactId>
-            <version>${tapestry-release-version}</version>
+            <version>${tapestry.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.tapestry</groupId>
             <artifactId>tapestry-ioc</artifactId>
-            <version>${tapestry-release-version}</version>
+            <version>${tapestry.version}</version>
         </dependency>
 
         <!--
@@ -306,7 +306,10 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
                http://tomcat.apache.org/maven-plugin-2.1/tomcat7-maven-plugin/
                -->
             <!-- 2.1 - 7.0.37 - 20 February 2013 -  -->
-            <!-- 2.2-SNAPSHOT :  - tomcat7-maven-plugin-2.2-20130706.134724-11.pom -->
+            <!-- http://repo1.maven.org/maven2/org/apache/tomcat/maven/tomcat7-maven-plugin/2.2/
+             http://tomcat.apache.org/maven-plugin-2.2/tomcat7-maven-plugin/source-repository.html
+             http://tomcat.apache.org/maven-plugin-2.2/distribution-management.html
+             -->
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
@@ -403,6 +406,6 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.6</java.version>
         <!-- http://maven.apache.org/plugins/maven-resources-plugin/examples/binaries-filtering.html -->
-         <tapestry-release-version>5.4-alpha-29</tapestry-release-version>
+         <tapestry.version>5.4-beta-1</tapestry.version>
     </properties>
 </project>

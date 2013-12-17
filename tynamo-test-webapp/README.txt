@@ -11,12 +11,12 @@ editor1 222
 seller1 333
 customer1 444
 
-Tapestry version used: 5.4-alpha-29
+Tapestry version used: 5.4-beta-1
 
 ===================================================
-status: (notrunning) update to 5.4-alpha-29, + ldap user-role filter, fix navbar and add icons rendering (ongoing)
+status: (unstable) update to 5.4-beta-1, + auto-logout header, layout template, bootswatch.css
 
-- [] update: layout template, bootswatch.css, font awesome and icon config in AppModule and fix it
+- [] update: font awesome and icon config in AppModule and navbar fix
 - [] move files to the root of the project
 - [] loginLayout -> LoginLayout
 - [] fix with http://mail-archives.apache.org/mod_mbox/tapestry-users/201309.mbox/browser

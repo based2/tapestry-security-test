@@ -285,6 +285,7 @@ public class AppModule
 
         configuration.add("HSTSPolicy", new HSTSPolicyHeader()); // HTTPS only: No HTTP allowed
         configuration.add("CSPolicy", new CSPolicyHeader());     // Restrict JS execution: no CDN
+        configuration.add("AutoLogout", new AutoLogoutHeader());
         //configuration.add("Timing", filter);
     }
 }
