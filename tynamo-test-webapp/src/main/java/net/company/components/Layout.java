@@ -7,6 +7,7 @@ import org.apache.tapestry5.Block;
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.annotations.*;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.ioc.internal.util.InternalUtils;
 import org.apache.tapestry5.services.Request;
 import org.slf4j.Logger;
 import org.tynamo.security.internal.services.LoginContextService;
@@ -17,20 +18,23 @@ import java.util.List;
 
 /**
  * Layout component for pages of application webapp.
- *
+ * <p/>
  * todo update layout template, bootswatch.css, and icon config in AppModule and fix it
  */
 // http://getbootstrap.com/examples/theme/
-@Import(stack="core",
-        stylesheet={"context:styles/bootstrap-bootswatch-slate.css",
-              //  "context:styles/bootstrap-theme.min.css",
+@Import(stack = "core",
+        stylesheet = {"context:styles/bootstrap-bootswatch-slate.css",
+                //  "context:styles/bootstrap-theme.min.css",
+                "context:font-awesome-4.0.3/css/font-awesome.min.css",
                 "context:styles/empty.css"})
 public class Layout
 {
     @Inject
     private Logger LOG;
 
-    /** The page title, for the <title> element and the <h1> element. */
+    /**
+     * The page title, for the <title> element and the <h1> element.
+     */
     @Property
     @Parameter(required = true, defaultPrefix = BindingConstants.LITERAL)
     private String title;
@@ -61,7 +65,8 @@ public class Layout
     private SecurityService securityService;
 
     @Property
-    @Persist //@ImmutableSessionPersistedObject http://tapestry.apache.org/persistent-page-data.html#PersistentPageData-ClusteringIssues
+    @Persist
+    //@ImmutableSessionPersistedObject http://tapestry.apache.org/persistent-page-data.html#PersistentPageData-ClusteringIssues
     private String uname;
 
     @Inject
@@ -79,64 +84,75 @@ public class Layout
     private List<String> icons;
     //@Persist  Map?
 
+    @SetupRender
+    public void init(){
+        this.loadPageNames();
+    }
+
     // todo direct pageName/icon map
-    private String loadIcon(){
-        if (accessiblePages==null) {
+    private String loadIcon()
+    {
+        if (accessiblePages == null) {
             loadPageNames();
         }
 
-        for(int i = 0; i < accessiblePages.size(); i++){
+        for (int i = 0; i < accessiblePages.size(); i++) {
             try {
                 if (pageName.equals(accessiblePages.get(i))) {
                     return icons.get(i);
                 }
-            } catch (Exception e) { return null;}
+            } catch (Exception e) {
+                return null;
+            }
         }
         return null;
     }
 
     public boolean isIcon()
     {
-        if (accessiblePages==null) {
+        if (accessiblePages == null) {
             loadPageNames();
         }
     /* if (icons==null) {
         icons = new String[accessiblePages.length];
     }*/
-        for(int i = 0; i < accessiblePages.size(); i++){
+        for (int i = 0; i < accessiblePages.size(); i++) {
             try {
                 if (pageName.equals(accessiblePages.get(i))) {
-                    if (icons.get(i)!=null) {
+                    if (icons.get(i) != null) {
                         icon = icons.get(i);
                         return true;
-                    }  else  {
+                    } else {
                         return false;
                     }
                 }
-            } catch (Exception e) { return false;}
+            } catch (Exception e) {
+                return false;
+            }
         }
         return false;
     }
 
     /**
      * Init current navbar with its active state
-     *
+     * <p/>
      * <pre>
      *    <t:loop class="prop:classForPageName()">
      * </pre>
+     *
      * @return active | null
      */
     public String getClassForPageName()
     {
-        if (uname==null) {
+        if (InternalUtils.isBlank(uname)) {
             uname = (String) SecurityUtils.getSubject().getPrincipal();
         }
-        if (pageName==null) {
+        if (InternalUtils.isBlank(pageName)) {
             pageName = AppModule.URL_SUCCESS.substring(1);
             this.loadPageNames();
         }
 
-        if (icon==null) {
+        if (InternalUtils.isBlank(icon)) {
             icon = this.loadIcon();
         }
         try {
@@ -147,7 +163,7 @@ public class Layout
                     ? "active"
                     : null;
 
-        } catch (Exception e){
+        } catch (Exception e) {
             LOG.error(resources.getPageName(), e);
             return null;
         }
@@ -157,13 +173,13 @@ public class Layout
     {
         try {
             icons.add(pageOrDir[3]);
-
-        } catch (Exception e){}
+        } catch (Exception e) {
+        }
     }
 
     private void load(String[] pageOrDir)
     {
-        if (pageOrDir.length==1) {
+        if (pageOrDir.length == 1) {
             this.accessiblePages.add(pageOrDir[0]);
             loadIcon(pageOrDir);
         } else if (AppModule.DEV.equals(pageOrDir[1])) {
@@ -180,14 +196,13 @@ public class Layout
 
     public void loadPageNames()
     {
-        if (accessiblePages==null) {
+        if (accessiblePages == null) {
             accessiblePages = new ArrayList<String>();
             icons = new ArrayList<String>();
-            for (String[] pageOrDir : AppModule.LINK_PATH_PERMISSIONS)
-            {
-                if (pageOrDir!=null){
+            for (String[] pageOrDir : AppModule.LINK_PATH_PERMISSIONS) {
+                if (pageOrDir != null) {
                     try {
-                        if (pageOrDir.length>3){
+                        if (pageOrDir.length > 3) {
                             if (securityService.hasPermission(pageOrDir[2])) {
                                 load(pageOrDir);
                             }
@@ -199,48 +214,36 @@ public class Layout
                             load(pageOrDir);
                         } catch (Exception e2) {
                             try {
-                                LOG.error("Failed to proceed to register pageOrDir "+ pageOrDir[0]
+                                LOG.error("Failed to proceed to register pageOrDir " + pageOrDir[0]
                                         + " for permission " + pageOrDir[2]);
                             } catch (Exception e1) {
                                 LOG.error("Failed to proceed to register pageOrDir " + pageOrDir[0]);
                             }
                             if (!AppModule.isProduction)
-                                LOG.error("",e);
+                                LOG.error("", e);
                         }
                     }
                 }
             }
-
-            //  String[] i = Objects.toString(icos);
-            //  icons2 = i;
-            // icons = ArrayUtils.toArray(icos);
-            //icons = new String[icos.size()];
-            //icos.toArray(icons);
-            //icons = icos.toArray(new String[icos.size()]);
-            ///*String[]*/ p = Objects.toString(pages);
-
-            //accessiblePages = p;
-            //accessiblePages = ArrayUtils.toArray(pages);
-            //accessiblePages = new String[pages.size()];
-            //pages.toArray(accessiblePages);
-            //accessiblePages = pages.toArray(new String[pages.size()]);
         }
         this.pageNames = this.accessiblePages;
     }
 
     @Log
-    @OnEvent(value=org.apache.tapestry5.EventConstants.ACTION, component="logout")
-    public String onActionFromLogout(){
+    @OnEvent(value = org.apache.tapestry5.EventConstants.ACTION, component = "logout")
+    public String onActionFromLogout()
+    {
         // Need to call this explicitly to invoke onlogout handlers (for remember me etc.)
         SecurityUtils.getSubject().logout();
+        // http://shiro.apache.org/static/current/apidocs/org/apache/shiro/mgt/DefaultSecurityManager.html#stopSession%28org.apache.shiro.subject.Subject%29
+        // stopSession(SecurityUtils.getSubject())
         try {
             // the session is already invalidated, but need to cause an exception since tapestry doesn't know about it
             // and you'll get a container exception message instead without this. Unfortunately, there's no way of
             // configuring Shiro to not invalidate sessions right now. See DefaultSecurityManager.logout()
             request.getSession(false).invalidate();
         } catch (Exception e) {
-            LOG.error("Invalidating HTTP session...");
-
+            LOG.debug("Invalidating HTTP session...", e);
         }
         return loginContextService.getLoginPage();
     }

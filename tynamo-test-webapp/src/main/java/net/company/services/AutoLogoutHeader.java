@@ -14,10 +14,13 @@ import java.io.IOException;
  * Use cases:
  *  Logout when closing the browser windows that enabled login,
  *  Prevent two login-authenticated sessions at the same time on different sites by closing the previous authenticated session),
+ *  Give the ability to the user to set his/her own session timeout,
  *  ...
  *
  * todo RFC
- * todo Send only the header after successful login answer
+ *
+ *  Send only the header after successful login answer => done in pages/Index#onActivate()
+ * todo specific ResponseAutoLogoutHeader
  *
  * http://security.stackexchange.com/questions/43809/do-we-need-to-logout-of-webapps logout,netsec
  + http://popuplogout.iniqua.com/

@@ -35,6 +35,8 @@ public class AppModule
 {
     private final static Logger LOG = LoggerFactory.getLogger(AppModule.class);
 
+    public static boolean isProduction = false;
+
     public static final String ROLE_CUSTOMER = "customer";
     public static final String ROLE_SELLER = "seller";
     public static final String ROLE_EDITOR = "editor";
@@ -53,7 +55,7 @@ public class AppModule
     public static final String DEV = "DEV$!|#@";
 
     public static String[][] LINK_PATH_PERMISSIONS = new String[][]{
-            {T5_DASHBOARD, DEV , "dashboard"}, // used only when isProduction = false, only in dev mode
+            { T5_DASHBOARD, T5_DASHBOARD, DEV , "dashboard"}, // used only when isProduction = false, only in dev mode
             {"Board","/board/**",PERMISSION_CUSTOMER, "tasks"},
             {"Stats","/stats/**",PERMISSION_SELLER, ""},
             {"Inventory","/inventory/**",PERMISSION_EDITOR, ""},
@@ -64,7 +66,7 @@ public class AppModule
             {"Contact"}
     };
 
-    public static boolean isProduction = true;
+
 
     public static void contributeApplicationDefaults(MappedConfiguration<String, String> configuration)
     {
@@ -201,22 +203,31 @@ public class AppModule
         configuration.add(SecurityFilterChainFactory.class, securityFilterChainFactory);
     }
 
+    private static boolean IS_SECURITY_ENABLED = false;
     @Contribute(HttpServletRequestFilter.class)
     @Marker(Security.class)
     public static void setupSecurity(Configuration<SecurityFilterChain> configuration,
                                      SecurityFilterChainFactory factory, WebSecurityManager securityManager) {
-
         // Authentication gateways
         // /authc/** rule covers /authc , /authc?q=name /authc#anchor urls as well
-        configuration.add(factory.createChain(URL_LOGIN).add(factory.anon()).build());
-        configuration.add(factory.createChain(URL_SUCCESS).add(factory.user()).build());
-        configuration.add(factory.createChain(URL_UNAUTHORIZED).add(factory.user()).build());
+        if (!IS_SECURITY_ENABLED) {
+            configuration.add(factory.createChain(URL_LOGIN).add(factory.anon()).build());
+            configuration.add(factory.createChain(URL_SUCCESS).add(factory.user()).build());
+            configuration.add(factory.createChain(URL_UNAUTHORIZED).add(factory.user()).build());
 
-        for (String[] linkPathPermission : LINK_PATH_PERMISSIONS) {
-            try {
-                LOG.info("Permission " + linkPathPermission[0] + " > " + linkPathPermission[1] + " > " + linkPathPermission[2] );
-                configuration.add(factory.createChain(linkPathPermission[1]).add(factory.perms(), linkPathPermission[2]).build());
-            } catch (Exception e) {}
+            for (String[] linkPathPermission : LINK_PATH_PERMISSIONS) {
+                try {
+                    if (linkPathPermission.length>2) {
+                        LOG.info("Permission " + linkPathPermission[0] + " > " + linkPathPermission[1] + " > " + linkPathPermission[2] );
+                        configuration.add(factory.createChain(linkPathPermission[1]).add(factory.perms(), linkPathPermission[2]).build());
+                    } else {
+                        LOG.info("Public " + linkPathPermission[0] );
+                    }
+                } catch (Exception e) {
+                    LOG.debug("", e);
+                }
+            }
+            IS_SECURITY_ENABLED=true;
         }
     }
 

@@ -8,7 +8,7 @@
 
     <div class="container">
       <div class="panel panel-default">
-        <div class="panel-heading"> <t:glyphicon name="home"/> Please Login</div>
+        <div class="panel-heading"> <t:glyphicon name="home"/> Please Log in</div>
             <t:form t:id="loginForm" t:clientValidation="NONE" class="form-horizontal">
             <fieldset>
                 <legend></legend>

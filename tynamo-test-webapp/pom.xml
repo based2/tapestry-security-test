@@ -146,7 +146,7 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
                                 </artifactItem>
                             </artifactItems>
                             <excludes>
-                                <exclude>org.apache.tapestry5.corelib.components.PasswordField</exclude>
+                                <exclude>corelib.components.PasswordField</exclude>
                                 <exclude>org.apache.tapestry5.corelib.components.TextField</exclude>
                             </excludes>
                             <outputDirectory>${project.build.directory}/wars</outputDirectory>
