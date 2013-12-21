@@ -13,8 +13,8 @@ customer1 444
 
 Tapestry version used: 5.4-beta-1
 
-===================================================
-status: auto-logout header after login and direct call to logout works, navbar fix
+===============================================================================
+status: + secure flag for cookies in web.xml, * maven-tomcat7-plugin 2.2 (7.0.47)
 
 http://jira.codehaus.org/browse/TYNAMO-147 - Make tapestry-security compatible with tapestry-5.4
 
@@ -28,3 +28,7 @@ http://jira.codehaus.org/browse/TYNAMO-147 - Make tapestry-security compatible w
 - [] http://wiki.apache.org/tapestry/Tapestry5CSRF
 - [] better default ssl config: enabling tests on IE?
 - [] check https://kawwa.atosworldline.com/?
+
+
+http://erik.io/blog/2013/06/08/a-basic-guide-to-when-and-how-to-deploy-https/
+  https://www.owasp.org/index.php/SecureFlag

@@ -122,42 +122,6 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.8</version>
-                <executions>
-                    <execution>
-                        <id>unpack</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                        <groupId>org.apache.tapestry</groupId>
-                                        <artifactId>tapestry-core</artifactId>
-                                        <version>${tapestry-release-version}</version>
-                                    <type>jar</type>
-                                    <overWrite>false</overWrite>
-                                    <outputDirectory>${project.build.directory}/tapestry-core-${tapestry-release-version}</outputDirectory>
-                                    <destFileName>tapestry-core-${tapestry-release-version}.jar</destFileName>
-                                  <!--  <includes>**/*.class,**/*.xml</includes>
-                                    <excludes>**/*test.class</excludes>  -->
-                                </artifactItem>
-                            </artifactItems>
-                            <excludes>
-                                <exclude>corelib.components.PasswordField</exclude>
-                                <exclude>org.apache.tapestry5.corelib.components.TextField</exclude>
-                            </excludes>
-                            <outputDirectory>${project.build.directory}/wars</outputDirectory>
-                            <overWriteReleases>false</overWriteReleases>
-                            <overWriteSnapshots>true</overWriteSnapshots>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
@@ -305,16 +269,10 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
             <!-- tomcat7:run
                http://tomcat.apache.org/maven-plugin-2.1/tomcat7-maven-plugin/
                -->
-            <!-- 2.1 - 7.0.37 - 20 February 2013 -  -->
-            <!-- http://repo1.maven.org/maven2/org/apache/tomcat/maven/tomcat7-maven-plugin/2.2/
-             http://tomcat.apache.org/maven-plugin-2.2/tomcat7-maven-plugin/source-repository.html
-             http://tomcat.apache.org/maven-plugin-2.2/distribution-management.html
-             -->
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.1</version>
-
+                <version>2.2</version>
                 <configuration>
                     <!-- application path always starts with /-->
                     <path>/</path>
