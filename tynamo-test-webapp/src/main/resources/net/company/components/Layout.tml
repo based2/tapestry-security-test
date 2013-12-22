@@ -22,7 +22,7 @@
                          <div class="navbar-collapse collapse">
                              <ul class="nav navbar-nav">
                                 <li t:type="loop" source="pageNames" value="pageName" class="prop:classForPageName">
-                                    <t:pagelink page="prop:pageName">${pageName}</t:pagelink>
+                                    <t:if test="prop:isIcon()"><t:faicon name="${icon}"/></t:if><t:pagelink page="prop:pageName">${pageName}</t:pagelink>
                                 </li>
                              </ul>
                              <a class="navbar-brand btn btn-primary disabled" href="#">App</a>

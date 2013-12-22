@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html t:type="layout" title="Contact net.company"
+<html t:type="Layout" title="Contact net.company"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
       xmlns:p="tapestry:parameter">
 

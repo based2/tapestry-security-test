@@ -56,11 +56,11 @@ public class AppModule
 
     public static String[][] LINK_PATH_PERMISSIONS = new String[][]{
             { T5_DASHBOARD, T5_DASHBOARD, DEV , "dashboard"}, // used only when isProduction = false, only in dev mode
-            {"Board","/board/**",PERMISSION_CUSTOMER, "tasks"},
-            {"Stats","/stats/**",PERMISSION_SELLER, ""},
-            {"Inventory","/inventory/**",PERMISSION_EDITOR, ""},
-            {"Controls","/controls/**",PERMISSION_EDITOR, ""},
-            {"Admin","/admin/**",PERMISSION_ADMIN, ""},
+            {"Board","/board/**",PERMISSION_CUSTOMER, "glass"},
+            {"Stats","/stats/**",PERMISSION_SELLER, "eye"},
+            {"Inventory","/inventory/**",PERMISSION_EDITOR, "compass"},
+            {"Controls","/controls/**",PERMISSION_EDITOR, "flash"},
+            {"Admin","/admin/**",PERMISSION_ADMIN, "gavel"},
             {"Bootswatch", DEV}, // used only when isProduction = false, only in dev mode
             {"About"},
             {"Contact"}

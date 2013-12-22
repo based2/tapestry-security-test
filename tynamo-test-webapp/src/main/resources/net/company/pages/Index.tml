@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html t:type="loginLayout" title="Another Example for Tapestry 5.4"
+<html t:type="LoginLayout" title="Another Example for Tapestry 5.4"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd" xmlns:p="tapestry:parameter">
 
     <div class="jumbotron">

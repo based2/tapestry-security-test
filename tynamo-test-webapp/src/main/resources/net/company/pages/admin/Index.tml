@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html t:type="layout" title="Admin"
+<html t:type="Layout" title="Admin"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
       xmlns:p="tapestry:parameter">
 

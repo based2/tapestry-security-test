@@ -14,10 +14,12 @@ import org.tynamo.security.internal.services.LoginContextService;
 import org.tynamo.security.services.SecurityService;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
- * Layout component for pages of application webapp.
+ * Layout component for generic application's pages
  * <p/>
  * todo update layout template, bootswatch.css, and icon config in AppModule and fix it
  */
@@ -33,7 +35,7 @@ public class Layout
     private Logger LOG;
 
     /**
-     * The page title, for the <title> element and the <h1> element.
+     * Page title, for the <title> element and the <h1> element.
      */
     @Property
     @Parameter(required = true, defaultPrefix = BindingConstants.LITERAL)
@@ -76,33 +78,23 @@ public class Layout
     private LoginContextService loginContextService;
 
     @Persist
-    //private String[] accessiblePages;
-    private List<String> accessiblePages;
-
-    @Persist
-    //private String[] icons;
-    private List<String> icons;
-    //@Persist  Map?
+    private Map<String, String> pageIcons;
 
     @SetupRender
-    public void init(){
+    public void init()
+    {
         this.loadPageNames();
     }
 
-    // todo direct pageName/icon map
     private String loadIcon()
     {
-        if (accessiblePages == null) {
+        if (pageIcons == null) {
             loadPageNames();
         }
 
-        for (int i = 0; i < accessiblePages.size(); i++) {
-            try {
-                if (pageName.equals(accessiblePages.get(i))) {
-                    return icons.get(i);
-                }
-            } catch (Exception e) {
-                return null;
+        for (String pageN : pageIcons.keySet()) {
+            if (pageName.equals(pageN)) {
+                return pageIcons.get(pageN);
             }
         }
         return null;
@@ -110,24 +102,17 @@ public class Layout
 
     public boolean isIcon()
     {
-        if (accessiblePages == null) {
+        if (pageIcons == null) {
             loadPageNames();
         }
-    /* if (icons==null) {
-        icons = new String[accessiblePages.length];
-    }*/
-        for (int i = 0; i < accessiblePages.size(); i++) {
-            try {
-                if (pageName.equals(accessiblePages.get(i))) {
-                    if (icons.get(i) != null) {
-                        icon = icons.get(i);
-                        return true;
-                    } else {
-                        return false;
-                    }
+        for (String pageN : pageIcons.keySet()) {
+            if (pageName.equals(pageN)) {
+                if (InternalUtils.isBlank(pageIcons.get(pageN))) {
+                    icon = pageIcons.get(pageN);
+                    return true;
+                } else {
+                    return false;
                 }
-            } catch (Exception e) {
-                return false;
             }
         }
         return false;
@@ -169,36 +154,30 @@ public class Layout
         }
     }
 
-    private void loadIcon(String[] pageOrDir)
+    private void load(String pageName, String iconName)
     {
-        try {
-            icons.add(pageOrDir[3]);
-        } catch (Exception e) {
-        }
+        if (iconName==null) iconName = "";
+        this.pageIcons.put(pageName, iconName);
     }
 
     private void load(String[] pageOrDir)
     {
         if (pageOrDir.length == 1) {
-            this.accessiblePages.add(pageOrDir[0]);
-            loadIcon(pageOrDir);
+            load(pageOrDir[0], "");
         } else if (AppModule.DEV.equals(pageOrDir[1])) {
             // add specific page enabled by DEV mode
             if (!AppModule.isProduction) {
-                this.accessiblePages.add(pageOrDir[0]);
-                loadIcon(pageOrDir);
+                load(pageOrDir[0], pageOrDir[1]);
             }
         } else {
-            this.accessiblePages.add(pageOrDir[0]);
-            loadIcon(pageOrDir);
+            load(pageOrDir[0], pageOrDir[2]);
         }
     }
 
     public void loadPageNames()
     {
-        if (accessiblePages == null) {
-            accessiblePages = new ArrayList<String>();
-            icons = new ArrayList<String>();
+        if (pageIcons == null) {
+            pageIcons = new LinkedHashMap<String, String>();
             for (String[] pageOrDir : AppModule.LINK_PATH_PERMISSIONS) {
                 if (pageOrDir != null) {
                     try {
@@ -226,7 +205,7 @@ public class Layout
                 }
             }
         }
-        this.pageNames = this.accessiblePages;
+        this.pageNames = new ArrayList<String>(pageIcons.keySet());
     }
 
     @Log

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html t:type="layout" title="Inventory"
+<html t:type="Layout" title="Inventory"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
       xmlns:p="tapestry:parameter">
 

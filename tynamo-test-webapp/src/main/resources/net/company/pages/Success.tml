@@ -1,16 +1,13 @@
 <!DOCTYPE html>
-<html t:type="Layout" title="Welcome Page"
+<html t:type="Layout" title="Success"
       encoding="ISO-8859-1"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
       xmlns:p="tapestry:parameter">
 
-
-	WELCOME ${userLogin} [<strong><a t:type="actionLink" t:id="logout" id="logout">Logout</a></strong>]
-	       
+	Welcome ${userLogin} [<strong><a t:type="actionLink" t:id="logout" id="logout">Log out</a></strong>]
 	<p>
 		<t:security.hasRole role="adminRole">
-		  YOU ARE THE BOSS!! 
+		  You are admin
 		</t:security.hasRole>	
 	</p>
-
 </html>

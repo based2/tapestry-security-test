@@ -1,3 +1,6 @@
+Another Tapestry Template
+Secured web application access with Apache Tapestry 5.4-beta-1 and Apache Shiro 1.2.2 (Tynamo: tapestry-security 0.5.1)
+
 mvn clean tomcat7:run
 mvn clean tomcat6:run
 mvn clean jetty:run
@@ -13,22 +16,19 @@ customer1 444
 
 Tapestry version used: 5.4-beta-1
 
-===============================================================================
-status: + secure flag for cookies in web.xml, * maven-tomcat7-plugin 2.2 (7.0.47)
-
-http://jira.codehaus.org/browse/TYNAMO-147 - Make tapestry-security compatible with tapestry-5.4
+=================================================================================
+Status: + fa-icon, loginLayout -> LoginLayout, fix Error at line 30 column 1: XML document structures must start and end within the same entity.
 
 - [] update: font awesome and icon config in AppModule
+- center navbar and logout
 - [] move files to the root of the project
-- [] loginLayout -> LoginLayout
-- [] fix with http://mail-archives.apache.org/mod_mbox/tapestry-users/201309.mbox/browser
-- [] add Shiro UI management like in ISIS
 - [] use org.tynamo.security:tapestry-security-jpa with H2 DB
+-- [] add Shiro UI management like in ISIS
+- [] use tynamo-security 0.06, when released: http://jira.codehaus.org/browse/TYNAMO-147
 - [] audit view page
 - [] http://wiki.apache.org/tapestry/Tapestry5CSRF
 - [] better default ssl config: enabling tests on IE?
-- [] check https://kawwa.atosworldline.com/?
-
+- [] check https://kawwa.atosworldline.com/
 
 http://erik.io/blog/2013/06/08/a-basic-guide-to-when-and-how-to-deploy-https/
   https://www.owasp.org/index.php/SecureFlag

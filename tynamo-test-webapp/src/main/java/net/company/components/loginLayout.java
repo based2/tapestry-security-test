@@ -6,7 +6,7 @@ import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
 
 /**
- * Layout component for pages of application webapp.
+ * Layout component for login application page
  */
 @Import(stack="core",
         // pkdvc - styles/pixel-kit/dark-velvet-css/
@@ -21,7 +21,7 @@ import org.apache.tapestry5.annotations.Property;
                 //"context:styles/pixel-kit/dark-velvet-css/css/jquery-ui-1.8.20.custom.css",
         //        "context:pkdvc/style.css"}
 )
-public class loginLayout
+public class LoginLayout
 {
     /** The page title, for the <title> element and the <h1> element. */
     @Property
