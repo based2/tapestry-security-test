@@ -20,17 +20,13 @@
                            </button>
                          </div>
                          <div class="navbar-collapse collapse">
-                             <ul class="nav navbar-nav">
-                                <li t:type="loop" source="pageNames" value="pageName" class="prop:classForPageName">
-                                    <t:if test="prop:isIcon()"><t:faicon name="${icon}"/></t:if><t:pagelink page="prop:pageName">${pageName}</t:pagelink>
-                                </li>
-                             </ul>
-                             <a class="navbar-brand btn btn-primary disabled" href="#">App</a>
-                           <div class="navbar-header navbar-right">
-                             	<p class="navbar-text">
-                             	    <a t:type="actionLink" t:id="logout" id="logout"><t:glyphicon name="off"/> ${uname}</a>
-                             	</p>
-                           </div>
+                           <ul class="nav navbar-nav">
+                            <li t:type="loop" source="pageNames" value="pageName" class="prop:classForPageName">
+                                <t:pagelink page="prop:pageName"><t:if test="prop:isIcon()"><t:faicon name="prop:loadIcon()"/></t:if> ${pageName}</t:pagelink>
+                            </li>
+                            <li><a class="navbar-brand btn btn-primary disabled" href="#">App</a></li>
+                            <li><a t:type="actionLink" t:id="logout" id="logout"> <t:glyphicon name="off"/> ${uname}</a></li>
+                         </ul>
                          </div>
                  </div>
            </div>

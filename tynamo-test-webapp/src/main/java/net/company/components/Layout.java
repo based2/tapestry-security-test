@@ -86,18 +86,13 @@ public class Layout
         this.loadPageNames();
     }
 
-    private String loadIcon()
+    public String loadIcon()
     {
         if (pageIcons == null) {
             loadPageNames();
         }
 
-        for (String pageN : pageIcons.keySet()) {
-            if (pageName.equals(pageN)) {
-                return pageIcons.get(pageN);
-            }
-        }
-        return null;
+        return pageIcons.get(pageName);
     }
 
     public boolean isIcon()
@@ -107,7 +102,7 @@ public class Layout
         }
         for (String pageN : pageIcons.keySet()) {
             if (pageName.equals(pageN)) {
-                if (InternalUtils.isBlank(pageIcons.get(pageN))) {
+                if (!InternalUtils.isBlank(pageIcons.get(pageN))) {
                     icon = pageIcons.get(pageN);
                     return true;
                 } else {
@@ -169,8 +164,10 @@ public class Layout
             if (!AppModule.isProduction) {
                 load(pageOrDir[0], pageOrDir[1]);
             }
+        } else if (pageOrDir.length==4) {
+            load(pageOrDir[0], pageOrDir[3]);
         } else {
-            load(pageOrDir[0], pageOrDir[2]);
+            load(pageOrDir[0], "");
         }
     }
 

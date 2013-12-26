@@ -14,20 +14,18 @@ editor1 222
 seller1 333
 customer1 444
 
-Tapestry version used: 5.4-beta-1
+Tapestry version used: 5.4-beta-2
 
 =================================================================================
-Status: + fa-icon, loginLayout -> LoginLayout, fix Error at line 30 column 1: XML document structures must start and end within the same entity.
+Status: * navbar fix: font awesome and icon config in AppModule, * update 5.4-beta-2
 
-- [] update: font awesome and icon config in AppModule
-- center navbar and logout
 - [] move files to the root of the project
 - [] use org.tynamo.security:tapestry-security-jpa with H2 DB
 -- [] add Shiro UI management like in ISIS
-- [] use tynamo-security 0.06, when released: http://jira.codehaus.org/browse/TYNAMO-147
+- [] use tynamo-security 0.6, when released: http://jira.codehaus.org/browse/TYNAMO-147
 - [] audit view page
 - [] http://wiki.apache.org/tapestry/Tapestry5CSRF
-- [] better default ssl config: enabling tests on IE?
+- enable css template user change: http://stackoverflow.com/questions/2864070/tapestry-5-loading-css-from-filesystem
 - [] check https://kawwa.atosworldline.com/
 
 http://erik.io/blog/2013/06/08/a-basic-guide-to-when-and-how-to-deploy-https/
