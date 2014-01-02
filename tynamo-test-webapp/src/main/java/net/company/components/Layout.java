@@ -91,7 +91,6 @@ public class Layout
         if (pageIcons == null) {
             loadPageNames();
         }
-
         return pageIcons.get(pageName);
     }
 
@@ -122,6 +121,7 @@ public class Layout
      *
      * @return active | null
      */
+    // todo cache it if page does not change
     public String getClassForPageName()
     {
         if (InternalUtils.isBlank(uname)) {

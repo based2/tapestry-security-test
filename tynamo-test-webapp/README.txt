@@ -17,7 +17,7 @@ customer1 444
 Tapestry version used: 5.4-beta-2
 
 =================================================================================
-Status: * navbar fix: font awesome and icon config in AppModule, * update 5.4-beta-2
+Status: + list/grid tests on board page: ciphers, providers, * commons lang to 3.2
 
 - [] move files to the root of the project
 - [] use org.tynamo.security:tapestry-security-jpa with H2 DB

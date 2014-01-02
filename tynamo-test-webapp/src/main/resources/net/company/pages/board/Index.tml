@@ -3,7 +3,12 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
       xmlns:p="tapestry:parameter">
 
-    <h2>Customers Board</h2>
+    <h3>Ciphers</h3>
 
+    <t:grid source="ciphers" model="cipherModel" />
+
+    <h3>Providers</h3>
+
+    <t:grid source="providers" model="providerModel" />
 
 </html>
