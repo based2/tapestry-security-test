@@ -26,6 +26,9 @@ import org.tynamo.security.services.impl.SecurityFilterChain;
 import org.tynamo.security.shiro.authz.PermissionsAuthorizationFilter;
 import org.tynamo.shiro.extension.realm.text.ExtendedPropertiesRealm;
 
+import javax.crypto.Cipher;
+import java.security.NoSuchAlgorithmException;
+
 /**
  * This module is automatically included as part of the Tapestry IoC Registry, it's a good place to
  * configure and extend Tapestry, or to place your own service definitions.
@@ -55,12 +58,12 @@ public class AppModule
     public static final String DEV = "DEV$!|#@";
 
     public static String[][] LINK_PATH_PERMISSIONS = new String[][]{
-            { T5_DASHBOARD, T5_DASHBOARD, DEV , "dashboard"}, // used only when isProduction = false, only in dev mode
-            {"Board","/board/**",PERMISSION_CUSTOMER, "glass"},
-            {"Stats","/stats/**",PERMISSION_SELLER, "eye"},
-            {"Inventory","/inventory/**",PERMISSION_EDITOR, "compass"},
-            {"Controls","/controls/**",PERMISSION_EDITOR, "flash"},
-            {"Admin","/admin/**",PERMISSION_ADMIN, "gavel"},
+            {T5_DASHBOARD, T5_DASHBOARD, DEV, "dashboard"}, // used only when isProduction = false: only in dev mode
+            {"Board", "/board/**", PERMISSION_CUSTOMER, "glass"},
+            {"Stats", "/stats/**", PERMISSION_SELLER, "eye"},
+            {"Inventory", "/inventory/**", PERMISSION_EDITOR, "compass"},
+            {"Controls", "/controls/**", PERMISSION_EDITOR, "flash"},
+            {"Admin", "/admin/**", PERMISSION_ADMIN, "gavel"},
             {"Bootswatch", DEV}, // used only when isProduction = false, only in dev mode
             {"About"},
             {"Contact"}
@@ -96,11 +99,8 @@ public class AppModule
         }
 
         configuration.add(SymbolConstants.JAVASCRIPT_INFRASTRUCTURE_PROVIDER, "jquery");
-
         configuration.add(SymbolConstants.SESSION_LOCKING_ENABLED, "true");
-
         configuration.add(SymbolConstants.SUPPORTED_LOCALES, "en");
-
         //configuration.add(SymbolConstants.DEFAULT_STYLESHEET, "context:styles/empty.css");
 
 
@@ -109,9 +109,7 @@ public class AppModule
         // header. If existing assets are changed, the version number should also
         // change, to force the browser to download new versions.
         configuration.add(SymbolConstants.APPLICATION_VERSION, "1.0");
-
         configuration.add(SymbolConstants.START_PAGE_NAME, "SEC");
-
         configuration.add(SymbolConstants.SECURE_ENABLED, "true");
 
         configuration.add(SymbolConstants.HOSTPORT, "8080");
@@ -123,6 +121,15 @@ public class AppModule
         configuration.add(SecuritySymbols.UNAUTHORIZED_URL, URL_UNAUTHORIZED);
 
         configuration.add(SymbolConstants.TAPESTRY_VERSION, "false");
+
+        // Check JCE Unlimited StrengthJurisdictionPolicyFilesInstalled
+        try {
+            if (Cipher.getMaxAllowedKeyLength("AES")<2147483647){
+                LOG.error("### JCE Unlimited Strength Jurisdiction Policy Files is NOT Installed. http://www.oracle.com/technetwork/java/javase/downloads/jce-7-download-432124.html");
+            }
+        } catch (NoSuchAlgorithmException e) {
+            LOG.error("### JCA JSSE JCE API not found. - http://www.oracle.com/technetwork/java/javase/tech/index-jsp-136007.html");
+        }
     }
 
     // http://apache-tapestry-mailing-list-archives.1045711.n5.nabble.com/HMAC-Passphrase-Could-Be-Much-More-Useful-Correct-Me-If-I-m-Wrong-td5724606.html#a5724608
@@ -184,28 +191,32 @@ public class AppModule
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Security - Tynamo/Shiro
 
-    public void contributeMetaDataLocator(MappedConfiguration<String,String> configuration)
+    public void contributeMetaDataLocator(MappedConfiguration<String, String> configuration)
     {
         // Enabling @Secure only on some pages (the remaining ones are insecure)
         configuration.add(MetaDataConstants.SECURE_PAGE, "true");
     }
 
-    public static void contributeWebSecurityManager(Configuration<Realm> configuration) {
+    public static void contributeWebSecurityManager(Configuration<Realm> configuration)
+    {
         configuration.add(new ExtendedPropertiesRealm("classpath:shiro-users.properties"));
     }
 
-    @Contribute(ServiceOverride.class) // binder.bind(SecurityFilterChainFactory.class, RedirectHTTP401Error.class).withId("RedirectHTTP401Error");
-    public static void overrideSecurityFilterChainFactory(MappedConfiguration<Class<?>,Object> configuration,
+    @Contribute(ServiceOverride.class)
+    // binder.bind(SecurityFilterChainFactory.class, RedirectHTTP401Error.class).withId("RedirectHTTP401Error");
+    public static void overrideSecurityFilterChainFactory(MappedConfiguration<Class<?>, Object> configuration,
                                                           @Local SecurityFilterChainFactory securityFilterChainFactory)
     {
         configuration.add(SecurityFilterChainFactory.class, securityFilterChainFactory);
     }
 
     private static boolean IS_SECURITY_ENABLED = false;
+
     @Contribute(HttpServletRequestFilter.class)
     @Marker(Security.class)
     public static void setupSecurity(Configuration<SecurityFilterChain> configuration,
-                                     SecurityFilterChainFactory factory, WebSecurityManager securityManager) {
+                                     SecurityFilterChainFactory factory, WebSecurityManager securityManager)
+    {
         // Authentication gateways
         // /authc/** rule covers /authc , /authc?q=name /authc#anchor urls as well
         if (!IS_SECURITY_ENABLED) {
@@ -215,21 +226,22 @@ public class AppModule
 
             for (String[] linkPathPermission : LINK_PATH_PERMISSIONS) {
                 try {
-                    if (linkPathPermission.length>2) {
-                        LOG.info("Permission " + linkPathPermission[0] + " > " + linkPathPermission[1] + " > " + linkPathPermission[2] );
+                    if (linkPathPermission.length > 2) {
+                        LOG.info("Permission " + linkPathPermission[0] + " > " + linkPathPermission[1] + " > " + linkPathPermission[2]);
                         configuration.add(factory.createChain(linkPathPermission[1]).add(factory.perms(), linkPathPermission[2]).build());
                     } else {
-                        LOG.info("Public " + linkPathPermission[0] );
+                        LOG.info("Public " + linkPathPermission[0]);
                     }
                 } catch (Exception e) {
                     LOG.debug("", e);
                 }
             }
-            IS_SECURITY_ENABLED=true;
+            IS_SECURITY_ENABLED = true;
         }
     }
 
-    private static PermissionsAuthorizationFilter getPermissionFilter(SecurityFilterChainFactory factory) {
+    private static PermissionsAuthorizationFilter getPermissionFilter(SecurityFilterChainFactory factory)
+    {
         PermissionsAuthorizationFilter permFilter = factory.perms();
         permFilter.setUnauthorizedUrl(URL_UNAUTHORIZED);
         return permFilter;
