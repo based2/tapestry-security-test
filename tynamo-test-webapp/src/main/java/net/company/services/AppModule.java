@@ -1,5 +1,8 @@
 package net.company.services;
 
+import net.company.services.http.CSPolicyHeader;
+import net.company.services.http.HSTSPolicyHeader;
+import net.company.services.http.RedirectHTTP401Error;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.web.mgt.WebSecurityManager;
@@ -40,34 +43,14 @@ public class AppModule
 
     public static boolean isProduction = false;
 
-    public static final String ROLE_CUSTOMER = "customer";
-    public static final String ROLE_SELLER = "seller";
-    public static final String ROLE_EDITOR = "editor";
-    public static final String ROLE_ADMIN = "admin";
+    public static final String URL_LOGIN = "/index";
+    public static final String URL_SUCCESS = "/board/Index";//"/success";
+    public static final String URL_UNAUTHORIZED = "/AccessDenied";
 
     public static final String PERMISSION_CUSTOMER = "customerPermission:1";
     public static final String PERMISSION_SELLER = "sellerPermission:1";
     public static final String PERMISSION_EDITOR = "editorPermission:1";
     public static final String PERMISSION_ADMIN = "adminPermission:1";
-
-    public static final String URL_LOGIN = "/index";
-    public static final String URL_SUCCESS = "/board/Index";//"/success";
-    public static final String URL_UNAUTHORIZED = "/AccessDenied";
-
-    public static final String T5_DASHBOARD = "T5Dashboard";
-    public static final String DEV = "DEV$!|#@";
-
-    public static String[][] LINK_PATH_PERMISSIONS = new String[][]{
-            {T5_DASHBOARD, T5_DASHBOARD, DEV, "dashboard"}, // used only when isProduction = false: only in dev mode
-            {"Board", "/board/**", PERMISSION_CUSTOMER, "glass"},
-            {"Stats", "/stats/**", PERMISSION_SELLER, "eye"},
-            {"Inventory", "/inventory/**", PERMISSION_EDITOR, "compass"},
-            {"Controls", "/controls/**", PERMISSION_EDITOR, "flash"},
-            {"Admin", "/admin/**", PERMISSION_ADMIN, "gavel"},
-            {"Bootswatch", DEV}, // used only when isProduction = false, only in dev mode
-            {"About"},
-            {"Contact"}
-    };
 
     public static void contributeApplicationDefaults(MappedConfiguration<String, String> configuration)
     {
@@ -88,7 +71,7 @@ public class AppModule
             configuration.add(SymbolConstants.COMPRESS_WHITESPACE, "false");
             configuration.add(SymbolConstants.MINIFICATION_ENABLED, "false");
         } else {
-            LINK_PATH_PERMISSIONS[0][0] = null;
+            //LINK_PATH_PERMISSIONS[0][0] = null;
             configuration.add(SymbolConstants.PRODUCTION_MODE, "true");
             configuration.add(SymbolConstants.COMPONENT_RENDER_TRACING_ENABLED, "false");
             configuration.add(SymbolConstants.COMPACT_JSON, "true");
@@ -184,12 +167,15 @@ public class AppModule
     public static void bind(final ServiceBinder binder)
     {
         binder.bind(SecurityFilterChainFactory.class, RedirectHTTP401Error.class).withId("RedirectHTTP401Error");
-        binder.bind(Audit.class, AuditImpl.class);
+        binder.bind(NavbarAccess.class, NavbarAccessImpl.class);
+        binder.bind(Audit.class, net.company.services.AuditImpl.class);
         //binder.bind(Customer.class, CustomerImpl.class);
     }
 
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Security - Tynamo/Shiro
+    // http://tapestry.apache.org/https.html#HTTPS-SecuringMultiplePages
 
     public void contributeMetaDataLocator(MappedConfiguration<String, String> configuration)
     {
@@ -203,7 +189,6 @@ public class AppModule
     }
 
     @Contribute(ServiceOverride.class)
-    // binder.bind(SecurityFilterChainFactory.class, RedirectHTTP401Error.class).withId("RedirectHTTP401Error");
     public static void overrideSecurityFilterChainFactory(MappedConfiguration<Class<?>, Object> configuration,
                                                           @Local SecurityFilterChainFactory securityFilterChainFactory)
     {
@@ -215,12 +200,13 @@ public class AppModule
     @Contribute(HttpServletRequestFilter.class)
     @Marker(Security.class)
     public static void setupSecurity(Configuration<SecurityFilterChain> configuration,
-                                     SecurityFilterChainFactory factory, WebSecurityManager securityManager)
+                                     SecurityFilterChainFactory factory, WebSecurityManager securityManager, NavbarAccess navbarAccess)
     {
         // Authentication gateways
         // /authc/** rule covers /authc , /authc?q=name /authc#anchor urls as well
         if (!IS_SECURITY_ENABLED) {
-            configuration.add(factory.createChain(URL_LOGIN).add(factory.anon()).build());
+            navbarAccess.setupSecurity(configuration, factory, securityManager);
+           /* configuration.add(factory.createChain(URL_LOGIN).add(factory.anon()).build());
             configuration.add(factory.createChain(URL_SUCCESS).add(factory.user()).build());
             configuration.add(factory.createChain(URL_UNAUTHORIZED).add(factory.user()).build());
 
@@ -235,7 +221,7 @@ public class AppModule
                 } catch (Exception e) {
                     LOG.debug("", e);
                 }
-            }
+            }               */
             IS_SECURITY_ENABLED = true;
         }
     }

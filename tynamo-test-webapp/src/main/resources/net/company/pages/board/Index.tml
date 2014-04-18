@@ -9,6 +9,6 @@
 
     <h3>Providers</h3>
 
-    <t:grid source="providers" model="providerModel" />
+    <t:grid source="suiteproviders" model="providerModel" />
 
 </html>

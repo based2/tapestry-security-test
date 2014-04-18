@@ -4,7 +4,10 @@ import net.company.services.AppModule;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.tapestry5.annotations.Persist;
+import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.Secure;
+import org.apache.tapestry5.annotations.SetupRender;
 import org.apache.tapestry5.beaneditor.BeanModel;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -29,6 +32,10 @@ import java.util.Map;
 public class Index {
 
     private final static Logger LOG = LoggerFactory.getLogger(Index.class);
+
+    @Property
+    @Persist
+    private Map[] suiteproviders;
 
     @Inject
     private Logger logger;
@@ -59,45 +66,53 @@ public class Index {
             new ImmutablePair("Value", String.class)
     };
 
+    @SetupRender
+    public void init()
+    {
+        this.loadProviders();
+    }
+
+
     private void initProvidersFactory(){
         if (providersFactory==null) {
             providersFactory = new MapPropertyBeanModelFactory(PROVIDERS_PAIR);
         }
     }
 
-    public Map[] getProviders() {
-         initProvidersFactory();
+    private void loadProviders() {
+        if (suiteproviders==null) {
+            initProvidersFactory();
             List<Map<String, Object>> maps = new ArrayList<Map<String, Object>>();
-            for (Provider provider: Security.getProviders()) {
-                for (String key: provider.stringPropertyNames())
+            for (Provider provider : Security.getProviders()) {
+                for (String key : provider.stringPropertyNames())
                     maps.add(createProviderRecord(provider.getName(), key, provider.getProperty(key)));
             }
-            @SuppressWarnings({ "rawtypes", "unchecked" })
+            @SuppressWarnings({"rawtypes", "unchecked"})
             Map<String, Object>[] array = (Map<String, Object>[]) new HashMap[maps.size()];
-            maps.toArray(array);
-            return array;
+            suiteproviders=maps.toArray(array);
         }
+    }
 
-        private Map<String, Object> createProviderRecord(String name, String key, String value) {
-            return providersFactory.createRecord(name, key, value);
-           /* Map<String, Object> providerRecord = new HashMap<String, Object>();
-            providerRecord.put("Name", name);
-            providerRecord.put("Key", key);
-            providerRecord.put("Value", value);
-            return providerRecord; */
-        }
+    private Map<String, Object> createProviderRecord(String name, String key, String value) {
+        return providersFactory.createRecord(name, key, value);
+       /* Map<String, Object> providerRecord = new HashMap<String, Object>();
+        providerRecord.put("Name", name);
+        providerRecord.put("Key", key);
+        providerRecord.put("Value", value);
+        return providerRecord; */
+    }
 
-        public BeanModel<Object> getProviderModel() {
-            return providersFactory.createMapPropertyConduit(beanModelSource, messages);
-           /* // Initially construct a BeanModel for object (no properties)
-            BeanModel<Object> beanModel = beanModelSource.createDisplayModel(Object.class, messages);
+    public BeanModel<Object> getProviderModel() {
+        return providersFactory.createMapPropertyConduit(beanModelSource, messages);
+       /* // Initially construct a BeanModel for object (no properties)
+        BeanModel<Object> beanModel = beanModelSource.createDisplayModel(Object.class, messages);
 
-            // add MapPropertyConduits for each map entry
-            beanModel.add("Name", new MapPropertyConduit("Name", String.class));
-            beanModel.add("Key", new MapPropertyConduit("Key", String.class));
-            beanModel.add("Value", new MapPropertyConduit("Value", String.class));
+        // add MapPropertyConduits for each map entry
+        beanModel.add("Name", new MapPropertyConduit("Name", String.class));
+        beanModel.add("Key", new MapPropertyConduit("Key", String.class));
+        beanModel.add("Value", new MapPropertyConduit("Value", String.class));
 
-            return beanModel; */
+        return beanModel; */
     }
 
     private static MapPropertyBeanModelFactory ciphersFactory;

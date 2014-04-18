@@ -1,4 +1,4 @@
-package net.company.services;
+package net.company.services.http;
 
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestFilter;

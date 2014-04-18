@@ -3,4 +3,11 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
       xmlns:p="tapestry:parameter">
 
+<h3>Goals</h3>
+<p class="well">
+ Help to create a secured Tapestry application with easily customisable layout<br/>
+ Provide configurable tools to manage UI page links, icons in the navbar and <a href="http://www.getbootstrap.com">Bootstrap</a> themes (Bootswatch) activation<br/><br/>
+ User Access Control per page should be configurable with Tynamo Tapestry Security/Apache Shiro Page @Annotations authorizations, via an UI (like with Apache Syncope).<br/>
+ Serve as a basis to generate a full Tapestry application with MinuteProject (already available to generate JPA, like Apache OpenJPA generator)(like Apache ISIS).
+</p>
 </html>

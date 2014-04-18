@@ -1,4 +1,4 @@
-package net.company.services;
+package net.company.services.http;
 
 import org.apache.tapestry5.ioc.annotations.EagerLoad;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -41,7 +41,7 @@ public class RedirectHTTP401Error extends SecurityFilterChainFactoryImpl
                        @Inject
                        @Symbol(SecuritySymbols.UNAUTHORIZED_URL) String unauthorizedUrl,
                        @Inject
-                       @Symbol(SecuritySymbols.REDIRECT_TO_SAVED_URL) boolean redirectToSavedUrl)
+                       @Symbol(SecuritySymbols.REDIRECT_TO_SAVED_URL) String redirectToSavedUrl)
     {
         super(logger, builder, login, successUrl, loginUrl, unauthorizedUrl, redirectToSavedUrl);
     }

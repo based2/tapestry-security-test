@@ -1,4 +1,4 @@
-// Copyright 2013 The Apache Software Foundation
+// Copyright 2014 The Apache Software Foundation
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ public class Faicon
      * The name of the icon, e.g., "arrow-up", "flag", "fire" etc.
      */
     @Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
-    String name;
+    private String name;
 
     boolean beginRender(MarkupWriter writer)
     {
