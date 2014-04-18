@@ -1,5 +1,5 @@
 Another Tapestry Template
-Secured web application access with Apache Tapestry 5.4-beta-3 and Apache Shiro 1.2.2 (Tynamo: tapestry-security 0.5.1)
+Secured web application access with Apache Tapestry 5.4-beta-3 and Apache Shiro 1.2.3 (Tynamo: tapestry-security 0.6.0)
 
 mvn clean tomcat7:run
 mvn clean tomcat6:run
