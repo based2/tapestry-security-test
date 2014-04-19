@@ -2,14 +2,15 @@
 <html t:type="LoginLayout" title="Another Example for Tapestry 5.4"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd" xmlns:p="tapestry:parameter">
 
-    <div class="jumbotron">
-        <h3 class="text-success"><t:glyphicon name="tower"/> ${message:greeting}</h3>
+    <div class="yez">
+        <h1><t:glyphicon name="tower"/> ${message:greeting1}</h1>
+        <h2>${message:greeting2}</h2>
     </div>
 
     <div class="container">
       <div class="panel panel-default">
         <div class="panel-heading"> <t:glyphicon name="home"/> Please Log in</div>
-            <t:form t:id="loginForm" t:clientValidation="NONE" class="form-horizontal">
+            <t:form t:id="loginForm" t:clientValidation="SUBMIT" class="form-horizontal">
             <fieldset>
                 <legend></legend>
                 <div class="form-group has-info">

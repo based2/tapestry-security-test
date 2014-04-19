@@ -1,5 +1,5 @@
 Another Tapestry Template
-Secured web application access with Apache Tapestry 5.4-beta-3 and Apache Shiro 1.2.3 (Tynamo: tapestry-security 0.6.0)
+Secured web application access with Apache Tapestry 5.4-beta-5 and Apache Shiro 1.2.3 (Tynamo: tapestry-security 0.6.0)
 
 mvn clean tomcat7:run
 mvn clean tomcat6:run
@@ -14,13 +14,9 @@ editor1 222
 seller1 333
 customer1 444
 
-Tapestry version used: 5.4-beta-4
+Tapestry version used: 5.4-beta-5
 =================================================================================
-Status: Test java jca jsse jce unlimited policy files presence,
-        update to 5.4-beta-4,
-        update to tynamo-security 0.6.0 and shiro 1.2.3,
-        enable navbar component for persistence and better reuse,
-        Board> SuiteProviders fix exception in mapgrid
+Status: update to 5.4-beta-5, +http://codepen.io/yez/pen/yGjIl
 
 - try with https://github.com/spreadthesource/tapestry5-installer
 - [] move files to the root of the project

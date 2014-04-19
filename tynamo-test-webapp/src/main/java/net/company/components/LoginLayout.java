@@ -16,7 +16,8 @@ import org.apache.tapestry5.annotations.Property;
                 "context:pkdvc/js/libs/bootstrap.min.js",
                 "context:pkdvc/js/general.js"
         },*/
-        stylesheet={"context:styles/bootstrap-bootswatch-slate.css","context:styles/empty.css"}
+        stylesheet={"context:styles/bootstrap-bootswatch-slate.css",
+                "context:styles/empty.css","context:styles/codepen_yez.css"}
         //stylesheet={"context:pkdvc/css/bootstrap.css",
                 //"context:styles/pixel-kit/dark-velvet-css/css/jquery-ui-1.8.20.custom.css",
         //        "context:pkdvc/style.css"}

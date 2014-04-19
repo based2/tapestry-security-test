@@ -431,6 +431,6 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.6</java.version>
         <!-- http://maven.apache.org/plugins/maven-resources-plugin/examples/binaries-filtering.html -->
-         <tapestry.version>5.4-beta-4</tapestry.version>
+         <tapestry.version>5.4-beta-5</tapestry.version>
     </properties>
 </project>

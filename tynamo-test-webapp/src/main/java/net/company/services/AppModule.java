@@ -172,6 +172,12 @@ public class AppModule
         //binder.bind(Customer.class, CustomerImpl.class);
     }
 
+    // http://tapestry.apache.org/security-faq.html
+   /* @Contribute(ClientWhitelist.class)
+    public static void turnOffLocalhostInProduction(OrderedConfiguration<WhitelistAnalyzer> configuration,
+                                                    @Symbol(SymbolConstants.PRODUCTION_MODE) boolean productionMode) {
+        if (productionMode) { configuration.override("LocalhostOnly", null); }
+    }*/
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Security - Tynamo/Shiro
