@@ -208,26 +208,8 @@ public class AppModule
     public static void setupSecurity(Configuration<SecurityFilterChain> configuration,
                                      SecurityFilterChainFactory factory, WebSecurityManager securityManager, NavbarAccess navbarAccess)
     {
-        // Authentication gateways
-        // /authc/** rule covers /authc , /authc?q=name /authc#anchor urls as well
         if (!IS_SECURITY_ENABLED) {
             navbarAccess.setupSecurity(configuration, factory, securityManager);
-           /* configuration.add(factory.createChain(URL_LOGIN).add(factory.anon()).build());
-            configuration.add(factory.createChain(URL_SUCCESS).add(factory.user()).build());
-            configuration.add(factory.createChain(URL_UNAUTHORIZED).add(factory.user()).build());
-
-            for (String[] linkPathPermission : LINK_PATH_PERMISSIONS) {
-                try {
-                    if (linkPathPermission.length > 2) {
-                        LOG.info("Permission " + linkPathPermission[0] + " > " + linkPathPermission[1] + " > " + linkPathPermission[2]);
-                        configuration.add(factory.createChain(linkPathPermission[1]).add(factory.perms(), linkPathPermission[2]).build());
-                    } else {
-                        LOG.info("Public " + linkPathPermission[0]);
-                    }
-                } catch (Exception e) {
-                    LOG.debug("", e);
-                }
-            }               */
             IS_SECURITY_ENABLED = true;
         }
     }

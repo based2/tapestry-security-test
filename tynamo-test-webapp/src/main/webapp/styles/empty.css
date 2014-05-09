@@ -16,3 +16,11 @@ body {
 #container {
   margin:10px;
 }
+
+/*.animate {
+   width: 6.6em;
+   width: 66ch;
+   border-right: .1em solid;
+   font: 5em monospace;
+   animation: cursor 1s step-end infinite;
+} */

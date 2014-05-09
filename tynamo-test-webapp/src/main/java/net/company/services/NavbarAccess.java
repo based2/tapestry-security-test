@@ -11,7 +11,6 @@ import org.tynamo.security.services.impl.SecurityFilterChain;
  */
 public interface NavbarAccess
 {
-    public String[][] getPermissions();
     public void setupSecurity(Configuration<SecurityFilterChain> configuration,
                               SecurityFilterChainFactory factory, WebSecurityManager securityManager);
     public java.util.Map<String, String> getPageNames(SecurityService securityService);

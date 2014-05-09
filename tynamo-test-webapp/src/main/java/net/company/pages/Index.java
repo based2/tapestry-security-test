@@ -14,13 +14,14 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Response;
 import org.slf4j.Logger;
 import org.tynamo.security.internal.services.LoginContextService;
-import org.tynamo.security.services.SecurityService;
 
 import java.util.Date;
 
 /**
- * Start page of application
+ * Application log in page
  * http://jumpstart.doublenegative.com.au/jumpstart/examples/input/forms1
+ *
+ * @net.company.components.LoginLayout
  */
 
 @Secure
@@ -29,9 +30,9 @@ public class Index
     @Inject
     private Logger LOG;
 
-    @Inject
-    @Property
-    private SecurityService securityService;
+   // @Inject
+   // @Property
+   // private SecurityService securityService;
 
     @Property
     private String username, password;
@@ -57,10 +58,10 @@ public class Index
     String onActivate()
     {
         // http://stackoverflow.com/questions/3450604/why-is-there-no-string-empty-in-java
-        this.password = BLANK_STRING;
+        //this.password = BLANK_STRING;
         //this.username = BLANK_STRING;
         this.password = EMPTY_STRING;
-        //this.username = EMPTY_STRING;
+        this.username = EMPTY_STRING;
 
         Subject subject = SecurityUtils.getSubject();
         if (subject.isAuthenticated() || subject.isRemembered()) {
@@ -86,7 +87,6 @@ public class Index
                 subject.login(token);
                 token.clear();
                 LOG.debug("User [" + subject.getPrincipal() + "] logged in successfully.");
-
             } else {
                 LOG.debug("User [" + subject.getPrincipal() + "] failed to log.");
             }

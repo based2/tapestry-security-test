@@ -4,7 +4,7 @@
     <artifactId>tynamo-test-webapp</artifactId>
     <version>0.1</version>
     <packaging>war</packaging>
-    <name>Secured web application access with Apache Tapestry 5.4 and Apache Shiro 1.2.3 (Tynamo: tapestry-security 0.6.0)</name>
+    <name>Secured web application access with Apache Tapestry 5.4-beta-5 and Tynamo/tapestry-security 0.6.0 (Shiro 1.2.3)</name>
     <dependencies>
 
         <dependency>
@@ -66,12 +66,12 @@
             <artifactId>tapestry-security</artifactId>
             <version>0.6.0</version>
         </dependency>
-
+        <!--
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-core</artifactId>
             <version>1.2.3</version>
-        </dependency>
+        </dependency> -->
 
         <!-- A dependency on either JUnit or TestNG is required, or the surefire plugin (which runs the tests)
 will fail, preventing Maven from packaging the WAR. Tapestry includes a large number
@@ -169,7 +169,7 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
         <plugin>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-maven-plugin</artifactId>
-            <version>9.1.4.v20140401</version>
+            <version>9.1.5.v20140505</version>
             <configuration>
                 <reload>automatic</reload>
                 <scanIntervalSeconds>4</scanIntervalSeconds>

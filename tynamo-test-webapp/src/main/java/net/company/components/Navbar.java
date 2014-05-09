@@ -86,26 +86,18 @@ public class Navbar
      */
     public String getClassForPageName()
     {
-        if (InternalUtils.isBlank(uname)) {
-            uname = (String) SecurityUtils.getSubject().getPrincipal();
-        }
+        if (InternalUtils.isBlank(uname)) uname = (String) SecurityUtils.getSubject().getPrincipal();
+
         if (InternalUtils.isBlank(name)) {
             name = AppModule.URL_SUCCESS.substring(1);
             this.init();
         }
 
-        if (InternalUtils.isBlank(icon)) {
-            icon = this.loadIcon(icon);
-        }
+        if (InternalUtils.isBlank(icon)) icon = this.loadIcon(icon);
 
         try {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug(resources.getPageName().toLowerCase() + " / " + name.toLowerCase());
-            }
-            return resources.getPageName().toLowerCase().startsWith(name.toLowerCase())
-                    ? "active"
-                    : null;
-
+            if (LOG.isDebugEnabled()) LOG.debug("test:" + resources.getPageName().toLowerCase() + " / " + name.toLowerCase());
+            return resources.getPageName().toLowerCase().startsWith(name.toLowerCase()) ? "active" : null;
         } catch (Exception e) {
             LOG.error(resources.getPageName(), e);
             return null;
@@ -122,20 +114,16 @@ public class Navbar
     {
         if (pageIcons == null) init();
         icon = loadIcon();
-        if (icon==null) {
-            return false;
-        } else {
-            return true;
-        }
+        if (icon==null) return false;
+        return true;
     }
 
-
-    // To Component Layout
+    /** To Component @net.company.components.Layout */
     public String getPage(){
         return pageName;
     }
 
-    // From Component Layout
+    /** From Component @net.company.components.Layout */
     public void setPage(String pageName)
     {
         this.pageName = pageName;
@@ -144,13 +132,10 @@ public class Navbar
 
     public String loadIcon(String pageName)
     {
-        if (pageIcons == null) {
-            init();
-        }
+        if (pageIcons == null) init();
         return pageIcons.get(pageName);
     }
 
-    //@Log
     @OnEvent(value = org.apache.tapestry5.EventConstants.ACTION, component = "logout")
     public String onActionFromLogout()
     {

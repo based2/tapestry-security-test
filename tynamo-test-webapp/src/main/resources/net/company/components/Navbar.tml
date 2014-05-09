@@ -10,7 +10,7 @@
    <div class="navbar-collapse collapse">
      <ul class="nav navbar-nav">
       <li t:type="loop" source="pageNames" value="name" class="prop:classForPageName">
-          <t:pagelink page="prop:name"><t:if test="prop:isIcon()"><t:faicon name="prop:loadIcon()"/></t:if> ${name}</t:pagelink>
+          <t:pagelink page="prop:name"><t:if test="prop:isIcon()"><t:fa icon="prop:loadIcon()"/></t:if> ${name}</t:pagelink>
       </li>
       <li><a class="navbar-brand btn btn-primary disabled" href="#">App</a></li>
       <li><a t:type="actionLink" t:id="logout" id="logout"> <t:glyphicon name="off"/> ${uname}</a></li>

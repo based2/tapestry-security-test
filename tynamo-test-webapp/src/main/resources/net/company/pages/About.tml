@@ -5,9 +5,11 @@
 
 <h3>Goals</h3>
 <p class="well">
- Help to create a secured <a href="http://tapestry.apache.org/">Tapestry</a> application with easily customisable layout<br/>
+ Help to create a secured (HTTPS SSL TLS) <a href="http://tapestry.apache.org/">Tapestry</a> application with easily customisable layout<br/>
  Provide configurable tools to manage UI page links, icons in the navbar and <a href="http://www.getbootstrap.com">Bootstrap</a> themes (<a href="http://bootswatch.com/">Bootswatch</a>) activation<br/><br/>
  User Access Control per page should be configurable with <a href="http://tynamo.org/tapestry-security+guide">Tynamo Tapestry Security</a>/<a href="http://shiro.apache.org/">Apache Shiro</a> Page @Annotations authorizations, via an UI (like with <a href="https://syncope.apache.org/">Apache Syncope</a>).<br/>
  Serve as a basis to generate a full Tapestry application with <a href="http://minuteproject.wikispaces.com/JPA2">MinuteProject</a> (already available to generate JPA, like <a href="http://openjpa.apache.org/builds/2.2.2/apache-openjpa/docs/jpa_2.2.html">Apache OpenJPA generator</a>)(like <a href="http://isis.apache.org/">Apache Isis</a>).
+
+ <br/>Apache HTTPD/Tomcat can be both configured with HTTPS with AJP.
 </p>
 </html>

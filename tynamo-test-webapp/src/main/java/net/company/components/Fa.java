@@ -19,21 +19,23 @@ import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.annotations.Parameter;
 
 /**
- * Renders a {@code <span>} tag with the CSS class to select a <a href="http://fontawesome.io/examples/">Font Awesome</a>.
+ * Icon component for Font Awesome
+ * Renders a {@code <span>} tag with the CSS class
+ * to select a <a href="http://fontawesome.io/examples/">Font Awesome</a>.
  *
  * @tapestrydoc
  */
-public class Faicon
+public class Fa
 {
     /**
      * The name of the icon, e.g., "arrow-up", "flag", "fire" etc.
      */
     @Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
-    private String name;
+    private String icon;
 
     boolean beginRender(MarkupWriter writer)
     {
-        writer.element("i", "class", "fa fa-" + name);
+        writer.element("i", "class", "fa fa-" + icon);
         writer.end();
 
         return false;
