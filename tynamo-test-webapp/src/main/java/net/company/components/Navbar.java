@@ -149,7 +149,7 @@ public class Navbar
             // configuring Shiro to not invalidate sessions right now. See DefaultSecurityManager.logout()
             request.getSession(false).invalidate();
         } catch (Exception e) {
-            LOG.debug("Invalidating HTTP session...", e);
+            LOG.debug("Invalidating HTTP session...");
         }
         return loginContextService.getLoginPage();
     }

@@ -1,6 +1,6 @@
 Another Tapestry Template
 Secured web application access
-with Apache Tapestry 5.4-beta-6 and Tynamo/tapestry-security 0.6.0 (Shiro 1.2.3)
+with Apache Tapestry 5.4-beta-7 and Tynamo/tapestry-security 0.6.0 (Shiro 1.2.3)
 
 mvn clean tomcat7:run
 mvn clean tomcat6:run
@@ -16,7 +16,7 @@ seller1 333
 customer1 444
 
 =================================================================================
-Status: update to 5.4-beta-6
+Status: update to 5.4-beta-7
 
 add theme switcher for bootswatch
 add google bootstrap theme
@@ -114,3 +114,18 @@ https://github.com/hlship/plastic-demos
 https://github.com/jmayaalv/Tapestrify
 
 intellij IDEA Emmet templates
+
+
+java.lang.NullPointerException
+	org.apache.shiro.util.AntPathMatcher.doMatch(AntPathMatcher.java:109)
+	org.apache.shiro.util.AntPathMatcher.match(AntPathMatcher.java:90)
+	org.apache.shiro.util.AntPathMatcher.matches(AntPathMatcher.java:86)
+	org.tynamo.security.services.impl.SecurityFilterChain.matches(SecurityFilterChain.java:46)
+	org.tynamo.security.services.impl.SecurityConfiguration.getMatchingChain(SecurityConfiguration.java:76)
+	org.tynamo.security.services.impl.SecurityConfiguration.service(SecurityConfiguration.java:48)
+	$HttpServletRequestFilter_13731a5f2fa06bda.service(Unknown Source)
+	$HttpServletRequestHandler_13731a5f2fa06be0.service(Unknown Source)
+	org.apache.tapestry5.modules.TapestryModule$1.service(TapestryModule.java:795)
+	$HttpServletRequestHandler_13731a5f2fa06be0.service(Unknown Source)
+	$HttpServletRequestHandler_13731a5f2fa06bd9.service(Unknown Source)
+	org.apache.tapestry5.TapestryFilter.doFilter(TapestryFilter.java:166)
