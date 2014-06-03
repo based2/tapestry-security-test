@@ -119,7 +119,8 @@ public class Navbar
     }
 
     /** To Component @net.company.components.Layout */
-    public String getPage(){
+    public String getPage()
+    {
         return pageName;
     }
 

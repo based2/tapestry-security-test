@@ -1,6 +1,6 @@
 Another Tapestry Template
 Secured web application access
-with Apache Tapestry 5.4-beta-7 and Tynamo/tapestry-security 0.6.0 (Shiro 1.2.3)
+with Apache Tapestry 5.4-beta-10 and Tynamo/tapestry-security 0.6.0 (Shiro 1.2.3)
 
 mvn clean tomcat7:run
 mvn clean tomcat6:run
@@ -16,7 +16,7 @@ seller1 333
 customer1 444
 
 =================================================================================
-Status: update to 5.4-beta-7
+Status: update to 5.4-beta-10
 
 add theme switcher for bootswatch
 add google bootstrap theme
