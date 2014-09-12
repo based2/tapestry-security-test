@@ -30,7 +30,7 @@ public class Fa
     /**
      * The name of the icon, e.g., "arrow-up", "flag", "fire" etc.
      */
-    @Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
+    @Parameter(required=true, allowNull=false, cache=true, defaultPrefix=BindingConstants.LITERAL)
     private String icon;
 
     boolean beginRender(MarkupWriter writer)

@@ -4,12 +4,14 @@
       xmlns:p="tapestry:parameter">
 
 <p><h1>CDN control</h1>
+<pre>
 - The CDN gets to decide *what* code is delivered to *which* users. Could be a prime target for, say, another FERRETCANNON.
 - If the CDN is compromised, so is your site.
 - If an attacker on a local network manages to inject poisoned cache data into requests for said CDN, your site is compromised.
 - All of your visitors are disclosed to the CDN owner.
 - If the CDN goes down, your site does so, too. Note that the inverse doesn't apply: the CDNs superior availability has no positive effect on your site.
 - Loading from another host may cause an unnecessary DNS lookup and will cause an unnecessary TLS connection.
-(by phlo)</p>
+(by phlo)
+</pre></p>
 
 </html>

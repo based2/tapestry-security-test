@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 /**
  * Audit Service implementation
  *   with log debug
+ *
+ *   todo cache
  */
 public class AuditImpl implements Audit {
     @Inject

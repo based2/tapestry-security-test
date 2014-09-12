@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
-    <display-name>WebApp Tapestry 5 Application</display-name>
+    <display-name>WebApp 4 Tapestry 5 Applications</display-name>
     <context-param>
         <!-- The only significant configuration for Tapestry 5, this informs Tapestry
 of where to look for pages, components and mixins. -->
@@ -19,9 +19,14 @@ of where to look for pages, components and mixins. -->
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     <session-config>
+        <!-- https://www.owasp.org/index.php/HttpOnly
+             http://support.filecatalyst.com/index.php?/Knowledgebase/Article/View/209/0/securing-session-cookies-in-tomcat-with-httponly-and-securetrue
+        -->
+        <session-timeout>120</session-timeout>
         <cookie-config>
             <http-only>true</http-only>
-            <secure>true</secure>
         </cookie-config>
+        <!-- https://fralef.me/tomcat-disable-jsessionid-in-url.html -->
+        <tracking-mode>COOKIE</tracking-mode>
     </session-config>
 </web-app>

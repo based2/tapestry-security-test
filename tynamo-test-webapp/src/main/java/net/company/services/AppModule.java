@@ -77,13 +77,13 @@ public class AppModule
             configuration.add(SymbolConstants.COMPACT_JSON, "true");
             configuration.add(SymbolConstants.COMPRESS_WHITESPACE, "true");
             configuration.add(SymbolConstants.MINIFICATION_ENABLED, "true");
-            // todo check http://apache-tapestry-mailing-list-archives.1045711.n5.nabble.com/HMAC-Passphrase-Could-Be-Much-More-Useful-Correct-Me-If-I-m-Wrong-td5724606.html
-            configuration.add(SymbolConstants.HMAC_PASSPHRASE, RandomStringUtils.randomAscii(10));
         }
+        // todo check http://apache-tapestry-mailing-list-archives.1045711.n5.nabble.com/HMAC-Passphrase-Could-Be-Much-More-Useful-Correct-Me-If-I-m-Wrong-td5724606.html
+        configuration.add(SymbolConstants.HMAC_PASSPHRASE, RandomStringUtils.randomAscii(10));
 
         configuration.add(SymbolConstants.JAVASCRIPT_INFRASTRUCTURE_PROVIDER, "jquery");
         configuration.add(SymbolConstants.SESSION_LOCKING_ENABLED, "true");
-        configuration.add(SymbolConstants.SUPPORTED_LOCALES, "en");
+        configuration.add(SymbolConstants.SUPPORTED_LOCALES, "en,fr");
         //configuration.add(SymbolConstants.DEFAULT_STYLESHEET, "context:styles/empty.css");
 
 
