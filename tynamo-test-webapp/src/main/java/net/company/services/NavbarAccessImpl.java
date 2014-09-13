@@ -49,12 +49,13 @@ public class NavbarAccessImpl implements NavbarAccess
     public void setupSecurity(Configuration<SecurityFilterChain> configuration,
                                                        SecurityFilterChainFactory securityFactory, WebSecurityManager securityManager)
     {
-        LOG.info("Log In page:" + AppModule.URL_LOGIN);
+        // Authentication gateways
         configuration.add(securityFactory.createChain(AppModule.URL_LOGIN).add(securityFactory.anon()).build());
-        LOG.info("Page after successful login:" + AppModule.URL_LOGIN);
+        LOG.info("Log In page:" + AppModule.URL_LOGIN);
         configuration.add(securityFactory.createChain(AppModule.URL_SUCCESS).add(securityFactory.user()).build());
-        LOG.info("Redirect page for unauthorized access:" + AppModule.URL_UNAUTHORIZED);
+        LOG.debug("Page after successful login:" + AppModule.URL_SUCCESS);
         configuration.add(securityFactory.createChain(AppModule.URL_UNAUTHORIZED).add(securityFactory.user()).build());
+        LOG.info("Redirect page for unauthorized access:" + AppModule.URL_UNAUTHORIZED);
 
         for (String[] modePagePathPermission : MODES_PAGES_PATHS_PERMISSIONS_ICONS) {
             if ((modePagePathPermission.length > 0) && (InternalUtils.isNonBlank(modePagePathPermission[0]))) {
