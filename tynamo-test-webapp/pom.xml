@@ -64,7 +64,7 @@
         <dependency>
             <groupId>org.tynamo</groupId>
             <artifactId>tapestry-security</artifactId>
-            <version>0.6.0</version>
+            <version>0.6.1</version>
         </dependency>
 
         <!-- A dependency on either JUnit or TestNG is required, or the surefire plugin (which runs the tests)

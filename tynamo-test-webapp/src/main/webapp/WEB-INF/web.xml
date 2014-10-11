@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
-    <display-name>WebApp 4 Tapestry 5 Applications</display-name>
+    <display-name>Webapp Tapestry 5.4</display-name>
     <context-param>
         <!-- The only significant configuration for Tapestry 5, this informs Tapestry
 of where to look for pages, components and mixins. -->

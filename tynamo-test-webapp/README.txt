@@ -1,6 +1,6 @@
 Another Tapestry Template
 Secured web application access
-with Apache Tapestry 5.4-beta-22 and Tynamo/tapestry-security 0.6.0 (Shiro 1.2.3)
+with Apache Tapestry 5.4-beta-22 and Tynamo/tapestry-security 0.6.1 (Shiro 1.2.3)
 
 mvn clean tomcat7:run
 mvn clean tomcat6:run
@@ -16,7 +16,7 @@ seller1 333
 customer1 444
 
 ===================================================================================
-Status: update to 5.4-beta-22, font-awesome 4.1.0, IE 9 compatibility, start i18n:fr
+Status: update tapestry-security to 0.6.1
 
 update maven to 3.2.3
 add font-awesome 4.2.0
