@@ -1,19 +1,12 @@
-<div class="navbar navbar-fixed-bottom"
-  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd" xmlns:p="tapestry:parameter">
- <div class="navbar-header">
-     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-       <span class="icon-bar"></span>
-       <span class="icon-bar"></span>
-       <span class="icon-bar"></span>
-     </button>
-   </div>
-   <div class="navbar-collapse collapse">
-     <ul class="nav navbar-nav">
-      <li t:type="loop" source="pageNames" value="name" class="prop:classForPageName">
-          <t:pagelink page="prop:name"><t:if test="prop:isIcon()"><t:fa icon="prop:loadIcon()"/></t:if> ${name}</t:pagelink>
-      </li>
-      <li><a class="navbar-brand btn btn-primary disabled" href="#">App</a></li>
-      <li><a t:type="actionLink" t:id="logout" id="logout"> <t:glyphicon name="off"/> ${uname}</a></li>
-   </ul>
-   </div>
+<div class="container-fluid navbar navbar-default navbar-fixed-bottom" role="navigation"
+  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+    <div>
+     <ul class="row-fluid nav navbar-nav">
+          <li t:type="loop" source="pageNames" value="name" class="prop:classForPageName">
+              <t:pagelink page="prop:name"><t:if test="prop:isIcon()"><t:fa icon="prop:loadIcon()"/></t:if> ${name}</t:pagelink>
+          </li>
+          <li><a class="navbar-brand btn btn-primary disabled" href="#">Gardot</a></li>
+          <li><a t:type="actionLink" t:id="logout" id="logout"> <t:glyphicon name="off"/> ${uname}</a></li>
+       </ul>
+     </div>
 </div>

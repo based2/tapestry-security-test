@@ -23,7 +23,7 @@ import java.util.Map;
 
 /**
  * Horizontal menu with icons
- * Icons and order is Configurable in @AppModule LINK_PATH_PERMISSIONS
+ * Icons and order is Configurable in @NavbarAccessImpl MODES_PAGES_PATHS_PERMISSIONS_ICONS
  */
 public class Navbar
 {
@@ -114,8 +114,7 @@ public class Navbar
     {
         if (pageIcons == null) init();
         icon = loadIcon();
-        if (icon==null) return false;
-        return true;
+        return icon!=null;
     }
 
     /** To Component @net.company.components.Layout */

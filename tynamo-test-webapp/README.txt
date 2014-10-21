@@ -16,9 +16,8 @@ seller1 333
 customer1 444
 
 ===================================================================================
-Status: update tapestry-security to 0.6.1
+Status: NavBar improvements
 
-update maven to 3.2.3
 add font-awesome 4.2.0
 add theme switcher for bootswatch
 add google bootstrap theme
