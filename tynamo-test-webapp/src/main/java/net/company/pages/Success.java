@@ -41,6 +41,6 @@ public class Success {
         	logger.error("Invalidating HTTP session...");
         }
 
-        return loginContextService.getLoginPage();		
+        return loginContextService.getLoginURL();
 	}
 }

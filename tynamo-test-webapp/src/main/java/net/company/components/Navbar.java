@@ -151,6 +151,6 @@ public class Navbar
         } catch (Exception e) {
             LOG.debug("Invalidating HTTP session...");
         }
-        return loginContextService.getLoginPage();
+        return loginContextService.getLoginURL();
     }
 }

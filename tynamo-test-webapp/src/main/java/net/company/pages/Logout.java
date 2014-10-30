@@ -28,7 +28,7 @@ public class Logout
     Object onPassivate()
     {
         securityService.getSubject().logout();
-        return loginContextService.getLoginPage();
+        return loginContextService.getLoginURL();
     }
 
     Object onActivate()
@@ -75,6 +75,6 @@ public class Logout
         } catch (Exception e) { }   */
 
         securityService.getSubject().logout();
-        return  loginContextService.getLoginPage();
+        return loginContextService.getLoginURL();
     }
 }

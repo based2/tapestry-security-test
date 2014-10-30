@@ -149,7 +149,7 @@ public class AppModule
                         logger.warn("HMAC does not match for user: " + SecurityUtils.getSubject().getPrincipal() +", redirecting to login page.");
                         //TapestryRealmSecurityManager
                         //saveRequestAndRedirectToLogin(request, response);
-                        loginContextService.redirectToSavedRequest(loginContextService.getLoginPage());
+                        loginContextService.redirectToSavedRequest(loginContextService.getLoginURL());
                     } else {
                         throw ex;
                     }
