@@ -20,7 +20,7 @@ import org.slf4j.Logger;
 // http://getbootstrap.com/examples/theme/
 @Import(stack = "core",
         stylesheet = {"context:styles/bootstrap-bootswatch-slate.css",
-                "context:font-awesome-4.1.0/css/font-awesome.min.css",
+                "context:font-awesome-4.2.0/css/font-awesome.min.css",
                 "context:styles/empty.css"})
 public class Layout
 {
