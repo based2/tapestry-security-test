@@ -16,7 +16,8 @@ seller1 333
 customer1 444
 
 ===================================================================================
-Status: update to Tapestry 5.4-beta-23 & font-awesome 4.2.0
+Status: add tapestry-webresources for js compression:
+   http://mail-archives.apache.org/mod_mbox/tapestry-users/201311.mbox/%3CCACd-vsMoUdDnP8+f=0zoP=m63-moNHw5-NNkEcQCs6rDjoGdig@mail.gmail.com%3E
 
 add font-awesome 4.2.0
 add theme switcher for bootswatch

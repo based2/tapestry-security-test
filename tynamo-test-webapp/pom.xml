@@ -44,6 +44,12 @@
             <version>${tapestry.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.tapestry</groupId>
+            <artifactId>tapestry-webresources</artifactId>
+            <version>${tapestry.version}</version>
+        </dependency>
+
         <!--
         <dependency>
             <groupId>org.apache.tapestry</groupId>
