@@ -4,7 +4,7 @@
     <artifactId>tynamo-test-webapp</artifactId>
     <version>0.1</version>
     <packaging>war</packaging>
-    <name>Secured web application access with Apache Tapestry 5.4-beta-23 and Tynamo/tapestry-security 0.6.2 (Shiro 1.2.3)</name>
+    <name>Secured web application access with Apache Tapestry 5.4-beta-24 and Tynamo/tapestry-security 0.6.2 (Shiro 1.2.3)</name>
     <dependencies>
 
         <dependency>
@@ -22,14 +22,14 @@
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk15on</artifactId>
-            <version>1.50</version>
+            <version>1.51</version>
         </dependency>
         -->
         <!--
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>1.3.174</version>
+            <version>1.3.176</version>
         </dependency> -->
 
         <dependency>
@@ -149,27 +149,11 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
 
                 http://code.google.com/p/googleappengine/issues/detail?id=6768
             -->
-            <!-- <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.0.7.v20131107</version>
-                <configuration>
-                    <reload>automatic</reload>
-                    <scanIntervalSeconds>4</scanIntervalSeconds>
-                    <stopPort>9999</stopPort>
-                    <stopKey>key</stopKey> -->
-                    <!--
-                     http://git.eclipse.org/c/jetty/org.eclipse.jetty.project.git/tree/jetty-server/src/main/config/etc/
-                     http://git.eclipse.org/c/jetty/org.eclipse.jetty.project.git/tree/examples/embedded/src/main/java/org/eclipse/jetty/embedded/LikeJettyXml.java
-                     -->
-                  <!--  <jettyXml>src/main/jetty/jetty.xml,src/main/jetty/jetty-http.xml,src/main/jetty/jetty-ssl.xml,src/main/jetty/jetty-https.xml</jettyXml>
-                </configuration>
-            </plugin>  -->
 
         <plugin>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-maven-plugin</artifactId>
-            <version>9.2.5.v20141112</version>
+            <version>9.2.6.v20141205</version>
             <configuration>
                 <reload>automatic</reload>
                 <scanIntervalSeconds>4</scanIntervalSeconds>
@@ -182,26 +166,6 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
                 <jettyXml>src/main/jetty/jetty.xml,src/main/jetty/jetty-http.xml,src/main/jetty/jetty-ssl.xml,src/main/jetty/jetty-https.xml</jettyXml>
               </configuration>
           </plugin>
-
-            <!-- http://wiki.eclipse.org/Jetty/Howto/Configure_SSL -->
-           <!-- <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>8.1.16.v20140903</version>
-                <configuration>
-                    <reload>automatic</reload>
-                    <scanIntervalSeconds>4</scanIntervalSeconds>
-                    <stopPort>9098</stopPort>
-                    <stopKey>key</stopKey>
-                    <jettyXml>src/main/jetty8/server-conf.xml</jettyXml>
-              <systemProperties>
-                  <systemProperty>
-                      <name>tapestry.execution-mode</name>
-                      <value>development</value>
-                  </systemProperty>
-              </systemProperties>
-          </configuration>
-      </plugin>      -->
 
             <!-- tomcat6:run
                http://tomcat.apache.org/maven-plugin-2.1/tomcat6-maven-plugin/
@@ -392,6 +356,6 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.6</java.version>
         <!-- http://maven.apache.org/plugins/maven-resources-plugin/examples/binaries-filtering.html -->
-         <tapestry.version>5.4-beta-23</tapestry.version>
+         <tapestry.version>5.4-beta-24</tapestry.version>
     </properties>
 </project>

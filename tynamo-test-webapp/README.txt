@@ -1,10 +1,10 @@
 Another Tapestry Template
 Secured web application access
-with Apache Tapestry 5.4-beta-23 and Tynamo/tapestry-security 0.6.2 (Shiro 1.2.3)
+with Apache Tapestry 5.4-beta-24 and Tynamo/tapestry-security 0.6.2 (Shiro 1.2.3)
 
 mvn clean tomcat7:run
 mvn clean tomcat6:run
-mvn clean jetty:run      Before you must change java.version to 1.7 in the pom.xml file
+mvn clean jetty:run      Before, you must change the java.version to 1.7 in the pom.xml file
 
 > https://localhost:8443/
 
@@ -16,14 +16,10 @@ seller1 333
 customer1 444
 
 ===================================================================================
-Status: add tapestry-webresources for js compression:
-   http://mail-archives.apache.org/mod_mbox/tapestry-users/201311.mbox/%3CCACd-vsMoUdDnP8+f=0zoP=m63-moNHw5-NNkEcQCs6rDjoGdig@mail.gmail.com%3E
+Status: Update to Tapestry 5.4-beta-24
 
-add font-awesome 4.2.0
 add theme switcher for bootswatch
-add google bootstrap theme
-add ms bootstrap theme
-fix navbar bootstrap 'activate'
+add google, ms bootstrap theme
 - [] use org.tynamo.security:tapestry-security-jpa with H2 DB
 add JPA to H2 with Thiago CRUD
 - a better grid: with search component/filter -> jquery
