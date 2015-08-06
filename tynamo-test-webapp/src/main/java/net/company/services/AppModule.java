@@ -108,7 +108,8 @@ public class AppModule
         // Check JCE Unlimited StrengthJurisdictionPolicyFilesInstalled
         try {
             if (Cipher.getMaxAllowedKeyLength("AES")<2147483647){
-                LOG.error("### JCE Unlimited Strength Jurisdiction Policy Files is NOT Installed. http://www.oracle.com/technetwork/java/javase/downloads/jce-7-download-432124.html");
+                LOG.error("### JCE Unlimited Strength Jurisdiction Policy Files is NOT Installed.\n" +
+                        "http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html http://www.oracle.com/technetwork/java/javase/downloads/jce-7-download-432124.html");
             }
         } catch (NoSuchAlgorithmException e) {
             LOG.error("### JCA JSSE JCE API not found. - http://www.oracle.com/technetwork/java/javase/tech/index-jsp-136007.html");

@@ -1,10 +1,13 @@
-Another Tapestry Template
-Secured web application access
-with Apache Tapestry 5.4-beta-33 and Tynamo/tapestry-security 0.6.2 (Shiro 1.2.3)
+Another Tapestry Template for a Secured web application access
+with Apache Tapestry 5.4-beta-33 and Tynamo/tapestry-security 0.6.2 (Shiro 1.2.4)
+
+Install Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files 8
+ http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html
+ in your jre/lib/security (it will replace 2 jars)
 
 mvn clean tomcat7:run
 mvn clean tomcat6:run
-mvn clean jetty:run      Before, you must change the java.version to 1.7 in the pom.xml file
+mvn clean jetty:run
 
 > https://localhost:8443/
 
@@ -15,8 +18,11 @@ editor1 222
 seller1 333
 customer1 444
 
+To get live class reloading work for the common module in IntelliJ:
+Open Project Structure/Modules/Paths/Use module compile output path/Output path (target/classes)
+Copy the path to Project Structure/Project/Project compiler output path
 ===================================================================================
-Status: Update to Tapestry 5.4-beta-33
+Status: Update to TShiro 1.2.4 and jetty
 
 add theme switcher for bootswatch
 add google, ms bootstrap theme
@@ -54,6 +60,8 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=959270
 http://erik.io/blog/2013/06/08/a-basic-guide-to-when-and-how-to-deploy-https/
   https://www.owasp.org/index.php/SecureFlag
 http://security.stackexchange.com/questions/20803/how-does-ssl-work
+
+http://www.cert.ssi.gouv.fr/site/CERTFR-2015-AVI-317/index.html bluecoat
 
 =============================================================================================================
 
@@ -112,6 +120,14 @@ https://github.com/jmayaalv/Tapestrify
 
 intellij IDEA Emmet templates
 
+https://github.com/satago/tapestry-jpa-transactions
+
+https://github.com/joostschouten/newrelic4tapestry5
+
+https://github.com/anjlab/eclipse-tapestry5-plugin#install
+
+https://github.com/uklance/tapestry-atmosphere
+https://github.com/uklance/tapestry-cometd
 
 java.lang.NullPointerException
 	org.apache.shiro.util.AntPathMatcher.doMatch(AntPathMatcher.java:109)

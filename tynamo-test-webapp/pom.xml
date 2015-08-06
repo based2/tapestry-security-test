@@ -4,7 +4,7 @@
     <artifactId>tynamo-test-webapp</artifactId>
     <version>0.1</version>
     <packaging>war</packaging>
-    <name>Secured web application access with Apache Tapestry 5.4-beta-33  and Tynamo/tapestry-security 0.6.2 (Shiro 1.2.3)</name>
+    <name>Secured web application access with Apache Tapestry 5.4-beta-33  and Tynamo/tapestry-security 0.6.2 (Shiro 1.2.4)</name>
     <dependencies>
 
         <dependency>
@@ -71,8 +71,18 @@
             <groupId>org.tynamo</groupId>
             <artifactId>tapestry-security</artifactId>
             <version>0.6.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.shiro</groupId>
+                    <artifactId>shiro-web</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+            <version>1.2.4</version>
+        </dependency>
         <!-- A dependency on either JUnit or TestNG is required, or the surefire plugin (which runs the tests)
 will fail, preventing Maven from packaging the WAR. Tapestry includes a large number
 of testing facilities designed for use with TestNG (http://testng.org/), so it's recommended. -->
@@ -153,7 +163,7 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
         <plugin>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-maven-plugin</artifactId>
-            <version>9.3.1.v20150714</version>
+            <version>9.3.2.v20150730</version>
             <configuration>
                 <reload>automatic</reload>
                 <scanIntervalSeconds>4</scanIntervalSeconds>
@@ -310,13 +320,13 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
                         <artifactId>keytool-maven-plugin</artifactId>
                         <version>1.5</version>
                         <executions>
-                            <execution>
+                           <!-- <execution>
                                 <phase>generate-resources</phase>
                                 <id>clean</id>
                                 <goals>
                                     <goal>clean</goal>
                                 </goals>
-                            </execution>
+                            </execution> -->
                             <execution>
                                 <phase>generate-resources</phase>
                                 <id>genkey</id>
@@ -334,7 +344,9 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
                             <keypass>jetty88</keypass>
                             <storepass>jetty88</storepass>
                             <alias>jetty88</alias>
-                            <keyalg>RSA</keyalg>
+                            <keyalg>EAS</keyalg>
+                            <keysize>256</keysize>
+                            <validity>1000</validity>
                         </configuration>
                     </plugin>
                 </plugins>
