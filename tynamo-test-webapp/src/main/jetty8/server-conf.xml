@@ -45,7 +45,7 @@
                     <SystemProperty name="jetty.host" />
                 </Set>
                 <Set name="port">
-                    <SystemProperty name="jetty.port" default="8080" />
+                    <SystemProperty name="jetty.port" default="8086" />
                 </Set>
                 <Set name="requestHeaderSize">16384</Set>
                 <!-- for mod_proxy -->

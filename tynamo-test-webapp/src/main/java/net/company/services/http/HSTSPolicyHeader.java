@@ -22,16 +22,18 @@ import java.io.IOException;
  * Limits:
  * Browser 	            Support Introduced
  * =======================================
- *  Internet Explorer 	no support as of IE 10 (tested on 2013-01-01)
+ *  Internet Explorer 	no support as of IE 11
  *  Firefox 	        4
  *  Opera 	            12
- *  Safari 	            no support
+ *  Safari 	            7.1
  *  Chrome 	            4.0.211.0
  *
  * http://apache-tapestry-mailing-list-archives.1045711.n5.nabble.com/t5-adding-http-header-td3369097.html
  *
  * https://github.com/twitter/secureheaders
  * http://www.browserscope.org/?category=security
+ * http://caniuse.com/#feat=stricttransportsecurity
+ * http://www.troyhunt.com/2015/06/understanding-http-strict-transport.html
  */
 public class HSTSPolicyHeader implements RequestFilter
 {

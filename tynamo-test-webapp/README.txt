@@ -9,7 +9,7 @@ mvn clean tomcat7:run
 mvn clean tomcat6:run
 mvn clean jetty:run
 
-> https://localhost:8443/
+> https://localhost:8443/index
 
 Accesses in src/resources/shiro-users.properties:
 
@@ -22,7 +22,7 @@ To get live class reloading work for the common module in IntelliJ:
 Open Project Structure/Modules/Paths/Use module compile output path/Output path (target/classes)
 Copy the path to Project Structure/Project/Project compiler output path
 ===================================================================================
-Status: Update to TShiro 1.2.4 and jetty
+Status: Update to Tapestry Shiro 1.2.5 and jetty
 
 add theme switcher for bootswatch
 add google, ms bootstrap theme
@@ -69,6 +69,8 @@ ComponentWorld
 
 https://github.com/tapestry-modules/list
 https://github.com/tapestry-modules/tapestry-modules
+
+https://github.com/oakstair/tapinapp
 
 http://sody.github.io/greatage/
 https://github.com/sody/greatage
@@ -129,16 +131,37 @@ https://github.com/anjlab/eclipse-tapestry5-plugin#install
 https://github.com/uklance/tapestry-atmosphere
 https://github.com/uklance/tapestry-cometd
 
-java.lang.NullPointerException
-	org.apache.shiro.util.AntPathMatcher.doMatch(AntPathMatcher.java:109)
-	org.apache.shiro.util.AntPathMatcher.match(AntPathMatcher.java:90)
-	org.apache.shiro.util.AntPathMatcher.matches(AntPathMatcher.java:86)
-	org.tynamo.security.services.impl.SecurityFilterChain.matches(SecurityFilterChain.java:46)
-	org.tynamo.security.services.impl.SecurityConfiguration.getMatchingChain(SecurityConfiguration.java:76)
-	org.tynamo.security.services.impl.SecurityConfiguration.service(SecurityConfiguration.java:48)
-	$HttpServletRequestFilter_13731a5f2fa06bda.service(Unknown Source)
-	$HttpServletRequestHandler_13731a5f2fa06be0.service(Unknown Source)
-	org.apache.tapestry5.modules.TapestryModule$1.service(TapestryModule.java:795)
-	$HttpServletRequestHandler_13731a5f2fa06be0.service(Unknown Source)
-	$HttpServletRequestHandler_13731a5f2fa06bd9.service(Unknown Source)
-	org.apache.tapestry5.TapestryFilter.doFilter(TapestryFilter.java:166)
+https://issues.apache.org/jira/browse/SHIRO-582
+ava.lang.NullPointerException
+	at org.apache.shiro.util.AntPathMatcher.doMatch(AntPathMatcher.java:109)
+	at org.apache.shiro.util.AntPathMatcher.match(AntPathMatcher.java:90)
+	at org.apache.shiro.util.AntPathMatcher.matches(AntPathMatcher.java:86)
+	at org.tynamo.security.services.impl.SecurityFilterChain.matches(SecurityFilterChain.java:46)
+	at org.tynamo.security.services.impl.SecurityConfiguration.getMatchingChain(SecurityConfiguration.java:84)
+	at org.tynamo.security.services.impl.SecurityConfiguration.service(SecurityConfiguration.java:52)
+	at $HttpServletRequestFilter_19ddf7bc0531.service(Unknown Source)
+	at $HttpServletRequestHandler_19ddf7bc0534.service(Unknown Source)
+	at org.apache.tapestry5.modules.TapestryModule$1.service(TapestryModule.java:796)
+	at $HttpServletRequestHandler_19ddf7bc0534.service(Unknown Source)
+	at $HttpServletRequestHandler_19ddf7bc052d.service(Unknown Source)
+	at org.apache.tapestry5.TapestryFilter.doFilter(TapestryFilter.java:166)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:585)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:143)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:577)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:223)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1127)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1061)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.ContextHandlerCollection.handle(ContextHandlerCollection.java:215)
+	at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:110)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+	at org.eclipse.jetty.server.Server.handle(Server.java:499)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:311)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:258)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:544)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:745)

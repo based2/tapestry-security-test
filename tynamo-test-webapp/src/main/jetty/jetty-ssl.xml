@@ -8,22 +8,45 @@
 <!-- ============================================================= -->
 <Configure id="sslContextFactory" class="org.eclipse.jetty.util.ssl.SslContextFactory">
     <Set name="KeyStorePath"><Property name="jetty.home" default="." />/<Property name="jetty.keystore" default="jetty-ssl.keystore"/></Set>
-    <Set name="KeyStorePassword"><Property name="jetty.keystore.password" default="jetty66"/></Set>
-    <Set name="KeyManagerPassword"><Property name="jetty.keymanager.password" default="jetty66"/></Set>
+    <Set name="KeyStorePassword"><Property name="jetty.keystore.password" default="jetty88"/></Set>
+    <Set name="KeyManagerPassword"><Property name="jetty.keymanager.password" default="jetty88"/></Set>
     <Set name="TrustStorePath"><Property name="jetty.home" default="." />/<Property name="jetty.truststore" default="jetty-ssl.keystore"/></Set>
-    <Set name="TrustStorePassword"><Property name="jetty.truststore.password" default="jetty66"/></Set>
+    <Set name="TrustStorePassword"><Property name="jetty.truststore.password" default="jetty88"/></Set>
     <Set name="EndpointIdentificationAlgorithm"></Set>
-    <Set name="ExcludeCipherSuites">
+    <!-- https://wiki.mozilla.org/Security/Server_Side_TLS
+ http://www.eclipse.org/jetty/documentation/current/configuring-ssl.html
+ -->
+    <!-- Enable Forward Secrecy Ciphers.
+      Note: this replaces the default Include Cipher list -->
+    <Set name="IncludeCipherSuites">
         <Array type="String">
-            <Item>SSL_RSA_WITH_DES_CBC_SHA</Item>
-            <Item>SSL_DHE_RSA_WITH_DES_CBC_SHA</Item>
-            <Item>SSL_DHE_DSS_WITH_DES_CBC_SHA</Item>
-            <Item>SSL_RSA_EXPORT_WITH_RC4_40_MD5</Item>
-            <Item>SSL_RSA_EXPORT_WITH_DES40_CBC_SHA</Item>
-            <Item>SSL_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA</Item>
-            <Item>SSL_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA</Item>
+            <Item>TLS_ECDHE.*</Item>
         </Array>
     </Set>
+    <!-- Eliminate Old / Insecure / Anonymous Ciphers -->
+    <Call name="addExcludeCipherSuites">
+        <Arg>
+            <Array type="String">
+                <Item>.*NULL.*</Item>
+                <Item>.*RC4.*</Item>
+                <Item>.*MD5.*</Item>
+                <Item>.*DES.*</Item>
+                <Item>.*DSS.*</Item>
+            </Array>
+        </Arg>
+    </Call>
+    <!-- Eliminate Insecure Protocols -->
+    <Call name="addExcludeProtocols">
+        <Arg>
+            <Array type="java.lang.String">
+                <Item>SSL</Item>
+                <Item>SSLv2</Item>
+                <Item>SSLv2Hello</Item>
+                <Item>SSLv3</Item>
+            </Array>
+        </Arg>
+    </Call>
+    <Set name="renegotiationAllowed">FALSE</Set>
 
     <!-- =========================================================== -->
     <!-- Create a TLS specific HttpConfiguration based on the        -->

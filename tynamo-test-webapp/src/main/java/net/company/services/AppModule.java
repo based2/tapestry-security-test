@@ -17,8 +17,11 @@ import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.Marker;
 import org.apache.tapestry5.ioc.annotations.SubModule;
 import org.apache.tapestry5.ioc.services.ServiceOverride;
+import org.apache.tapestry5.services.Core;
 import org.apache.tapestry5.services.HttpServletRequestFilter;
 import org.apache.tapestry5.services.RequestFilter;
+import org.apache.tapestry5.services.javascript.JavaScriptStack;
+import org.apache.tapestry5.services.javascript.StackExtension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tynamo.security.Security;
@@ -213,6 +216,16 @@ public class AppModule
             navbarAccess.setupSecurity(configuration, factory, securityManager);
             IS_SECURITY_ENABLED = true;
         }
+    }
+
+    @Contribute(JavaScriptStack.class)
+    @Core
+    public static void setupCoreJavaScriptStack(OrderedConfiguration<StackExtension>
+                                     configuration) {
+        configuration.override("exception-frame.css", null);
+        configuration.override("tapestry.css", null);
+        configuration.override("tapestry-console.css", null);
+        configuration.override("tree.css", null);
     }
 
     private static PermissionsAuthorizationFilter getPermissionFilter(SecurityFilterChainFactory factory)

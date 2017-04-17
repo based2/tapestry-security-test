@@ -4,136 +4,26 @@
     <artifactId>tynamo-test-webapp</artifactId>
     <version>0.1</version>
     <packaging>war</packaging>
-    <name>Secured web application access with Apache Tapestry 5.4-beta-33  and Tynamo/tapestry-security 0.6.2 (Shiro 1.2.4)</name>
-    <dependencies>
+    <name>Secured web application access with Apache Tapestry 5.4.2 and Tynamo/tapestry-security 0.6.6 (Shiro 1.2.5) -</name>
 
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.1.3</version>
-        </dependency>
-       <!--
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15on</artifactId>
-            <version>1.51</version>
-        </dependency>
-        -->
-        <!--
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.3.176</version>
-        </dependency> -->
-
-        <dependency>
-            <groupId>org.apache.tapestry</groupId>
-            <artifactId>tapestry-core</artifactId>
-            <version>${tapestry.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.tapestry</groupId>
-            <artifactId>tapestry-ioc</artifactId>
-            <version>${tapestry.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.tapestry</groupId>
-            <artifactId>tapestry-webresources</artifactId>
-            <version>${tapestry.version}</version>
-        </dependency>
-
-        <!--
-        <dependency>
-            <groupId>org.apache.tapestry</groupId>
-            <artifactId>tapestry-annotations</artifactId>
-            <version>${tapestry-release-version}</version>
-            <scope>provided</scope>
-        </dependency>  -->
-
-        <!--
-        <exclusions>
-            <exclusion>
-                <groupId>org.apache.tapestry</groupId>
-                <artifactId>tapestry-upload</artifactId>
-            </exclusion>
-        </exclusions> -->
-
-        <!-- http://tynamo.org/tapestry-security+guide -->
-        <dependency>
-            <groupId>org.tynamo</groupId>
-            <artifactId>tapestry-security</artifactId>
-            <version>0.6.2</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.shiro</groupId>
-                    <artifactId>shiro-web</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-web</artifactId>
-            <version>1.2.4</version>
-        </dependency>
-        <!-- A dependency on either JUnit or TestNG is required, or the surefire plugin (which runs the tests)
-will fail, preventing Maven from packaging the WAR. Tapestry includes a large number
-of testing facilities designed for use with TestNG (http://testng.org/), so it's recommended. -->
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.8.21</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.easymock</groupId>
-            <artifactId>easymock</artifactId>
-            <version>2.5.2</version>
-            <scope>test</scope>
-        </dependency>
-
-      <!--  <dependency>
-            <groupId>org.apache.tapestry</groupId>
-            <artifactId>tapestry-test</artifactId>
-            <version>${tapestry-release-version}</version>
-            <scope>test</scope>
-        </dependency>  -->
-
-        <!-- Provided by the servlet container, but sometimes referenced in the application code.
-       http://www.eclipse.org/jetty/about.php#Versions
-       -->
-        <!-- javax.servlet.UnavailableException: org.apache.tapestry5.TapestryFilter -->
-            <!--
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-        </dependency>  -->
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-    </dependencies>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <!-- http://maven.apache.org/plugins/maven-resources-plugin/examples/binaries-filtering.html -->
+        <tapestry.version>5.4.2</tapestry.version>
+        <!-- http://stackoverflow.com/questions/41504071/jetty-noclassdeffounderror 9.4.3.v20170317 -->
+        <jetty.version>9.2.20.v20161216</jetty.version>
+    </properties>
 
     <build>
+        <defaultGoal>install</defaultGoal>
         <finalName>webapp</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
+                <version>3.6.1</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -144,9 +34,8 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.6</version>
+                <version>3.0.0</version>
             </plugin>
-
             <!-- Run the application using "mvn jetty:run"
                and browse: https://localhost:8443/tynamo-test-webapp/
 
@@ -159,24 +48,43 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
 
                 http://code.google.com/p/googleappengine/issues/detail?id=6768
             -->
-
         <plugin>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-maven-plugin</artifactId>
-            <version>9.3.2.v20150730</version>
+            <version>${jetty.version}</version>
+            <dependencies>
+                <dependency>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-io</artifactId>
+                    <version>${jetty.version}</version>
+                </dependency>
+            </dependencies>
             <configuration>
                 <reload>automatic</reload>
-                <scanIntervalSeconds>4</scanIntervalSeconds>
-                <stopPort>9999</stopPort>
-                <stopKey>key</stopKey>
+                <scanIntervalSeconds>5</scanIntervalSeconds>
+               <!-- <stopPort>10005</stopPort> -->
+                <stopKey>keyStop</stopKey>
                 <!--
                  http://git.eclipse.org/c/jetty/org.eclipse.jetty.project.git/tree/jetty-server/src/main/config/etc/
                  http://git.eclipse.org/c/jetty/org.eclipse.jetty.project.git/tree/examples/embedded/src/main/java/org/eclipse/jetty/embedded/LikeJettyXml.java
                  -->
                 <jettyXml>src/main/jetty/jetty.xml,src/main/jetty/jetty-http.xml,src/main/jetty/jetty-ssl.xml,src/main/jetty/jetty-https.xml</jettyXml>
-              </configuration>
+              <!--  <exclusions>
+                    <exclusion>
+                        <groupId>org.eclipse.jetty</groupId>
+                        <artifactId>jetty-jmx</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.eclipse.jetty.websocket</groupId>
+                        <artifactId>javax-websocket-server-impl</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.eclipse.jetty.websocket</groupId>
+                        <artifactId>websocket-server</artifactId>
+                    </exclusion>
+                </exclusions> -->
+            </configuration>
           </plugin>
-
             <!-- tomcat6:run
                http://tomcat.apache.org/maven-plugin-2.1/tomcat6-maven-plugin/
                -->
@@ -191,7 +99,7 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
                     <additionalConfigFilesDir>${basedir}/src/main/tomcat/conf</additionalConfigFilesDir>
                     <contextReloadable>true</contextReloadable>
                     <backgroundProcessorDelay>5</backgroundProcessorDelay>
-                    <port>8080</port>
+                    <port>8086</port>
                     <httpsPort>8443</httpsPort>
                     <keystoreFile>${basedir}/jetty-ssl.keystore</keystoreFile>
                     <password>jetty88</password>
@@ -214,7 +122,7 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
                     <!-- <additionalConfigFilesDir>${basedir}/src/main/tomcat/conf</additionalConfigFilesDir>  -->
                     <contextReloadable>true</contextReloadable>
                     <backgroundProcessorDelay>5</backgroundProcessorDelay>
-                    <port>8080</port>
+                    <port>8086</port>
                     <httpsPort>8443</httpsPort>
                     <keystoreFile>${basedir}/jetty-ssl.keystore</keystoreFile>
                     <password>jetty88</password>
@@ -237,7 +145,7 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
             <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-site-plugin</artifactId>
-            <version>3.4</version>
+            <version>3.6</version>
             <dependencies>
                 <dependency>
                     <groupId>org.apache.maven.doxia</groupId>
@@ -251,7 +159,7 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-project-info-reports-plugin</artifactId>
-                            <version>2.8</version>
+                            <version>2.8.1</version>
                             <reportSets>
                                 <reportSet>
                                     <reports>
@@ -266,7 +174,7 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-plugin-plugin</artifactId>
-                            <version>3.2</version>
+                            <version>3.5</version>
                             <configuration>
                                 <goalPrefix>dependency-check</goalPrefix>
                             </configuration>
@@ -274,7 +182,7 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-javadoc-plugin</artifactId>
-                            <version>2.10.3</version>
+                            <version>2.10.4</version>
                             <reportSets>
                                 <reportSet>
                                     <id>default</id>
@@ -306,13 +214,13 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
     <reporting/>
 
     <!--
-    http://active-active.blogspot.be/2011/04/maven-note-securing-temporary-jetty.html
-    http://stackoverflow.com/questions/3794892/howto-use-https-ssl-with-maven-mortbay-jetty-plugin
+    http://www.mojohaus.org/keytool/keytool-maven-plugin/
     http://www.eclipse.org/jetty/documentation/current/configuring-ssl.html#generating-key-pairs-and-certificates
+    keytool -keystore keystore -alias jetty88 -genkey -keyalg RSA
     -->
     <profiles>
         <profile>
-            <id>keytool</id>
+            <id>GenKeyStore</id>
             <build>
                 <plugins>
                     <plugin>
@@ -320,13 +228,13 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
                         <artifactId>keytool-maven-plugin</artifactId>
                         <version>1.5</version>
                         <executions>
-                           <!-- <execution>
+                          <execution>
                                 <phase>generate-resources</phase>
                                 <id>clean</id>
                                 <goals>
                                     <goal>clean</goal>
                                 </goals>
-                            </execution> -->
+                            </execution>
                             <execution>
                                 <phase>generate-resources</phase>
                                 <id>genkey</id>
@@ -336,16 +244,15 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
                             </execution>
                         </executions>
                         <configuration>
-                            <!-- <keystore>${project.build.directory}/webapp/WEB-INF/jetty-ssl.keystore</keystore>  -->
-                            <keystore>${basedir}/jetty-ssl.keystore</keystore>
-                            <!-- <keystore>${basedir}/src/main/webapp/WEB-INF/jetty-ssl.keystore</keystore> --><!-- jetty9 -->
-                            <dname>cn=localhost</dname><!-- put your CN here-->
-                            <!-- <dname>cn=myserverhostname.mydomain.tld</dname> --><!-- put your CN here-->
+                            <keystore>${project.build.directory}/webapp/WEB-INF/jetty-ssl.keystore</keystore>
+                            <!-- <keystore>${basedir}/jetty-ssl.keystore</keystore> -->
+                            <!-- <keystore>${basedir}/src/main/webapp/WEB-INF/jetty-ssl.keystore</keystore> -->
+                            <dname>cn=localhost</dname>
                             <keypass>jetty88</keypass>
                             <storepass>jetty88</storepass>
                             <alias>jetty88</alias>
-                            <keyalg>EAS</keyalg>
-                            <keysize>256</keysize>
+                            <keyalg>RSA</keyalg>
+                            <keysize>2048</keysize>
                             <validity>1000</validity>
                         </configuration>
                     </plugin>
@@ -363,11 +270,139 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
         </repository>
     </repositories>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-        <!-- http://maven.apache.org/plugins/maven-resources-plugin/examples/binaries-filtering.html -->
-         <tapestry.version>5.4-beta-33</tapestry.version>
-    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+        <!--
+         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+        -->
+
+        <!--
+         <dependency>
+             <groupId>org.bouncycastle</groupId>
+             <artifactId>bcprov-jdk15on</artifactId>
+             <version>1.53</version>
+         </dependency>
+         -->
+        <!--
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.194</version>
+        </dependency> -->
+
+        <dependency>
+            <groupId>org.apache.tapestry</groupId>
+            <artifactId>tapestry-core</artifactId>
+            <version>${tapestry.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.tapestry</groupId>
+            <artifactId>tapestry-ioc</artifactId>
+            <version>${tapestry.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.tapestry</groupId>
+            <artifactId>tapestry-webresources</artifactId>
+            <version>${tapestry.version}</version>
+        </dependency>
+
+        <!--
+        <dependency>
+            <groupId>com.github.sommeri</groupId>
+            <artifactId>less4j</artifactId>
+            <version>1.15.4</version>
+        </dependency>
+        -->
+
+        <!--
+        <dependency>
+            <groupId>org.apache.tapestry</groupId>
+            <artifactId>tapestry-annotations</artifactId>
+            <version>${tapestry-release-version}</version>
+            <scope>provided</scope>
+        </dependency>  -->
+
+        <!--
+        <exclusions>
+            <exclusion>
+                <groupId>org.apache.tapestry</groupId>
+                <artifactId>tapestry-upload</artifactId>
+            </exclusion>
+        </exclusions> -->
+
+        <!-- http://tynamo.org/tapestry-security+guide -->
+        <dependency>
+            <groupId>org.tynamo</groupId>
+            <artifactId>tapestry-security</artifactId>
+            <version>0.6.6</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.shiro</groupId>
+                    <artifactId>shiro-web</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+        <!-- A dependency on either JUnit or TestNG is required, or the surefire plugin (which runs the tests)
+will fail, preventing Maven from packaging the WAR. Tapestry includes a large number
+of testing facilities designed for use with TestNG (http://testng.org/), so it's recommended. -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.8.21</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <version>2.5.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--  <dependency>
+              <groupId>org.apache.tapestry</groupId>
+              <artifactId>tapestry-test</artifactId>
+              <version>${tapestry-release-version}</version>
+              <scope>test</scope>
+          </dependency>  -->
+
+        <!-- Provided by the servlet container, but sometimes referenced in the application code.
+       http://www.eclipse.org/jetty/about.php#Versions
+       -->
+        <!-- javax.servlet.UnavailableException: org.apache.tapestry5.TapestryFilter -->
+        <!--
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>servlet-api</artifactId>
+        <version>2.5</version>
+    </dependency>  -->
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 </project>
