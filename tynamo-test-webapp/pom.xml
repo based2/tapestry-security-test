@@ -4,16 +4,15 @@
     <artifactId>tynamo-test-webapp</artifactId>
     <version>0.1</version>
     <packaging>war</packaging>
-    <name>Secured web application access with Apache Tapestry 5.4.2 and Tynamo/tapestry-security 0.6.6 (Shiro 1.2.5) -</name>
+    <name>Secured web application access with Apache Tapestry 5.4.3 and Tynamo/Tapestry-security 0.7.0 (Apache Shiro 1.4) -</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <!-- http://maven.apache.org/plugins/maven-resources-plugin/examples/binaries-filtering.html -->
-        <tapestry.version>5.4.2</tapestry.version>
-        <!-- http://stackoverflow.com/questions/41504071/jetty-noclassdeffounderror 9.4.3.v20170317 -->
-        <jetty.version>9.2.20.v20161216</jetty.version>
+        <tapestry.version>5.4.3</tapestry.version>
+        <jetty.version>9.4.9.v20180320</jetty.version>
     </properties>
 
     <build>
@@ -23,7 +22,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.1</version>
+                <version>3.7.0</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -34,11 +33,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.2.0</version>
             </plugin>
             <!-- Run the application using "mvn jetty:run"
                and browse: https://localhost:8443/tynamo-test-webapp/
 
+               https://www.eclipse.org/jetty/documentation/9.4.x/jetty-maven-plugin.html
+               https://github.com/eclipse/jetty.project/issues/1826
                Java 1.7 is required, if not it fails:
 
                http://stackoverflow.com/questions/15567514/unsupported-major-minor-version-51-0-but-everything-is-set-to-jdk-1-6
@@ -48,66 +49,43 @@
 
                 http://code.google.com/p/googleappengine/issues/detail?id=6768
             -->
-        <plugin>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-maven-plugin</artifactId>
-            <version>${jetty.version}</version>
-            <dependencies>
-                <dependency>
-                    <groupId>org.eclipse.jetty</groupId>
-                    <artifactId>jetty-io</artifactId>
-                    <version>${jetty.version}</version>
-                </dependency>
-            </dependencies>
-            <configuration>
-                <reload>automatic</reload>
-                <scanIntervalSeconds>5</scanIntervalSeconds>
-               <!-- <stopPort>10005</stopPort> -->
-                <stopKey>keyStop</stopKey>
-                <!--
-                 http://git.eclipse.org/c/jetty/org.eclipse.jetty.project.git/tree/jetty-server/src/main/config/etc/
-                 http://git.eclipse.org/c/jetty/org.eclipse.jetty.project.git/tree/examples/embedded/src/main/java/org/eclipse/jetty/embedded/LikeJettyXml.java
-                 -->
-                <jettyXml>src/main/jetty/jetty.xml,src/main/jetty/jetty-http.xml,src/main/jetty/jetty-ssl.xml,src/main/jetty/jetty-https.xml</jettyXml>
-              <!--  <exclusions>
-                    <exclusion>
-                        <groupId>org.eclipse.jetty</groupId>
-                        <artifactId>jetty-jmx</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.eclipse.jetty.websocket</groupId>
-                        <artifactId>javax-websocket-server-impl</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.eclipse.jetty.websocket</groupId>
-                        <artifactId>websocket-server</artifactId>
-                    </exclusion>
-                </exclusions> -->
-            </configuration>
-          </plugin>
-            <!-- tomcat6:run
-               http://tomcat.apache.org/maven-plugin-2.1/tomcat6-maven-plugin/
-               -->
             <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat6-maven-plugin</artifactId>
-                <version>2.2</version>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${jetty.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.eclipse.jetty</groupId>
+                        <artifactId>jetty-io</artifactId>
+                        <version>${jetty.version}</version>
+                    </dependency>
+                </dependencies>
                 <configuration>
-                    <!-- application path always starts with /-->
-                    <path>/</path>
-                    <pluginArtifacts></pluginArtifacts>
-                    <additionalConfigFilesDir>${basedir}/src/main/tomcat/conf</additionalConfigFilesDir>
-                    <contextReloadable>true</contextReloadable>
-                    <backgroundProcessorDelay>5</backgroundProcessorDelay>
-                    <port>8086</port>
-                    <httpsPort>8443</httpsPort>
-                    <keystoreFile>${basedir}/jetty-ssl.keystore</keystoreFile>
-                    <password>jetty88</password>
-                    <keystorePass>jetty88</keystorePass>
-                    <!-- <keystoreType></keystoreType> -->
+                    <reload>automatic</reload>
+                    <scanIntervalSeconds>5</scanIntervalSeconds>
+                    <!-- <stopPort>10005</stopPort> -->
+                    <stopKey>keyStop</stopKey>
+                    <!--
+                     http://git.eclipse.org/c/jetty/org.eclipse.jetty.project.git/tree/jetty-server/src/main/config/etc/
+                     http://git.eclipse.org/c/jetty/org.eclipse.jetty.project.git/tree/examples/embedded/src/main/java/org/eclipse/jetty/embedded/LikeJettyXml.java
+                     -->
+                    <jettyXml>src/main/jetty/jetty.xml,src/main/jetty/jetty-http.xml,src/main/jetty/jetty-ssl.xml,src/main/jetty/jetty-https.xml</jettyXml>
+                    <!--  <exclusions>
+                          <exclusion>
+                              <groupId>org.eclipse.jetty</groupId>
+                              <artifactId>jetty-jmx</artifactId>
+                          </exclusion>
+                          <exclusion>
+                              <groupId>org.eclipse.jetty.websocket</groupId>
+                              <artifactId>javax-websocket-server-impl</artifactId>
+                          </exclusion>
+                          <exclusion>
+                              <groupId>org.eclipse.jetty.websocket</groupId>
+                              <artifactId>websocket-server</artifactId>
+                          </exclusion>
+                      </exclusions> -->
                 </configuration>
             </plugin>
-
             <!-- tomcat7:run
                http://tomcat.apache.org/maven-plugin-2.1/tomcat7-maven-plugin/
                -->
@@ -130,88 +108,89 @@
                     <!-- <keystoreType></keystoreType> -->
                 </configuration>
             </plugin>
-         <!--   <plugin>
-                <groupId>org.owasp</groupId>
-                <artifactId>dependency-check-maven</artifactId>
-                <version>1.1.1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin> -->
+            <!--   <plugin>
+                   <groupId>org.owasp</groupId>
+                   <artifactId>dependency-check-maven</artifactId>
+                   <version>1.1.1</version>
+                   <executions>
+                       <execution>
+                           <goals>
+                               <goal>check</goal>
+                           </goals>
+                       </execution>
+                   </executions>
+               </plugin> -->
             <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-site-plugin</artifactId>
-            <version>3.6</version>
-            <dependencies>
-                <dependency>
-                    <groupId>org.apache.maven.doxia</groupId>
-                    <artifactId>doxia-module-markdown</artifactId>
-                    <version>1.5</version>
-                </dependency>
-            </dependencies>
-            <configuration>
-                <skipDeploy>true</skipDeploy>
-                    <reportPlugins>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-project-info-reports-plugin</artifactId>
-                            <version>2.8.1</version>
-                            <reportSets>
-                                <reportSet>
-                                    <reports>
-                                        <report>index</report>
-                                        <report>summary</report>
-                                        <report>license</report>
-                                        <report>help</report>
-                                    </reports>
-                                </reportSet>
-                            </reportSets>
-                        </plugin>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-plugin-plugin</artifactId>
-                            <version>3.5</version>
-                            <configuration>
-                                <goalPrefix>dependency-check</goalPrefix>
-                            </configuration>
-                        </plugin>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-javadoc-plugin</artifactId>
-                            <version>2.10.4</version>
-                            <reportSets>
-                                <reportSet>
-                                    <id>default</id>
-                                    <reports>
-                                        <report>javadoc</report>
-                                    </reports>
-                                </reportSet>
-                            </reportSets>
-                        </plugin>
-                        <plugin>
-                            <groupId>org.codehaus.mojo</groupId>
-                            <artifactId>versions-maven-plugin</artifactId>
-                            <version>2.1</version>
-                            <reportSets>
-                                <reportSet>
-                                    <reports>
-                                        <report>dependency-updates-report</report>
-                                        <report>plugin-updates-report</report>
-                                    </reports>
-                                </reportSet>
-                            </reportSets>
-                        </plugin>
-                    </reportPlugins>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.7</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.doxia</groupId>
+                        <artifactId>doxia-module-markdown</artifactId>
+                        <version>1.5</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <skipDeploy>true</skipDeploy>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 
-    <reporting/>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.9</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>index</report>
+                            <report>summary</report>
+                            <report>license</report>
+                            <report>help</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <goalPrefix>dependency-check</goalPrefix>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.0</version>
+                <reportSets>
+                    <reportSet>
+                        <id>default</id>
+                        <reports>
+                            <report>javadoc</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.5</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>dependency-updates-report</report>
+                            <report>plugin-updates-report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
 
     <!--
     http://www.mojohaus.org/keytool/keytool-maven-plugin/
@@ -219,16 +198,50 @@
     keytool -keystore keystore -alias jetty88 -genkey -keyalg RSA
     -->
     <profiles>
+        <!-- New APIs for creating certificates and certificate requests
+               https://bugs.openjdk.java.net/browse/JDK-8058778
+                https://stackoverflow.com/questions/6340918/trust-store-vs-key-store-creating-with-keytool?rq=1
+                https://www.pixelstech.net/article/1420427307-Different-types-of-keystore-in-Java- -PKCS12
+
+                https://www.digitalocean.com/community/tutorials/java-keytool-essentials-working-with-java-keystores
+                keytool:generateKeyPair
+
+                -->
         <profile>
             <id>GenKeyStore</id>
             <build>
                 <plugins>
+                    <!-- to use the correct keytool-api per Java version
+                       requires toolchains.xml -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-toolchains-plugin</artifactId>
+                        <version>1.1</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>toolchain</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <toolchains>
+                                <jdk>
+                                    <version>${java.version}</version>
+                                    <vendor>oracle</vendor><!-- openjdk, azul, ibm -->
+                                </jdk>
+                            </toolchains>
+                        </configuration>
+                    </plugin>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>keytool-maven-plugin</artifactId>
-                        <version>1.5</version>
+                        <version>1.6-SNAPSHOT</version>
+                        <!-- http://www.mojohaus.org/keytool/keytool-maven-plugin
+                             https://github.com/mojohaus/keytool
+                        -->
                         <executions>
-                          <execution>
+                            <execution>
                                 <phase>generate-resources</phase>
                                 <id>clean</id>
                                 <goals>
@@ -244,15 +257,19 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <keystore>${project.build.directory}/webapp/WEB-INF/jetty-ssl.keystore</keystore>
+                            <!-- https://www.cs.auckland.ac.nz/~pgut001/pubs/pfx.html
+                            <storetype>pkcs12</storetype>
+                            <deststoretype>pkcs12</deststoretype> -->
+                            <keystore>${basedir}/jetty.jks</keystore>
                             <!-- <keystore>${basedir}/jetty-ssl.keystore</keystore> -->
                             <!-- <keystore>${basedir}/src/main/webapp/WEB-INF/jetty-ssl.keystore</keystore> -->
-                            <dname>cn=localhost</dname>
-                            <keypass>jetty88</keypass>
-                            <storepass>jetty88</storepass>
-                            <alias>jetty88</alias>
+                            <dname>CN=localhost,OU=myorg,O=myorg,L=mycity,S=mystate,C=ad</dname>
+                            <keypass>tapestry5</keypass>
+                            <storepass>tapestry5</storepass>
+                            <alias>tapestry5</alias>
                             <keyalg>RSA</keyalg>
                             <keysize>2048</keysize>
+                            <!-- <sigalg>SHA1withRSA</sigalg> -->
                             <validity>1000</validity>
                         </configuration>
                     </plugin>
@@ -264,7 +281,7 @@
     <repositories>
         <!-- This repository is only needed when the Tapestry version is a preview release, rather
              than a final release. -->
-       <repository>
+        <repository>
             <id>apache-staging</id>
             <url>https://repository.apache.org/content/groups/staging</url>
         </repository>
@@ -274,7 +291,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.5</version>
+            <version>3.7</version>
         </dependency>
 
         <dependency>
@@ -350,33 +367,39 @@
         <dependency>
             <groupId>org.tynamo</groupId>
             <artifactId>tapestry-security</artifactId>
-            <version>0.6.6</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.shiro</groupId>
-                    <artifactId>shiro-web</artifactId>
-                </exclusion>
-            </exclusions>
+            <version>0.7.0</version>
         </dependency>
+
+        <!-- TLS tests -->
         <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-web</artifactId>
-            <version>1.3.2</version>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>${jetty.version}</version>
+            <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-security</artifactId>
+            <version>${jetty.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+
         <!-- A dependency on either JUnit or TestNG is required, or the surefire plugin (which runs the tests)
 will fail, preventing Maven from packaging the WAR. Tapestry includes a large number
 of testing facilities designed for use with TestNG (http://testng.org/), so it's recommended. -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.8.21</version>
+            <version>6.14.2</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.easymock</groupId>
             <artifactId>easymock</artifactId>
-            <version>2.5.2</version>
+            <version>3.5.1</version>
             <scope>test</scope>
         </dependency>
 
