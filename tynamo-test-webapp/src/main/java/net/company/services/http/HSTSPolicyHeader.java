@@ -35,12 +35,10 @@ import java.io.IOException;
  * http://caniuse.com/#feat=stricttransportsecurity
  * http://www.troyhunt.com/2015/06/understanding-http-strict-transport.html
  */
-public class HSTSPolicyHeader implements RequestFilter
-{
+public class HSTSPolicyHeader implements RequestFilter {
     private static final String STRICT_TRANSPORT_SECURITY = "Strict-Transport-Security";
 
-    public boolean service(Request request, Response response,  RequestHandler handler) throws IOException
-    {
+    public boolean service(Request request, Response response,  RequestHandler handler) throws IOException {
         response.setHeader(STRICT_TRANSPORT_SECURITY, "max-age=60000; includeSubDomains");
         return handler.service(request, response);
     }

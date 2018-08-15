@@ -66,7 +66,7 @@ public class NavbarAccessImpl implements NavbarAccess {
                 if (MODE_STD.equals(get(0, modePagePathPermission))) {
                     //enablePermissions(configuration, securityFactory, modePagePathPermission, "");
                     if (modePagePathPermission.length > 3) {
-                        String msg = PRIVATE + " " + modePagePathPermission[1]
+                        final String msg = PRIVATE + " " + modePagePathPermission[1]
                                 + " > " + modePagePathPermission[2] + " > " + modePagePathPermission[3];
                         LOG.info(msg);
                         configuration.add(msg,
@@ -80,7 +80,7 @@ public class NavbarAccessImpl implements NavbarAccess {
                 } else if (isModeDev(modePagePathPermission)) {
                     //enablePermissions(configuration, securityFactory, modePagePathPermission, DEVELOPMENT+" ");
                     if (modePagePathPermission.length > 3) {
-                        String msg = DEVELOPMENT
+                       final String msg = DEVELOPMENT
                                 + " " + PRIVATE + " " + modePagePathPermission[1]
                                 + " > " + modePagePathPermission[2] + " > " + modePagePathPermission[3];
                         LOG.info(msg);

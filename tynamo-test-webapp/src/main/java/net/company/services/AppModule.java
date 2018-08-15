@@ -55,8 +55,7 @@ public class AppModule
     public static final String PERMISSION_EDITOR = "editorPermission:1";
     public static final String PERMISSION_ADMIN = "adminPermission:1";
 
-    public static void contributeApplicationDefaults(MappedConfiguration<String, String> configuration)
-    {
+    public static void contributeApplicationDefaults(MappedConfiguration<String, String> configuration) {
         // Contributions to ApplicationDefaults will override any contributions to
         // FactoryDefaults (with the same key). Here we're restricting the supported
         // locales to just "en" (English). As you add localised message catalogs and other assets,
@@ -204,10 +203,20 @@ public class AppModule
     private static boolean IS_SECURITY_ENABLED = false;
 
     @Contribute(HttpServletRequestFilter.class)
-    @Marker(Security.class)
+    @Security
+    //@Marker(Security.class)
     public static void setupSecurity(OrderedConfiguration<SecurityFilterChain> configuration,
                                      SecurityFilterChainFactory factory,
                                      WebSecurityManager securityManager, NavbarAccess navbarAccess) {
+        configuration.add("ModulesCompressed",
+                factory.createChain("/modules.gz/**").add(factory.anon()).build());
+        configuration.add("Modules",
+                factory.createChain("/modules/**").add(factory.anon()).build());
+        configuration.add("Assets",
+                factory.createChain("/assets/**").add(factory.anon()).build());
+        configuration.add("Favicon",
+                factory.createChain("/favicon.ico").add(factory.anon()).build());
+
         if (!IS_SECURITY_ENABLED) {
             navbarAccess.setupSecurity(configuration, factory, securityManager);
             IS_SECURITY_ENABLED = true;
@@ -224,7 +233,7 @@ public class AppModule
     }
 
     private static PermissionsAuthorizationFilter getPermissionFilter(SecurityFilterChainFactory factory) {
-        PermissionsAuthorizationFilter permFilter = factory.perms();
+        final PermissionsAuthorizationFilter permFilter = factory.perms();
         permFilter.setUnauthorizedUrl(URL_UNAUTHORIZED);
         return permFilter;
     }

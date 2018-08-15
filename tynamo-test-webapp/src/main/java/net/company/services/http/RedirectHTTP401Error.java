@@ -28,8 +28,7 @@ import org.tynamo.security.shiro.authz.RolesAuthorizationFilter;
  * http://flowlogix.googlecode.com/hg-history/4c2325d15a7395f72fb6f822284e028a99d71e28/tapestry-services/src/main/java/com/flowlogix/web/services/internal/ExceptionHandlerAssistantImpl.java
  */
 @EagerLoad
-public class RedirectHTTP401Error extends SecurityFilterChainFactoryImpl
-{
+public class RedirectHTTP401Error extends SecurityFilterChainFactoryImpl {
    // public SecurityFilterChainFactoryImpl(org.slf4j.Logger logger, org.apache.tapestry5.ioc.services.PipelineBuilder builder, org.tynamo.security.internal.services.LoginContextService loginContextService, @org.apache.tapestry5.ioc.annotations.Inject @org.apache.tapestry5.ioc.annotations.Symbol("security.successurl") java.lang.String successUrl, @org.apache.tapestry5.ioc.annotations.Inject @org.apache.tapestry5.ioc.annotations.Symbol("security.loginurl") java.lang.String loginUrl, @org.apache.tapestry5.ioc.annotations.Inject @org.apache.tapestry5.ioc.annotations.Symbol("security.unauthorizedurl") java.lang.String unauthorizedUrl, @org.apache.tapestry5.ioc.annotations.Inject @org.apache.tapestry5.ioc.annotations.Symbol("security.redirecttosavedurl") boolean redirectToSavedUrl) { /* compiled code */ }
 
     public RedirectHTTP401Error(Logger logger,
@@ -41,14 +40,12 @@ public class RedirectHTTP401Error extends SecurityFilterChainFactoryImpl
                        @Inject
                        @Symbol(SecuritySymbols.UNAUTHORIZED_URL) String unauthorizedUrl,
                        @Inject
-                       @Symbol(SecuritySymbols.REDIRECT_TO_SAVED_URL) String redirectToSavedUrl)
-    {
+                       @Symbol(SecuritySymbols.REDIRECT_TO_SAVED_URL) String redirectToSavedUrl) {
         super(logger, builder, login, successUrl, loginUrl, unauthorizedUrl, redirectToSavedUrl);
     }
 
     @Override
-    public RolesAuthorizationFilter roles()
-    {
+    public RolesAuthorizationFilter roles() {
         RolesAuthorizationFilter r = super.roles();
         r.setUnauthorizedUrl(AccessControlFilter.UNAUTHORIZED_URL);
         //the key setter that for some reason wasn't set
@@ -56,8 +53,7 @@ public class RedirectHTTP401Error extends SecurityFilterChainFactoryImpl
     }
 
     @Override
-    public PermissionsAuthorizationFilter perms()
-    {
+    public PermissionsAuthorizationFilter perms() {
         PermissionsAuthorizationFilter p = super.perms();
         p.setUnauthorizedUrl(AccessControlFilter.UNAUTHORIZED_URL);
         //the key setter that for some reason wasn't set

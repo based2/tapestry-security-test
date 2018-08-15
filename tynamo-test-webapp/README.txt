@@ -130,8 +130,6 @@ https://github.com/uklance/tapestry-cometd
 
 https://github.com/sveine/tapestry-multi-module-demo/
 
-java.lang.NullPointerException
-	at org.apache.shiro.util.AntPathMatcher.doMatch(AntPathMatcher.java:109)
-	at org.apache.shiro.util.AntPathMatcher.match(AntPathMatcher.java:90)
-	at org.apache.shiro.util.AntPathMatcher.matches(AntPathMatcher.java:86)
-	at org.tynamo.security.services.impl.SecurityFilterChain.matches(SecurityFilterChain.java:60)
+http://jumpstart.doublenegative.com.au/jumpstart/examples/infrastructure/protectingpages
+
+

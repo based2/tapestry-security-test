@@ -18,7 +18,7 @@ public class MapPropertyBeanModelFactory {
     }
 
     public Map<String, Object> createRecord(Object... values) {
-        Map<String, Object> record = new HashMap<String, Object>();
+        final Map<String, Object> record = new HashMap<>();
         int i = 0;
         for(Pair pair : config) {
             record.put((String) pair.getKey(), values[i]);
@@ -27,10 +27,9 @@ public class MapPropertyBeanModelFactory {
         return record;
     }
 
-    public BeanModel<Object> createMapPropertyConduit(BeanModelSource beanModelSource, Messages messages)
-    {
+    public BeanModel<Object> createMapPropertyConduit(BeanModelSource beanModelSource, Messages messages) {
         // Initially construct a BeanModel for object (no properties)
-        BeanModel<Object> beanModel = beanModelSource.createDisplayModel(Object.class, messages);
+        final BeanModel<Object> beanModel = beanModelSource.createDisplayModel(Object.class, messages);
 
         // add MapPropertyConduits for each map entry
         for(Pair pair : config) {

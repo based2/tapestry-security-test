@@ -25,8 +25,7 @@ import java.util.Map;
  * Horizontal menu with icons
  * Icons and order is Configurable in @NavbarAccessImpl MODES_PAGES_PATHS_PERMISSIONS_ICONS
  */
-public class Navbar
-{
+public class Navbar {
 
     @Parameter(required = true, cache=true, defaultPrefix = BindingConstants.LITERAL)
     @Property
@@ -69,10 +68,9 @@ public class Navbar
     private Map<String, String> pageIcons;
 
     @SetupRender
-    public void init()
-    {
+    public void init() {
         pageIcons = navbarAccess.getPageNames(securityService);
-        pageNames = new ArrayList<String>(pageIcons.keySet());;
+        pageNames = new ArrayList<>(pageIcons.keySet());
     }
 
     /**
@@ -84,8 +82,7 @@ public class Navbar
      *
      * @return active | null
      */
-    public String getClassForPageName()
-    {
+    public String getClassForPageName() {
         if (InternalUtils.isBlank(uname)) uname = (String) SecurityUtils.getSubject().getPrincipal();
 
         if (InternalUtils.isBlank(name)) {
@@ -96,7 +93,8 @@ public class Navbar
         if (InternalUtils.isBlank(icon)) icon = this.loadIcon(icon);
 
         try {
-            if (LOG.isDebugEnabled()) LOG.debug("test:" + resources.getPageName().toLowerCase() + " / " + name.toLowerCase());
+            if (LOG.isDebugEnabled()) LOG.debug("test:"
+                    + resources.getPageName().toLowerCase() + " / " + name.toLowerCase());
             return resources.getPageName().toLowerCase().startsWith(name.toLowerCase()) ? "active" : null;
         } catch (Exception e) {
             LOG.error(resources.getPageName(), e);
@@ -104,14 +102,12 @@ public class Navbar
         }
     }
 
-    public String loadIcon()
-    {
+    public String loadIcon() {
         if (pageIcons == null) init();
         return pageIcons.get(name);
     }
 
-    public boolean isIcon()
-    {
+    public boolean isIcon() {
         if (pageIcons == null) init();
         icon = loadIcon();
         return icon!=null;
@@ -124,21 +120,18 @@ public class Navbar
     }
 
     /** From Component @net.company.components.Layout */
-    public void setPage(String pageName)
-    {
+    public void setPage(String pageName) {
         this.pageName = pageName;
         this.name = pageName;
     }
 
-    public String loadIcon(String pageName)
-    {
+    public String loadIcon(String pageName) {
         if (pageIcons == null) init();
         return pageIcons.get(pageName);
     }
 
     @OnEvent(value = org.apache.tapestry5.EventConstants.ACTION, component = "logout")
-    public String onActionFromLogout()
-    {
+    public String onActionFromLogout() {
         // Need to call this explicitly to invoke onlogout handlers (for remember me etc.)
         SecurityUtils.getSubject().logout();
         // http://shiro.apache.org/static/current/apidocs/org/apache/shiro/mgt/DefaultSecurityManager.html#stopSession%28org.apache.shiro.subject.Subject%29
