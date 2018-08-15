@@ -2,6 +2,7 @@ package net.company.services;
 
 import org.apache.shiro.web.mgt.WebSecurityManager;
 import org.apache.tapestry5.ioc.Configuration;
+import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.internal.util.InternalUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,11 +15,10 @@ import java.util.Map;
 
 /**
  * Service enabling and keeping the application navigation bar configuration
- * @date 18/04/14.
+ * @since 18/04/14
  * https://issues.apache.org/jira/browse/TAP5-2281
  */
-public class NavbarAccessImpl implements NavbarAccess
-{
+public class NavbarAccessImpl implements NavbarAccess {
    private final static Logger LOG = LoggerFactory.getLogger(AppModule.class);
    //@Inject
    //private Logger LOG;
@@ -34,27 +34,31 @@ public class NavbarAccessImpl implements NavbarAccess
 
     private static String[][] MODES_PAGES_PATHS_PERMISSIONS_ICONS = new String[][]{
             {MODE_DEV, T5_DASHBOARD, null, null, "dashboard"}, // used only when isProduction = false: only in dev mode
-            {MODE_STD,"Board", "/board/**", AppModule.PERMISSION_CUSTOMER, "glass"},
-            {MODE_STD,"Stats", "/stats/**",  AppModule.PERMISSION_SELLER, "eye"},
-            {MODE_STD,"Inventory", "/inventory/**",  AppModule.PERMISSION_EDITOR, "compass"},
-            {MODE_DEV,"Controls", "/controls/**",  AppModule.PERMISSION_EDITOR, "flash"},
-            {MODE_STD,"Admin", "/admin/**",  AppModule.PERMISSION_ADMIN, "gavel"},
+            {MODE_STD,"Board", "/board/*", AppModule.PERMISSION_CUSTOMER, "glass"},
+            {MODE_STD,"Stats", "/stats/*",  AppModule.PERMISSION_SELLER, "eye"},
+            {MODE_STD,"Inventory", "/inventory/*",  AppModule.PERMISSION_EDITOR, "compass"},
+            {MODE_DEV,"Controls", "/controls/*",  AppModule.PERMISSION_EDITOR, "flash"},
+            {MODE_STD,"Admin", "/admin/*",  AppModule.PERMISSION_ADMIN, "gavel"},
             {MODE_DEV,"Bootswatch"}, // used only when isProduction = false, only in dev mode
             {MODE_STD,"About"},
             {MODE_STD,"Contact"},
             {MODE_STD,"Privacy"}
     };
 
+    // https://github.com/tynamo/tapestry-security/issues/49
     @Override
-    public void setupSecurity(Configuration<SecurityFilterChain> configuration,
-                                                       SecurityFilterChainFactory securityFactory, WebSecurityManager securityManager)
-    {
+    public void setupSecurity(OrderedConfiguration<SecurityFilterChain> configuration,
+                              SecurityFilterChainFactory securityFactory,
+                              WebSecurityManager securityManager) {
         // Authentication gateways
-        configuration.add(securityFactory.createChain(AppModule.URL_LOGIN).add(securityFactory.anon()).build());
+        configuration.add("LogIn",
+                securityFactory.createChain(AppModule.URL_LOGIN).add(securityFactory.anon()).build());
         LOG.info("Log In page:" + AppModule.URL_LOGIN);
-        configuration.add(securityFactory.createChain(AppModule.URL_SUCCESS).add(securityFactory.user()).build());
+        configuration.add("Success",
+                securityFactory.createChain(AppModule.URL_SUCCESS).add(securityFactory.user()).build());
         LOG.debug("Page after successful login:" + AppModule.URL_SUCCESS);
-        configuration.add(securityFactory.createChain(AppModule.URL_UNAUTHORIZED).add(securityFactory.user()).build());
+        configuration.add("Unauthorized",
+                        securityFactory.createChain(AppModule.URL_UNAUTHORIZED).add(securityFactory.user()).build());
         LOG.info("Redirect page for unauthorized access:" + AppModule.URL_UNAUTHORIZED);
 
         for (String[] modePagePathPermission : MODES_PAGES_PATHS_PERMISSIONS_ICONS) {
@@ -62,8 +66,12 @@ public class NavbarAccessImpl implements NavbarAccess
                 if (MODE_STD.equals(get(0, modePagePathPermission))) {
                     //enablePermissions(configuration, securityFactory, modePagePathPermission, "");
                     if (modePagePathPermission.length > 3) {
-                        LOG.info(PRIVATE + " " + modePagePathPermission[1] + " > " + modePagePathPermission[2] + " > " + modePagePathPermission[3]);
-                        configuration.add(securityFactory.createChain(modePagePathPermission[2]).add(securityFactory.perms(), modePagePathPermission[3]).build());
+                        String msg = PRIVATE + " " + modePagePathPermission[1]
+                                + " > " + modePagePathPermission[2] + " > " + modePagePathPermission[3];
+                        LOG.info(msg);
+                        configuration.add(msg,
+                                securityFactory.createChain(modePagePathPermission[2])
+                                        .add(securityFactory.perms(), modePagePathPermission[3]).build());
                     } else if (modePagePathPermission.length == 2) {
                         LOG.info(PUBLIC + " " + modePagePathPermission[1] + " > " + modePagePathPermission[1]);
                     } else  {
@@ -72,10 +80,17 @@ public class NavbarAccessImpl implements NavbarAccess
                 } else if (isModeDev(modePagePathPermission)) {
                     //enablePermissions(configuration, securityFactory, modePagePathPermission, DEVELOPMENT+" ");
                     if (modePagePathPermission.length > 3) {
-                        LOG.info(DEVELOPMENT + " " + PRIVATE + " " + modePagePathPermission[1] + " > " + modePagePathPermission[2] + " > " + modePagePathPermission[3]);
-                        configuration.add(securityFactory.createChain(modePagePathPermission[2]).add(securityFactory.perms(), modePagePathPermission[3]).build());
+                        String msg = DEVELOPMENT
+                                + " " + PRIVATE + " " + modePagePathPermission[1]
+                                + " > " + modePagePathPermission[2] + " > " + modePagePathPermission[3];
+                        LOG.info(msg);
+
+                        configuration.add(msg,
+                                securityFactory.createChain(modePagePathPermission[2])
+                                    .add(securityFactory.perms(), modePagePathPermission[3]).build());
                     } else if (modePagePathPermission.length == 2) {
-                        LOG.info(DEVELOPMENT + " " + PUBLIC + " " + modePagePathPermission[1] + " > " + modePagePathPermission[1]);
+                        LOG.info(DEVELOPMENT + " " + PUBLIC + " "
+                                + modePagePathPermission[1] + " > " + modePagePathPermission[1]);
                     } else  {
                         LOG.info(DEVELOPMENT + " " + PUBLIC + " " + modePagePathPermission[1]);
                     }
@@ -86,8 +101,7 @@ public class NavbarAccessImpl implements NavbarAccess
         }
     }
 
-    private String get(int i, String[] modePagePathPermission)
-    {
+    private String get(int i, String[] modePagePathPermission) {
         try {
             return modePagePathPermission[i];
         } catch (Exception e) {
@@ -104,8 +118,7 @@ public class NavbarAccessImpl implements NavbarAccess
         }
     }*/
 
-    private String getPage(String[] modePagePathPermission)
-    {
+    private String getPage(String[] modePagePathPermission) {
         try {
             return modePagePathPermission[1];
         } catch (Exception e) {
@@ -122,8 +135,7 @@ public class NavbarAccessImpl implements NavbarAccess
         }
     }  */
 
-    private String getPermission(String[] modePagePathPermission)
-    {
+    private String getPermission(String[] modePagePathPermission) {
         try {
             return modePagePathPermission[3];
         } catch (Exception e) {
@@ -131,8 +143,7 @@ public class NavbarAccessImpl implements NavbarAccess
         }
     }
 
-    private String getIcon(String[] modePagePathPermission)
-    {
+    private String getIcon(String[] modePagePathPermission) {
         try {
             return modePagePathPermission[4];
         } catch (Exception e) {
@@ -161,9 +172,8 @@ public class NavbarAccessImpl implements NavbarAccess
         }
     }  */
 
-    public Map<String, String> getPageNames(SecurityService securityService)
-    {
-       Map<String, String> pageIcons = new LinkedHashMap<String, String>();
+    public Map<String, String> getPageNames(SecurityService securityService) {
+       Map<String, String> pageIcons = new LinkedHashMap<>();
        for (String[] pageOrDir : MODES_PAGES_PATHS_PERMISSIONS_ICONS) {
            if (pageOrDir != null) {
                try {
@@ -189,12 +199,9 @@ public class NavbarAccessImpl implements NavbarAccess
        return pageIcons;
     }
 
-    private boolean isModeDev(String[] pageOrDir)
-    {
-        if ((NavbarAccessImpl.MODE_DEV.equals(pageOrDir[0]))) {
-            if (!AppModule.isProduction) return true;
-        }
-        return false;
+    private boolean isModeDev(String[] pageOrDir) {
+        return ((NavbarAccessImpl.MODE_DEV.equals(pageOrDir[0]))
+            && (!AppModule.isProduction) );
     }
 
 }

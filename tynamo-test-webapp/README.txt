@@ -1,5 +1,5 @@
 Another Tapestry Template for a Secured web application access
-with Apache Tapestry 5.4-beta-33 and Tynamo/tapestry-security 0.6.2 (Shiro 1.2.4)
+with Apache Tapestry 5.4.3 and Tynamo/tapestry-security 0.7.1 (Shiro 1.4.0)
 
 Install Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files 8
  http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html
@@ -22,7 +22,7 @@ To get live class reloading work for the common module in IntelliJ:
 Open Project Structure/Modules/Paths/Use module compile output path/Output path (target/classes)
 Copy the path to Project Structure/Project/Project compiler output path
 ===================================================================================
-Status: Update to Tapestry Shiro 1.2.5 and jetty
+Status: Update to Tapestry Shiro 1.4.0 and jetty
 
 add theme switcher for bootswatch
 add google, ms bootstrap theme
@@ -60,9 +60,6 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=959270
 http://erik.io/blog/2013/06/08/a-basic-guide-to-when-and-how-to-deploy-https/
   https://www.owasp.org/index.php/SecureFlag
 http://security.stackexchange.com/questions/20803/how-does-ssl-work
-
-http://www.cert.ssi.gouv.fr/site/CERTFR-2015-AVI-317/index.html bluecoat
-
 =============================================================================================================
 
 ComponentWorld
@@ -131,37 +128,10 @@ https://github.com/anjlab/eclipse-tapestry5-plugin#install
 https://github.com/uklance/tapestry-atmosphere
 https://github.com/uklance/tapestry-cometd
 
-https://issues.apache.org/jira/browse/SHIRO-582
-ava.lang.NullPointerException
+https://github.com/sveine/tapestry-multi-module-demo/
+
+java.lang.NullPointerException
 	at org.apache.shiro.util.AntPathMatcher.doMatch(AntPathMatcher.java:109)
 	at org.apache.shiro.util.AntPathMatcher.match(AntPathMatcher.java:90)
 	at org.apache.shiro.util.AntPathMatcher.matches(AntPathMatcher.java:86)
-	at org.tynamo.security.services.impl.SecurityFilterChain.matches(SecurityFilterChain.java:46)
-	at org.tynamo.security.services.impl.SecurityConfiguration.getMatchingChain(SecurityConfiguration.java:84)
-	at org.tynamo.security.services.impl.SecurityConfiguration.service(SecurityConfiguration.java:52)
-	at $HttpServletRequestFilter_19ddf7bc0531.service(Unknown Source)
-	at $HttpServletRequestHandler_19ddf7bc0534.service(Unknown Source)
-	at org.apache.tapestry5.modules.TapestryModule$1.service(TapestryModule.java:796)
-	at $HttpServletRequestHandler_19ddf7bc0534.service(Unknown Source)
-	at $HttpServletRequestHandler_19ddf7bc052d.service(Unknown Source)
-	at org.apache.tapestry5.TapestryFilter.doFilter(TapestryFilter.java:166)
-	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
-	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:585)
-	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:143)
-	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:577)
-	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:223)
-	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1127)
-	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
-	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185)
-	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1061)
-	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
-	at org.eclipse.jetty.server.handler.ContextHandlerCollection.handle(ContextHandlerCollection.java:215)
-	at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:110)
-	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
-	at org.eclipse.jetty.server.Server.handle(Server.java:499)
-	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:311)
-	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:258)
-	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:544)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
-	at java.lang.Thread.run(Thread.java:745)
+	at org.tynamo.security.services.impl.SecurityFilterChain.matches(SecurityFilterChain.java:60)

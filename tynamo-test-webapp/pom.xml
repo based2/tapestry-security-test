@@ -4,7 +4,7 @@
     <artifactId>tynamo-test-webapp</artifactId>
     <version>0.1</version>
     <packaging>war</packaging>
-    <name>Secured web application access with Apache Tapestry 5.4.3 and Tynamo/Tapestry-security 0.7.0 (Apache Shiro 1.4) -</name>
+    <name>Secured web application access with Apache Tapestry 5.4.3 and Tynamo/Tapestry-security 0.7.1 (Apache Shiro 1.4) -</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -12,7 +12,7 @@
         <java.version>1.8</java.version>
         <!-- http://maven.apache.org/plugins/maven-resources-plugin/examples/binaries-filtering.html -->
         <tapestry.version>5.4.3</tapestry.version>
-        <jetty.version>9.4.9.v20180320</jetty.version>
+        <jetty.version>9.4.11.v20180605</jetty.version>
     </properties>
 
     <build>
@@ -22,7 +22,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
+                <version>3.8.0</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -33,7 +33,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.2.2</version>
             </plugin>
             <!-- Run the application using "mvn jetty:run"
                and browse: https://localhost:8443/tynamo-test-webapp/
@@ -123,12 +123,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.7</version>
+                <version>3.7</version><!-- 3.7.1 https://mail-archives.apache.org/mod_mbox/maven-announce/201804.mbox/%3C2799494.6mTO93LJki%40giga%3E -->
                 <dependencies>
                     <dependency>
                         <groupId>org.apache.maven.doxia</groupId>
                         <artifactId>doxia-module-markdown</artifactId>
-                        <version>1.5</version>
+                        <version>1.8</version>
                     </dependency>
                 </dependencies>
                 <configuration>
@@ -166,7 +166,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.0.1</version>
                 <reportSets>
                     <reportSet>
                         <id>default</id>
@@ -367,7 +367,7 @@
         <dependency>
             <groupId>org.tynamo</groupId>
             <artifactId>tapestry-security</artifactId>
-            <version>0.7.0</version>
+            <version>0.7.1</version>
         </dependency>
 
         <!-- TLS tests -->
@@ -392,7 +392,7 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.14.2</version>
+            <version>6.14.3</version>
             <scope>test</scope>
         </dependency>
 

@@ -25,8 +25,7 @@ import java.util.Date;
  */
 
 @Secure
-public class Index
-{
+public class Index {
     @Inject
     private Logger LOG;
 
@@ -55,32 +54,28 @@ public class Index
     private static final String EMPTY_STRING = "";
 
     @Log
-    String onActivate()
-    {
+    String onActivate() {
         // http://stackoverflow.com/questions/3450604/why-is-there-no-string-empty-in-java
         //this.password = BLANK_STRING;
         //this.username = BLANK_STRING;
         this.password = EMPTY_STRING;
         this.username = EMPTY_STRING;
 
-        Subject subject = SecurityUtils.getSubject();
+        final Subject subject = SecurityUtils.getSubject();
         if (subject.isAuthenticated() || subject.isRemembered()) {
             response.setHeader("auto-logout", "logout");
-            return loginContextService.getSuccessPage();
+            return loginContextService.getSuccessPage(); // TODO deprecated
         }
         return null;
     }
 
     @Log
-    @OnEvent(value = EventConstants.VALIDATE, component = "loginForm")
-    public void validation()
-    {
-        if (!loginForm.isValid()) {
-            return;
-        }
+    @OnEvent(value=EventConstants.VALIDATE, component="loginForm")
+    public void validation() {
+        if (! loginForm.isValid()) return;
         try {
-            Subject subject = SecurityUtils.getSubject();
-            if (!subject.isAuthenticated()) {
+            final Subject subject = SecurityUtils.getSubject();
+            if (! subject.isAuthenticated()) {
                 // http://shiro.apache.org/static/1.2.2/apidocs/org/apache/shiro/authc/UsernamePasswordToken.html
                 UsernamePasswordToken token = new UsernamePasswordToken(username, password);
                 //token.setRememberMe(rememberMe);
@@ -96,10 +91,9 @@ public class Index
     }
 
     @Log
-    @OnEvent(value = EventConstants.SUCCESS, component = "loginForm")
-    public Object loggingSuccess()
-    {
-        return loginContextService.getSuccessPage();
+    @OnEvent(value=EventConstants.SUCCESS, component="loginForm")
+    public Object loggingSuccess() {
+        return loginContextService.getSuccessPage(); // TODO deprecated
     }
 
     public Date getCurrentTime()

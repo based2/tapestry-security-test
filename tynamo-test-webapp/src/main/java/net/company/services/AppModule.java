@@ -168,8 +168,7 @@ public class AppModule
         };
     } */
 
-    public static void bind(final ServiceBinder binder)
-    {
+    public static void bind(final ServiceBinder binder) {
         binder.bind(SecurityFilterChainFactory.class, RedirectHTTP401Error.class).withId("RedirectHTTP401Error");
         binder.bind(NavbarAccess.class, NavbarAccessImpl.class);
         binder.bind(Audit.class, net.company.services.AuditImpl.class);
@@ -187,21 +186,18 @@ public class AppModule
     // Security - Tynamo/Shiro
     // http://tapestry.apache.org/https.html#HTTPS-SecuringMultiplePages
 
-    public void contributeMetaDataLocator(MappedConfiguration<String, String> configuration)
-    {
+    public void contributeMetaDataLocator(MappedConfiguration<String, String> configuration) {
         // Enabling @Secure only on some pages (the remaining ones are insecure)
         configuration.add(MetaDataConstants.SECURE_PAGE, "true");
     }
 
-    public static void contributeWebSecurityManager(Configuration<Realm> configuration)
-    {
+    public static void contributeWebSecurityManager(Configuration<Realm> configuration) {
         configuration.add(new ExtendedPropertiesRealm("classpath:shiro-users.properties"));
     }
 
     @Contribute(ServiceOverride.class)
     public static void overrideSecurityFilterChainFactory(MappedConfiguration<Class<?>, Object> configuration,
-                                                          @Local SecurityFilterChainFactory securityFilterChainFactory)
-    {
+                                                          @Local SecurityFilterChainFactory securityFilterChainFactory) {
         configuration.add(SecurityFilterChainFactory.class, securityFilterChainFactory);
     }
 
@@ -209,9 +205,9 @@ public class AppModule
 
     @Contribute(HttpServletRequestFilter.class)
     @Marker(Security.class)
-    public static void setupSecurity(Configuration<SecurityFilterChain> configuration,
-                                     SecurityFilterChainFactory factory, WebSecurityManager securityManager, NavbarAccess navbarAccess)
-    {
+    public static void setupSecurity(OrderedConfiguration<SecurityFilterChain> configuration,
+                                     SecurityFilterChainFactory factory,
+                                     WebSecurityManager securityManager, NavbarAccess navbarAccess) {
         if (!IS_SECURITY_ENABLED) {
             navbarAccess.setupSecurity(configuration, factory, securityManager);
             IS_SECURITY_ENABLED = true;
@@ -220,16 +216,14 @@ public class AppModule
 
     @Contribute(JavaScriptStack.class)
     @Core
-    public static void setupCoreJavaScriptStack(OrderedConfiguration<StackExtension>
-                                     configuration) {
+    public static void setupCoreJavaScriptStack(OrderedConfiguration<StackExtension> configuration) {
         configuration.override("exception-frame.css", null);
         configuration.override("tapestry.css", null);
         configuration.override("tapestry-console.css", null);
         configuration.override("tree.css", null);
     }
 
-    private static PermissionsAuthorizationFilter getPermissionFilter(SecurityFilterChainFactory factory)
-    {
+    private static PermissionsAuthorizationFilter getPermissionFilter(SecurityFilterChainFactory factory) {
         PermissionsAuthorizationFilter permFilter = factory.perms();
         permFilter.setUnauthorizedUrl(URL_UNAUTHORIZED);
         return permFilter;
@@ -286,8 +280,7 @@ public class AppModule
      * Tapestry using the HSTSPolicy filter.
      */
     // https://svn.apache.org/repos/asf/tapestry/tapestry5/trunk/quickstart/filtered/archetype-resources/src/main/java/services/AppModule.java
-    public void contributeRequestHandler(OrderedConfiguration<RequestFilter> configuration)
-    {
+    public void contributeRequestHandler(OrderedConfiguration<RequestFilter> configuration) {
         // Each contribution to an ordered configuration has a name, When necessary, you may
         // set constraints to precisely control the invocation order of the contributed filter
         // within the pipeline.
