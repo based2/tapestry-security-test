@@ -132,4 +132,18 @@ https://github.com/sveine/tapestry-multi-module-demo/
 
 http://jumpstart.doublenegative.com.au/jumpstart/examples/infrastructure/protectingpages
 
+https://issues.apache.org/jira/browse/SHIRO-582
+[WARNING] /index.loginform
+java.lang.NullPointerException
+    at org.apache.shiro.util.AntPathMatcher.doMatch (AntPathMatcher.java:109)
+    at org.apache.shiro.util.AntPathMatcher.match (AntPathMatcher.java:90)
+    at org.apache.shiro.util.AntPathMatcher.matches (AntPathMatcher.java:86)
+    at org.tynamo.security.services.impl.SecurityFilterChain.matches (SecurityFilterChain.java:60)
+    at org.tynamo.security.services.impl.SecurityConfiguration.getMatchingChain (SecurityConfiguration.java:94)
+    at org.tynamo.security.services.impl.SecurityConfiguration.service (SecurityConfiguration.java:58)
+    at $HttpServletRequestFilter_17f3cb8d0fd0.service (Unknown Source)
+    at $HttpServletRequestHandler_17f3cb8d0fd3.service (Unknown Source)
+    at org.apache.tapestry5.modules.TapestryModule$1.service (TapestryModule.java:796)
+
+
 
