@@ -64,7 +64,7 @@ public class Index {
         final Subject subject = SecurityUtils.getSubject();
         if (subject.isAuthenticated() || subject.isRemembered()) {
             response.setHeader("auto-logout", "logout");
-            return loginContextService.getSuccessPage(); // TODO deprecated
+            return loginContextService.getSuccessURL(); //.getSuccessPage(); // TODO deprecated
         }
         return null;
     }
@@ -93,7 +93,7 @@ public class Index {
     @Log
     @OnEvent(value=EventConstants.SUCCESS, component="loginForm")
     public Object loggingSuccess() {
-        return loginContextService.getSuccessPage(); // TODO deprecated
+        return loginContextService.getSuccessURL(); //.getSuccessPage(); // TODO deprecated
     }
 
     public Date getCurrentTime()

@@ -34,11 +34,11 @@ public class NavbarAccessImpl implements NavbarAccess {
 
     private static String[][] MODES_PAGES_PATHS_PERMISSIONS_ICONS = new String[][]{
             {MODE_DEV, T5_DASHBOARD, null, null, "dashboard"}, // used only when isProduction = false: only in dev mode
-            {MODE_STD,"Board", "/board/*", AppModule.PERMISSION_CUSTOMER, "glass"},
-            {MODE_STD,"Stats", "/stats/*",  AppModule.PERMISSION_SELLER, "eye"},
-            {MODE_STD,"Inventory", "/inventory/*",  AppModule.PERMISSION_EDITOR, "compass"},
-            {MODE_DEV,"Controls", "/controls/*",  AppModule.PERMISSION_EDITOR, "flash"},
-            {MODE_STD,"Admin", "/admin/*",  AppModule.PERMISSION_ADMIN, "gavel"},
+            {MODE_STD,"Board", "/board/**", AppModule.PERMISSION_CUSTOMER, "glass"},
+            {MODE_STD,"Stats", "/stats/**",  AppModule.PERMISSION_SELLER, "eye"},
+            {MODE_STD,"Inventory", "/inventory/**",  AppModule.PERMISSION_EDITOR, "compass"},
+            {MODE_DEV,"Controls", "/controls/**",  AppModule.PERMISSION_EDITOR, "flash"},
+            {MODE_STD,"Admin", "/admin/**",  AppModule.PERMISSION_ADMIN, "gavel"},
             {MODE_DEV,"Bootswatch"}, // used only when isProduction = false, only in dev mode
             {MODE_STD,"About"},
             {MODE_STD,"Contact"},
@@ -69,7 +69,7 @@ public class NavbarAccessImpl implements NavbarAccess {
                         final String msg = PRIVATE + " " + modePagePathPermission[1]
                                 + " > " + modePagePathPermission[2] + " > " + modePagePathPermission[3];
                         LOG.info(msg);
-                        configuration.add(msg,
+                        configuration.add(filterDoubleStart(msg),
                                 securityFactory.createChain(modePagePathPermission[2])
                                         .add(securityFactory.perms(), modePagePathPermission[3]).build());
                     } else if (modePagePathPermission.length == 2) {
@@ -85,7 +85,7 @@ public class NavbarAccessImpl implements NavbarAccess {
                                 + " > " + modePagePathPermission[2] + " > " + modePagePathPermission[3];
                         LOG.info(msg);
 
-                        configuration.add(msg,
+                        configuration.add(filterDoubleStart(msg),
                                 securityFactory.createChain(modePagePathPermission[2])
                                     .add(securityFactory.perms(), modePagePathPermission[3]).build());
                     } else if (modePagePathPermission.length == 2) {
@@ -99,6 +99,12 @@ public class NavbarAccessImpl implements NavbarAccess {
                 }
             }
         }
+    }
+
+    /** fix RuntimeException: Exception constructing service 'SecurityConfiguration': Dangling meta character '*' near index 24
+     Private Board > /board/** > customerPermission:1 */
+    private String filterDoubleStart(final String msg) {
+        return msg.replaceAll("\\*\\*", "*");
     }
 
     private String get(int i, String[] modePagePathPermission) {

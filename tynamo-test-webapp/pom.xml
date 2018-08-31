@@ -13,6 +13,7 @@
         <!-- http://maven.apache.org/plugins/maven-resources-plugin/examples/binaries-filtering.html -->
         <tapestry.version>5.4.3</tapestry.version>
         <jetty.version>9.4.11.v20180605</jetty.version>
+        <shiro.version>1.4.1-SNAPSHOT</shiro.version>
     </properties>
 
     <build>
@@ -291,7 +292,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.7</version>
+            <version>3.8</version>
         </dependency>
 
         <dependency>
@@ -369,6 +370,14 @@
             <artifactId>tapestry-security</artifactId>
             <version>0.7.1</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+
+
 
         <!-- TLS tests -->
         <dependency>

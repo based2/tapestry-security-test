@@ -25,19 +25,16 @@ import org.apache.tapestry5.annotations.Parameter;
  *
  * @tapestrydoc
  */
-public class Fa
-{
+public class Fa {
     /**
      * The name of the icon, e.g., "arrow-up", "flag", "fire" etc.
      */
     @Parameter(required=true, allowNull=false, cache=true, defaultPrefix=BindingConstants.LITERAL)
     private String icon;
 
-    boolean beginRender(MarkupWriter writer)
-    {
+    boolean beginRender(MarkupWriter writer) {
         writer.element("i", "class", "fa fa-" + icon);
         writer.end();
-
         return false;
     }
 }

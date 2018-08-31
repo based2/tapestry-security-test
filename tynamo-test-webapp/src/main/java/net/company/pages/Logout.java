@@ -13,8 +13,7 @@ import org.tynamo.security.services.SecurityService;
  */
 // http://mail-archives.apache.org/mod_mbox/tapestry-users/201103.mbox/%3CAANLkTimVy8dbnzdtvr3eBWt3q2Wer4k_S4TbktK=KiYY@mail.gmail.com%3E
 // http://comments.gmane.org/gmane.comp.java.tynamo.user/710
-public class Logout
-{
+public class Logout {
 
     //@Inject
     //private Request request;
@@ -25,14 +24,12 @@ public class Logout
     @Inject
     private LoginContextService loginContextService;
 
-    Object onPassivate()
-    {
+    Object onPassivate() {
         securityService.getSubject().logout();
         return loginContextService.getLoginURL();
     }
 
-    Object onActivate()
-    {
+    Object onActivate() {
         /***
          * The order is important as Shiro uses the 'real' httpsession.*
          * Upon logout shiro clears session and cache and if session is already

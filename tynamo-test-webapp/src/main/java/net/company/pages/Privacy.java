@@ -1,6 +1,4 @@
 package net.company.pages;
 
-public class Privacy
-{
-
+public class Privacy {
 }

@@ -216,6 +216,8 @@ public class AppModule
                 factory.createChain("/assets/**").add(factory.anon()).build());
         configuration.add("Favicon",
                 factory.createChain("/favicon.ico").add(factory.anon()).build());
+        configuration.add("index",
+                factory.createChain("/index.loginform").add(factory.anon()).build());
 
         if (!IS_SECURITY_ENABLED) {
             navbarAccess.setupSecurity(configuration, factory, securityManager);

@@ -66,7 +66,7 @@ public class LdapRealm extends JndiLdapRealm {
     @Override
     protected AuthorizationInfo queryForAuthorizationInfo(PrincipalCollection principals,
                                                           LdapContextFactory ldapContextFactory) throws NamingException {
-        Set<String> roleNames = new HashSet<String>();
+        Set<String> roleNames = new HashSet<>();
         String username = (String) getAvailablePrincipal(principals);
         LdapContext systemLdapContext = null;
 

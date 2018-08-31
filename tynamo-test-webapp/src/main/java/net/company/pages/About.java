@@ -1,6 +1,5 @@
 package net.company.pages;
 
-public class About
-{
+public class About {
 
 }

@@ -5,9 +5,10 @@ Install Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy
  http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html
  in your jre/lib/security (it will replace 2 jars)
 
-mvn clean tomcat7:run
-mvn clean tomcat6:run
 mvn clean jetty:run
+mvn clean tomcat7:run
+https://stackoverflow.com/questions/26883836/tomcat-8-maven-plugin-for-java-8
+https://stackoverflow.com/questions/41326911/maven-plugin-for-tomcat-9
 
 > https://localhost:8443/index
 
@@ -132,7 +133,7 @@ https://github.com/sveine/tapestry-multi-module-demo/
 
 http://jumpstart.doublenegative.com.au/jumpstart/examples/infrastructure/protectingpages
 
-https://issues.apache.org/jira/browse/SHIRO-582
+https://issues.apache.org/jira/browse/SHIRO-582 -> fixed with current shiro build 1.4.1-SNAPSHOT
 [WARNING] /index.loginform
 java.lang.NullPointerException
     at org.apache.shiro.util.AntPathMatcher.doMatch (AntPathMatcher.java:109)

@@ -130,7 +130,7 @@ public class Navbar {
         return pageIcons.get(pageName);
     }
 
-    @OnEvent(value = org.apache.tapestry5.EventConstants.ACTION, component = "logout")
+    @OnEvent(value=org.apache.tapestry5.EventConstants.ACTION, component="logout")
     public String onActionFromLogout() {
         // Need to call this explicitly to invoke onlogout handlers (for remember me etc.)
         SecurityUtils.getSubject().logout();

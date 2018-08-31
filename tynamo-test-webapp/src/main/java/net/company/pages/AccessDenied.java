@@ -21,7 +21,7 @@ public class AccessDenied {
 	private LoginContextService loginContextService;
 
 	public String getSuccess() {
-		return loginContextService.getSuccessPage();
+		return loginContextService.getSuccessURL(); //.getSuccessPage();
 	}
 	
 }

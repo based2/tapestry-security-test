@@ -22,8 +22,7 @@ import org.apache.tapestry5.annotations.Property;
                 //"context:styles/pixel-kit/dark-velvet-css/css/jquery-ui-1.8.20.custom.css",
         //        "context:pkdvc/style.css"}
 )
-public class LoginLayout
-{
+public class LoginLayout {
     /** The page title, for the <title> element and the <h1> element. */
     @Property
     @Parameter(required = true, defaultPrefix = BindingConstants.LITERAL)
