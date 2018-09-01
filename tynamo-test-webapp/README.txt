@@ -1,5 +1,5 @@
 Another Tapestry Template for a Secured web application access
-with Apache Tapestry 5.4.3 and Tynamo/tapestry-security 0.7.1 (Shiro 1.4.0)
+with Apache Tapestry 5.4.3 and Tynamo/tapestry-security 0.7.1 (+Shiro 1.4.1-SNAPSHOT)
 
 Install Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files 8
  http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html
@@ -23,13 +23,15 @@ To get live class reloading work for the common module in IntelliJ:
 Open Project Structure/Modules/Paths/Use module compile output path/Output path (target/classes)
 Copy the path to Project Structure/Project/Project compiler output path
 ===================================================================================
-Status: Update to Tapestry Shiro 1.4.0 and jetty
+Status: Update to Tapestry Shiro 1.4.1-SNAPSHOT and jetty 9.4.12.v20180830
+  https://github.com/based2/tapestry-security-test
+  https://github.com/based2/shiro
 
 add theme switcher for bootswatch
 add google, ms bootstrap theme
 - [] use org.tynamo.security:tapestry-security-jpa with H2 DB
 add JPA to H2 with Thiago CRUD
-- a better grid: with search component/filter -> jquery
+- a better grid: with search comphttps://github.com/based2/tapestry-security-testonent/filter -> jquery
 - try with https://github.com/spreadthesource/tapestry5-installer
 - [] move files to the root of the project
 - [] audit view page
@@ -132,6 +134,8 @@ https://github.com/uklance/tapestry-cometd
 https://github.com/sveine/tapestry-multi-module-demo/
 
 http://jumpstart.doublenegative.com.au/jumpstart/examples/infrastructure/protectingpages
+
+Notes:
 
 https://issues.apache.org/jira/browse/SHIRO-582 -> fixed with current shiro build 1.4.1-SNAPSHOT
 [WARNING] /index.loginform

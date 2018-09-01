@@ -4,9 +4,9 @@
       xmlns:p="tapestry:parameter">
   <div id="error">
     <p>
-      You are not allowed to access or perform an action on the requested page.
+      You are not allowed to access or to perform an action on the requested page.
       <br/>
-      Please contact your system administrator for further information!
+      Please contact your system administrator for further information.
     </p>
     <p>You are not logged on! Go <a t:type="pagelink" t:page="${success}">back to the application</a></p>
   </div>

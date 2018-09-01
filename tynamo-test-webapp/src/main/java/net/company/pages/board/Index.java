@@ -31,8 +31,6 @@ import java.util.Map;
 @RequiresPermissions(AppModule.PERMISSION_CUSTOMER)
 public class Index {
 
-    private final static Logger LOG = LoggerFactory.getLogger(Index.class);
-
     @Property
     @Persist
     private Map[] suiteproviders;
@@ -187,22 +185,22 @@ public class Index {
 
         try {
             int maxKeyLengthAES = Cipher.getMaxAllowedKeyLength("AES");
-            LOG.info("AES maxKeyLength:" + maxKeyLengthAES);
+            logger.info("AES maxKeyLength:" + maxKeyLengthAES);
 
             int maxKeyLengthRSA = Cipher.getMaxAllowedKeyLength("RSA"); // Seems not to change?!
-            LOG.info("RSA maxKeyLength:" + maxKeyLengthRSA);
+            logger.info("RSA maxKeyLength:" + maxKeyLengthRSA);
 
             int maxKeyLengthDES = Cipher.getMaxAllowedKeyLength("DES");
-            LOG.info("DES maxKeyLength:" + maxKeyLengthDES);
+            logger.info("DES maxKeyLength:" + maxKeyLengthDES);
 
             if ((maxKeyLengthAES>128) && (maxKeyLengthDES>64)) {
-                LOG.info("Unlimited JCE Security enabled :-), alt: Bouncy Castle http://www.bouncycastle.org/");
+                logger.info("Unlimited JCE Security enabled :-), alt: Bouncy Castle http://www.bouncycastle.org/");
                 return true;
             } else {
-                LOG.error(ERROR_INSTALL_UNLIMITED);
+                logger.error(ERROR_INSTALL_UNLIMITED);
             }
         } catch (NoSuchAlgorithmException e) {
-            LOG.error(ERROR_INSTALL_UNLIMITED, e);
+            logger.error(ERROR_INSTALL_UNLIMITED, e);
         }
         return false;
 

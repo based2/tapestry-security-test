@@ -27,7 +27,7 @@ import java.util.Map;
  */
 public class Navbar {
 
-    @Parameter(required = true, cache=true, defaultPrefix = BindingConstants.LITERAL)
+    @Parameter(required=true, cache=true, defaultPrefix = BindingConstants.LITERAL)
     @Property
     private String pageName;
 
