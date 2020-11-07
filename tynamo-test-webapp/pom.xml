@@ -11,9 +11,9 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <!-- http://maven.apache.org/plugins/maven-resources-plugin/examples/binaries-filtering.html -->
-        <tapestry.version>5.4.3</tapestry.version>
-        <jetty.version>9.4.12.v20180830</jetty.version>
-        <shiro.version>1.4.1-SNAPSHOT</shiro.version>
+        <tapestry.version>5.6.1</tapestry.version>
+        <jetty.version>9.4.34.v20201102</jetty.version>
+        <shiro.version>1.7.0</shiro.version>
     </properties>
 
     <build>
@@ -292,7 +292,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.8</version>
+            <version>3.11</version>
         </dependency>
 
         <dependency>
@@ -368,7 +368,7 @@
         <dependency>
             <groupId>org.tynamo</groupId>
             <artifactId>tapestry-security</artifactId>
-            <version>0.7.1</version>
+            <version>0.8.0</version>
         </dependency>
 
         <dependency>
@@ -376,8 +376,6 @@
             <artifactId>shiro-web</artifactId>
             <version>${shiro.version}</version>
         </dependency>
-
-
 
         <!-- TLS tests -->
         <dependency>

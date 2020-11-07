@@ -1,5 +1,5 @@
 Another Tapestry Template for a Secured web application access
-with Apache Tapestry 5.4.3 and Tynamo/tapestry-security 0.7.1 (+Shiro 1.4.1-SNAPSHOT)
+with Apache Tapestry 5.6.1 and Tynamo/tapestry-security 0.8.0
 
 Install Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files 8
  http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html
@@ -10,7 +10,7 @@ mvn clean tomcat7:run
 https://stackoverflow.com/questions/26883836/tomcat-8-maven-plugin-for-java-8
 https://stackoverflow.com/questions/41326911/maven-plugin-for-tomcat-9
 
-> https://localhost:8443/index
+> https://localhost:8445/index
 
 Accesses in src/resources/shiro-users.properties:
 
@@ -149,6 +149,21 @@ java.lang.NullPointerException
     at $HttpServletRequestFilter_17f3cb8d0fd0.service (Unknown Source)
     at $HttpServletRequestHandler_17f3cb8d0fd3.service (Unknown Source)
     at org.apache.tapestry5.modules.TapestryModule$1.service (TapestryModule.java:796)
+
+ java.lang.NullPointerException
+ 	at org.apache.shiro.util.AntPathMatcher.doMatch(AntPathMatcher.java:109)
+ 	at org.apache.shiro.util.AntPathMatcher.match(AntPathMatcher.java:90)
+ 	at org.apache.shiro.util.AntPathMatcher.matches(AntPathMatcher.java:86)
+ 	at org.tynamo.security.services.impl.SecurityFilterChain.matches(SecurityFilterChain.java:60)
+ 	at org.tynamo.security.services.impl.SecurityConfiguration.getMatchingChain(SecurityConfiguration.java:94)
+ 	at org.tynamo.security.services.impl.SecurityConfiguration.service(SecurityConfiguration.java:58)
+
+java.lang.NullPointerException
+	at org.apache.shiro.util.AntPathMatcher.doMatch(AntPathMatcher.java:109)
+	at org.apache.shiro.util.AntPathMatcher.match(AntPathMatcher.java:90)
+	at org.apache.shiro.util.AntPathMatcher.matches(AntPathMatcher.java:86)
+	at org.tynamo.security.services.impl.SecurityFilterChain.matches(SecurityFilterChain.java:60)
+	at org.tynamo.security.services.impl.SecurityConfiguration.getMatchingChain(SecurityConfiguration.java:94)
 
 
 

@@ -33,7 +33,7 @@ public class NavbarAccessImpl implements NavbarAccess {
     public static final String MODE_STD = "STANDARD";
 
     private static String[][] MODES_PAGES_PATHS_PERMISSIONS_ICONS = new String[][]{
-            {MODE_DEV, T5_DASHBOARD, null, null, "dashboard"}, // used only when isProduction = false: only in dev mode
+            {MODE_DEV, T5_DASHBOARD, "", "", "dashboard"}, // used only when isProduction = false: only in dev mode
             {MODE_STD,"Board", "/board/**", AppModule.PERMISSION_CUSTOMER, "glass"},
             {MODE_STD,"Stats", "/stats/**",  AppModule.PERMISSION_SELLER, "eye"},
             {MODE_STD,"Inventory", "/inventory/**",  AppModule.PERMISSION_EDITOR, "compass"},
