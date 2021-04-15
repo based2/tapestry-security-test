@@ -1,5 +1,5 @@
-Another Tapestry Template for a Secured web application access
-with Apache Tapestry 5.6.1 and Tynamo/tapestry-security 0.8.0
+# Another Tapestry Template for a Secured web application access
+with Apache Tapestry 5.6.2 and Tynamo/tapestry-security 0.8.0
 
 Install Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files 8
  http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html
@@ -22,10 +22,6 @@ customer1 444
 To get live class reloading work for the common module in IntelliJ:
 Open Project Structure/Modules/Paths/Use module compile output path/Output path (target/classes)
 Copy the path to Project Structure/Project/Project compiler output path
-===================================================================================
-Status: Update to Tapestry Shiro 1.4.1-SNAPSHOT and jetty 9.4.12.v20180830
-  https://github.com/based2/tapestry-security-test
-  https://github.com/based2/shiro
 
 add theme switcher for bootswatch
 add google, ms bootstrap theme
@@ -64,6 +60,7 @@ http://erik.io/blog/2013/06/08/a-basic-guide-to-when-and-how-to-deploy-https/
   https://www.owasp.org/index.php/SecureFlag
 http://security.stackexchange.com/questions/20803/how-does-ssl-work
 =============================================================================================================
+apache Shiro 1.7.0 fix CVE-2020-17510 (2020-10-29)
 
 ComponentWorld
 
@@ -135,35 +132,25 @@ https://github.com/sveine/tapestry-multi-module-demo/
 
 http://jumpstart.doublenegative.com.au/jumpstart/examples/infrastructure/protectingpages
 
-Notes:
+https://github.com/gagauz/tapestry-css-combiner
+https://github.com/gagauz/tapestry-security
+https://github.com/gagauz/tapestry-common
 
-https://issues.apache.org/jira/browse/SHIRO-582 -> fixed with current shiro build 1.4.1-SNAPSHOT
-[WARNING] /index.loginform
-java.lang.NullPointerException
-    at org.apache.shiro.util.AntPathMatcher.doMatch (AntPathMatcher.java:109)
-    at org.apache.shiro.util.AntPathMatcher.match (AntPathMatcher.java:90)
-    at org.apache.shiro.util.AntPathMatcher.matches (AntPathMatcher.java:86)
-    at org.tynamo.security.services.impl.SecurityFilterChain.matches (SecurityFilterChain.java:60)
-    at org.tynamo.security.services.impl.SecurityConfiguration.getMatchingChain (SecurityConfiguration.java:94)
-    at org.tynamo.security.services.impl.SecurityConfiguration.service (SecurityConfiguration.java:58)
-    at $HttpServletRequestFilter_17f3cb8d0fd0.service (Unknown Source)
-    at $HttpServletRequestHandler_17f3cb8d0fd3.service (Unknown Source)
-    at org.apache.tapestry5.modules.TapestryModule$1.service (TapestryModule.java:796)
+https://github.com/xfyre/tapestry5-xtensions bootstrap extensions
 
- java.lang.NullPointerException
- 	at org.apache.shiro.util.AntPathMatcher.doMatch(AntPathMatcher.java:109)
- 	at org.apache.shiro.util.AntPathMatcher.match(AntPathMatcher.java:90)
- 	at org.apache.shiro.util.AntPathMatcher.matches(AntPathMatcher.java:86)
- 	at org.tynamo.security.services.impl.SecurityFilterChain.matches(SecurityFilterChain.java:60)
- 	at org.tynamo.security.services.impl.SecurityConfiguration.getMatchingChain(SecurityConfiguration.java:94)
- 	at org.tynamo.security.services.impl.SecurityConfiguration.service(SecurityConfiguration.java:58)
+https://github.com/dragansah/filebrowser
 
-java.lang.NullPointerException
-	at org.apache.shiro.util.AntPathMatcher.doMatch(AntPathMatcher.java:109)
-	at org.apache.shiro.util.AntPathMatcher.match(AntPathMatcher.java:90)
-	at org.apache.shiro.util.AntPathMatcher.matches(AntPathMatcher.java:86)
-	at org.tynamo.security.services.impl.SecurityFilterChain.matches(SecurityFilterChain.java:60)
-	at org.tynamo.security.services.impl.SecurityConfiguration.getMatchingChain(SecurityConfiguration.java:94)
+https://github.com/got5
 
+https://github.com/dragansah/t5-contextmenu
 
+https://github.com/dirent/tapestry-piday Searching for digits in Pi, inspired from The Coding Traing
+                                         Implemented with Spring-Boot and Tapestry
+    
+ParsleyJS js form validator
+https://livr-spec.org/introduction/principles.html
 
+https://cycle.js.org/
+
+https://gitlab.nuiton.org/chorem/timebundle
+https://www.codelutin.com/contributions.html
