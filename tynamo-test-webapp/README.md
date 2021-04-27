@@ -1,5 +1,5 @@
 # Another Tapestry Template for a Secured web application access
-with Apache Tapestry 5.6.2 and Tynamo/tapestry-security 0.8.0
+with Apache Tapestry 5.6.4 and Tynamo/tapestry-security 0.8.0
 
 Install Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files 8
  http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html
